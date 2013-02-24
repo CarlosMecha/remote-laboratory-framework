@@ -1,0 +1,33 @@
+﻿Build started 07-Oct-11 09:27:36.
+     1>Project "C:\Users\rodriguezmecha\Documents\My Dropbox\Universidad\Proyecto\rlf\projects\visual studio\RLF_Board\AD_INT\ADINT.vcxproj" on node 2 (build target(s)).
+     1>InitializeBuildStatus:
+         Creating ".\Release\ADINT.unsuccessfulbuild" because "AlwaysCreate" was specified.
+       GenerateTargetFrameworkMonikerAttribute:
+       Skipping target "GenerateTargetFrameworkMonikerAttribute" because all output files are up-to-date with respect to the input files.
+       ClCompile:
+         c:\Program Files\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /AI"C:\Program Files\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0" /Zi /clr /nologo /W3 /WX- /O2 /Ob1 /Oy- /D WIN32 /D NDEBUG /D _CONSOLE /D _VC80_UPGRADE=0x0600 /D _MBCS /GF /EHa /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo".\Release\\" /Fd".\Release\vc100.pdb" /TP /FU"C:\Users\rodriguezmecha\Documents\My Dropbox\Universidad\Proyecto\rlf\tools\lib\NET\LibTool.dll" /FU"C:\Program Files\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Core.dll" /FU"C:\Program Files\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Data.dll" /FUC:\Windows\assembly\GAC_MSIL\System.Data.SQLite\1.0.72.0__db937bc2d44ff139\System.Data.SQLite.dll /FU"C:\Program Files\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.dll" /analyze- /errorReport:prompt ADINT.cpp /clr:nostdlib 
+         ADINT.cpp
+     1>ADINT.cpp(86): warning C4244: '=' : conversion from 'unsigned __int64' to 'ULONG', possible loss of data
+         c:\Program Files\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /Zi /clr /nologo /W3 /WX- /O2 /Ob1 /Oy- /D WIN32 /D NDEBUG /D _CONSOLE /D _VC80_UPGRADE=0x0600 /D _MBCS /GF /EHa /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo".\Release\\" /Fd".\Release\\" /TP /analyze- /errorReport:prompt "C:\Users\rodriguezmecha\AppData\Local\Temp\.NETFramework,Version=v4.0.AssemblyAttributes.cpp"
+         .NETFramework,Version=v4.0.AssemblyAttributes.cpp
+       ResourceCompile:
+         c:\Program Files\Microsoft SDKs\Windows\v7.0A\bin\rc.exe /D NDEBUG /D _VC80_UPGRADE=0x0600 /l"0x0804" /nologo /fo".\Release\ADINT.res" ADINT.RC 
+       Link:
+         c:\Program Files\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"Release/ADINT.exe" /INCREMENTAL:NO /NOLOGO odbc32.lib odbccp32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /ManifestFile:".\Release\ADINT.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /PDB:"C:\Users\rodriguezmecha\Documents\My Dropbox\Universidad\Proyecto\rlf\projects\visual studio\RLF_Board\AD_INT\Release\ADINT.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /FIXED:NO /NXCOMPAT /MACHINE:X86 .\Release\ADINT.res
+         .\Release\ADINT.obj
+         ".\Release\.NETFramework,Version=v4.0.AssemblyAttributes.obj"
+         "..\..\..\..\..\..\..\..\..\..\..\Program Files\Advantech\Adsapi\Lib\Adsapi32.lib"
+         ADINT.vcxproj -> C:\Users\rodriguezmecha\Documents\My Dropbox\Universidad\Proyecto\rlf\projects\visual studio\RLF_Board\AD_INT\.\Release\ADINT.exe
+       Manifest:
+         c:\Program Files\Microsoft SDKs\Windows\v7.0A\bin\mt.exe /nologo /verbose /outputresource:"Release/ADINT.exe;#1" /manifest .\Release\ADINT.exe.intermediate.manifest
+       _CopyFilesMarkedCopyLocal:
+         Copying file from "C:\Users\rodriguezmecha\Documents\My Dropbox\Universidad\Proyecto\rlf\tools\lib\NET\LibTool.dll" to ".\Release\LibTool.dll".
+         Copying file from "C:\Windows\assembly\GAC_MSIL\System.Data.SQLite\1.0.72.0__db937bc2d44ff139\System.Data.SQLite.dll" to ".\Release\System.Data.SQLite.dll".
+       FinalizeBuildStatus:
+         Deleting file ".\Release\ADINT.unsuccessfulbuild".
+         Touching ".\Release\ADINT.lastbuildstate".
+     1>Done Building Project "C:\Users\rodriguezmecha\Documents\My Dropbox\Universidad\Proyecto\rlf\projects\visual studio\RLF_Board\AD_INT\ADINT.vcxproj" (build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:21.95

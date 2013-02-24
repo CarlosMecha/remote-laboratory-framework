@@ -1,0 +1,85 @@
+\documentclass{template/rlftemplate}
+
+\usepackage{lib/rlfvocabulary}
+
+\begin{document}
+
+% Configuración varia
+\renewcommand{\tablename}{Tabla} 
+\renewcommand{\listtablename}{Índice de tablas}
+\setcounter{page}{1}
+\pagenumbering{roman}
+
+% Portada
+\include{include/portada}
+\emptypage
+
+% Contraportada
+\include{include/contraportada}
+\emptypage
+
+% Agradecimientos
+\include{include/agradecimientos}
+\emptypage
+
+% Resumen
+\include{include/resumen}
+
+% Índice
+\include{include/indice}
+
+\setcounter{page}{1}
+\pagenumbering{arabic}
+
+% Introducción
+\include{include/introduccion}
+
+% Estado del arte
+\include{include/estadodelarte}
+
+% Análisis
+\include{include/analisis}
+
+% Diseño
+\include{include/diseno}
+
+% Pruebas realizadas
+\include{include/pruebas}
+
+% Problemas y mejoras
+\include{include/problemasymejoras}
+
+% Conclusión
+\include{include/conclusion}
+
+\appendix
+
+% Apéndice: Presupuesto
+\include{include/presupuesto}
+
+% Apéndice: Manual de despliegue
+\include{include/manualdespliegue}
+
+% Apéndice: Manual de mantenimiento
+\include{include/manualmantenimiento}
+
+% Apéndice: Manual de desarrollo
+\include{include/manualdesarrollo}
+
+% Apéndice: Manual de usuario
+\include{include/manualdeusuario}
+
+% Apéndice: Material Entregado
+\include{include/materialentregado}
+
+% Bibliografía
+\phantomsection
+\addcontentsline{toc}{chapter}{Bibliografía}
+\bibliography{include/bibliografia}
+\bibliographystyle{plain}
+
+% Índice alfabético
+\phantomsection
+\addcontentsline{toc}{chapter}{Índice alfabético}
+\printindex
+\end{document}

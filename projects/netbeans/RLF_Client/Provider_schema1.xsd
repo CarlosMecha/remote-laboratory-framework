@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xs:schema version="1.0" targetNamespace="http://ws.provider.rlf.org/" xmlns:tns="http://ws.provider.rlf.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <xs:element name="AuthException" type="tns:AuthException"/>
+
+  <xs:element name="ConnectionException" type="tns:ConnectionException"/>
+
+  <xs:element name="FormatException" type="tns:FormatException"/>
+
+  <xs:element name="ToolException" type="tns:ToolException"/>
+
+  <xs:element name="describeTools" type="tns:describeTools"/>
+
+  <xs:element name="describeToolsResponse" type="tns:describeToolsResponse"/>
+
+  <xs:element name="getStatus" type="tns:getStatus"/>
+
+  <xs:element name="getStatusResponse" type="tns:getStatusResponse"/>
+
+  <xs:element name="login" type="tns:login"/>
+
+  <xs:element name="loginResponse" type="tns:loginResponse"/>
+
+  <xs:element name="logout" type="tns:logout"/>
+
+  <xs:element name="logoutResponse" type="tns:logoutResponse"/>
+
+  <xs:element name="takeTools" type="tns:takeTools"/>
+
+  <xs:element name="takeToolsResponse" type="tns:takeToolsResponse"/>
+
+  <xs:complexType name="takeTools">
+    <xs:sequence>
+      <xs:element name="auth" type="xs:string" minOccurs="0"/>
+      <xs:element name="array" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="takeToolsResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="AuthException">
+    <xs:sequence>
+      <xs:element name="message" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="ConnectionException">
+    <xs:sequence>
+      <xs:element name="message" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="ToolException">
+    <xs:sequence>
+      <xs:element name="message" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="FormatException">
+    <xs:sequence>
+      <xs:element name="message" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="login">
+    <xs:sequence>
+      <xs:element name="user" type="xs:string" minOccurs="0"/>
+      <xs:element name="hash_pass" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="loginResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="logout">
+    <xs:sequence>
+      <xs:element name="auth" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="logoutResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:boolean" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="getStatus">
+    <xs:sequence>
+      <xs:element name="auth" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="getStatusResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="describeTools">
+    <xs:sequence>
+      <xs:element name="auth" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="describeToolsResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>
+

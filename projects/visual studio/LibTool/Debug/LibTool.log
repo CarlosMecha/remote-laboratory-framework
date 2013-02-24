@@ -1,0 +1,38 @@
+﻿Build started 04-Sep-11 09:29:28.
+     1>Project "C:\Users\rodriguezmecha\Documents\My Dropbox\Universidad\Proyecto\rlf\projects\visual studio\LibTool\LibTool.vcxproj" on node 2 (rebuild target(s)).
+     1>InitializeBuildStatus:
+         Creating "Debug\LibTool.unsuccessfulbuild" because "AlwaysCreate" was specified.
+       GenerateTargetFrameworkMonikerAttribute:
+       Skipping target "GenerateTargetFrameworkMonikerAttribute" because all output files are up-to-date with respect to the input files.
+       ClCompile:
+         c:\Program Files\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /AI"C:\Program Files\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0" /Zi /clr /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _WINDLL /D _UNICODE /D UNICODE /EHa /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yc"StdAfx.h" /Fp"Debug\LibTool.pch" /Fo"Debug\\" /Fd"Debug\vc100.pdb" /TP /FU"C:\Program Files\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Core.dll" /FU"C:\Program Files\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Data.dll" /FUC:\Windows\assembly\GAC_MSIL\System.Data.SQLite\1.0.72.0__db937bc2d44ff139\System.Data.SQLite.dll /FU"C:\Program Files\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.dll" /FU"C:\Program Files\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Xml.dll" /analyze- /errorReport:prompt Stdafx.cpp /clr:nostdlib 
+         Stdafx.cpp
+         c:\Program Files\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /AI"C:\Program Files\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0" /Zi /clr /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _WINDLL /D _UNICODE /D UNICODE /EHa /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yu"StdAfx.h" /Fp"Debug\LibTool.pch" /Fo"Debug\\" /Fd"Debug\vc100.pdb" /TP /FU"C:\Program Files\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Core.dll" /FU"C:\Program Files\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Data.dll" /FUC:\Windows\assembly\GAC_MSIL\System.Data.SQLite\1.0.72.0__db937bc2d44ff139\System.Data.SQLite.dll /FU"C:\Program Files\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.dll" /FU"C:\Program Files\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Xml.dll" /analyze- /errorReport:prompt AssemblyInfo.cpp RLF_Data.cpp RLF_Exception.cpp RLF_Manager.cpp /clr:nostdlib 
+         AssemblyInfo.cpp
+         RLF_Data.cpp
+         RLF_Exception.cpp
+         RLF_Manager.cpp
+         Generating Code...
+         c:\Program Files\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /Zi /clr /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _WINDLL /D _UNICODE /D UNICODE /EHa /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc100.pdb" /TP /analyze- /errorReport:prompt "C:\Users\rodriguezmecha\AppData\Local\Temp\.NETFramework,Version=v4.0.AssemblyAttributes.cpp"
+         .NETFramework,Version=v4.0.AssemblyAttributes.cpp
+       ResourceCompile:
+         c:\Program Files\Microsoft SDKs\Windows\v7.0A\bin\rc.exe /D _UNICODE /D UNICODE /l"0x0409" /nologo /fo"Debug\app.res" app.rc 
+       Link:
+         c:\Program Files\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\rodriguezmecha\Documents\My Dropbox\Universidad\Proyecto\rlf\projects\visual studio\LibTool\Debug\LibTool.dll" /INCREMENTAL /NOLOGO /MANIFEST /ManifestFile:"Debug\LibTool.dll.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"C:\Users\rodriguezmecha\Documents\My Dropbox\Universidad\Proyecto\rlf\projects\visual studio\LibTool\Debug\LibTool.pdb" /ASSEMBLYDEBUG /TLBID:1 /DYNAMICBASE /FIXED:NO /NXCOMPAT /MACHINE:X86 /DLL Debug\app.res
+         Debug\AssemblyInfo.obj
+         Debug\RLF_Data.obj
+         Debug\RLF_Exception.obj
+         Debug\RLF_Manager.obj
+         Debug\Stdafx.obj
+         "Debug\.NETFramework,Version=v4.0.AssemblyAttributes.obj"
+         LibTool.vcxproj -> C:\Users\rodriguezmecha\Documents\My Dropbox\Universidad\Proyecto\rlf\projects\visual studio\LibTool\Debug\LibTool.dll
+       Manifest:
+         c:\Program Files\Microsoft SDKs\Windows\v7.0A\bin\mt.exe /nologo /verbose /outputresource:"C:\Users\rodriguezmecha\Documents\My Dropbox\Universidad\Proyecto\rlf\projects\visual studio\LibTool\Debug\LibTool.dll;#2" /manifest Debug\LibTool.dll.intermediate.manifest
+       FinalizeBuildStatus:
+         Deleting file "Debug\LibTool.unsuccessfulbuild".
+         Touching "Debug\LibTool.lastbuildstate".
+     1>Done Building Project "C:\Users\rodriguezmecha\Documents\My Dropbox\Universidad\Proyecto\rlf\projects\visual studio\LibTool\LibTool.vcxproj" (rebuild target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:10.85

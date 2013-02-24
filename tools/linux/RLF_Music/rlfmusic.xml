@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tool SYSTEM "/home/rodriguezmecha/Universidad/Proyecto/rlf/tools/tool.dtd" >
+<tool path="/home/rodriguezmecha/Universidad/Proyecto/rlf/tools/linux/RLF_Music" data="false">
+	<in-stream/>
+	<out-stream/>
+	<attributes>
+		<name>RLF Music</name>
+		<version>0.1</version>
+		<description>Reproductor de música ambiental. Contiene tres canciones, una pop, una chillout y otra rock.</description>
+		<admin>carlos</admin>
+		<role>0</role>
+	</attributes>
+	<constants>
+	</constants>
+	<parameters>
+	</parameters>
+	<actions>
+		<action name="player" timeout="10">
+			<value>rlfmusic</value>
+			<description>Reproductor de música. Reproduce las canciones bajo petición del usuario.</description>
+		</action>
+		<resetter>rlfmusic --clear</resetter>
+	</actions>
+</tool>

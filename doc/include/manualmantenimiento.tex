@@ -1,0 +1,147 @@
+% Apéndice: Manual de mantenimiento
+
+\capitulo{Guía de mantenimiento}{mantenimiento}{
+Este manual está dedicado a los administradores para realizar un 
+correcto mantenimiento de la plataforma RLF mientras esta esté en 
+ejecución. Además se incluyen algunos errores externos para su 
+tratamiento.
+}
+
+\section*{Proveedor y monitor}
+La única parte del proveedor y monitor que necesita mantenimiento es 
+la base de datos global. Aunque la mayoría del tratamiento de datos es 
+automático, en la versión \version entregada hay que realizar algunas 
+tareas a mano.
+
+\subsection*{Usuarios}
+Debido a motivos de seguridad, si un usuario no se desconecta 
+correctamente del sistema (en el cliente, en el monitor no ocurre 
+esto) su cuenta se queda bloqueada para su revisión. Para permitir 
+otra vez el uso de esta cuenta, hay que eliminar el \emph{token} de 
+acceso del usuario, es decir, establecer su valor a \emph{NULL}. Se 
+puede utilizar un programa de gestión de la base de datos como MySQL 
+Browser (descargable en \texttt{http://dev.mysql.com/doc/query-browser/es/index.html}).
+
+\subsection*{\emph{Backups}}
+El proceso de duplicar \index{\emph{backup}} la base de datos es necesario 
+cada cierto tiempo (a discreción de los administradores) para 
+salvaguardar los datos de los usuarios. Realmente, este proceso es 
+requerido sólo para estos datos, ya que la forma de desplegar el 
+sistema hace que no sea muy complejo volver a añadir los datos. Para 
+obtener información de cómo hacer un \emph{backup} en una base de 
+datos MySQL consultar \texttt{http://dev.mysql.com/doc/refman/5.1/en/backup-methods.html}.
+
+\subsection*{\emph{Logs}}
+Es recomendable que se revisen los \emph{logs} \index{\emph{log}} del 
+proveedor y monitor por si ha habido algún problema durante las 
+ejecuciones. Se encuentran en la carpeta del mismo nombre y pueden ser 
+consultados mediante un visor de texto genérico. También puede ser 
+necesario borrarlos cada cierto tiempo para no saturar el disco.
+
+\section*{Laboratorios}
+El mantenimiento de los laboratorios se realiza mediante el programa 
+\emph{LabConsole} incluido en este proyecto. Los laboratorios tienen 
+tres estados principales:
+
+\begin{itemize}
+\item \textbf{Iniciado:} Es el estado por defecto de un laboratorio. 
+En él se pueden realizar la mayoría de las tareas de mantenimiento, 
+como registrar una nueva herramienta y eliminarla, y también armar el 
+propio laboratorio. Cuando se desarma el laboratorio o se arranca por 
+primera vez se alcanza este estado.
+\item \textbf{Armado:} En este estado el laboratorio está preparado 
+para escuchar las peticiones de los usuarios y comunicarse con el 
+proveedor. No se puede realizar tareas de mantenimiento, sólo obtener 
+el estado de cada una de las herramientas en tiempo real.
+\item \textbf{Parado:} La ejecución del laboratorio se cierra. Para 
+una parada controlada es necesario desarmarlo antes. También se puede 
+llegar a este estado con una parada de emergencia.
+\end{itemize}
+
+\subsection*{\emph{LabConsole}}
+Esta herramienta permite acceder a cualquier laboratorio de la red. 
+Para utilizarlo se requiere un nombre de administrador y su 
+contraseña. Las acciones que se pueden realizar son las siguientes:
+
+\begin{verbatim}
+java -jar LabConsole.jar [-h <IP> -p <Puerto>] -user <Usuario>
+                         -pass <Contraseña> <Comando> <Parámetros>
+\end{verbatim}
+
+\begin{itemize}
+\item \textbf{Armar:} Arma el laboratorio al que se accede. Antes de 
+escuchar peticiones, se ejecutarán todos los limpiadores de las 
+herramientas.
+\begin{verbatim}
+<Comando>: arm
+<Parámetros>: ninguno
+\end{verbatim}
+\item \textbf{Desarmar:} Desarma el laboratorio. Es recomendable que 
+se compruebe el estado antes de las herramientas, ya que si hay 
+usuarios usándolas se desconectarán.
+\begin{verbatim}
+<Comando>: disarm
+<Parámetros>: ninguno
+\end{verbatim}
+\item \textbf{Parar:} Para por completo el laboratorio. Si está armado 
+lanzará un error.
+\begin{verbatim}
+<Comando>: stop
+<Parámetros>: ninguno
+\end{verbatim}
+\item \textbf{Emergencia:} Para por completo el laboratorio y dejará 
+las herramientas en el estado actual. Todos los usuarios conectados 
+serán expulsados y no se aceptarán nuevas conexiones. La clave de 
+emergencia por defecto es ``Emergency!''.
+\begin{verbatim}
+<Comando>: emergency
+<Parámetros>: <Clave de emergencia>
+\end{verbatim}
+\item \textbf{Estado:} Obtiene el estado de las herramientas (en 
+ejecución o parada) y del propio laboratorio. Esta acción se pude 
+realizar cuando el laboratorio está iniciado o armado.
+\begin{verbatim}
+<Comando>: status
+<Parámetros>: ninguno
+\end{verbatim}
+\item \textbf{Registrar:} Registra una herramienta. Es necesario 
+indicar dónde se encuentra el fichero \emph{.xml} de configuración 
+(ruta completa local). Cuando se registre se obtendrá el identificador 
+único de la herramienta y su clave. Esta acción sólo puede llevarse 
+a cabo cuando el laboratorio no está armado. Véase el Manual de Despliegue.
+\begin{verbatim}
+<Comando>: registry
+<Parámetros>: <Ruta local del fichero XML>
+\end{verbatim}
+\item \textbf{Eliminar:} Elimina una herramienta. Es necesario 
+indicar el identificador de la herramienta y su clave. También será 
+borrada de la base de datos. Esta acción sólo puede llevarse a cabo 
+cuando el laboratorio no está armado.
+\begin{verbatim}
+<Comando>: drop
+<Parámetros>: <ID de la herramienta> <Clave de la herramienta>
+\end{verbatim}
+\end{itemize}
+
+\subsection*{Limpiadores}
+Cada herramienta posee una acción especial para \emph{resetear} el 
+\hardware asociado. Esta acción se ejecuta automáticamente cuando se 
+arma el laboratorio y cuando ha ocurrido fallo de ejecución. Es 
+recomendable que se realice cada día un desarmado y armado de todos 
+los laboratorios para que se ejecuten los limpiadores al menos una vez 
+cada 24 horas.
+
+\subsection*{\emph{Logs}}
+Al igual que el proveedor y el monitor, los laboratorios tienen su 
+propio registro de sucesos, que es recomendable observar. También 
+se pueden eliminar cada cierto tiempo.
+
+\section*{Herramientas}
+No necesitan un mantenimiento concreto, aunque por motivos de 
+seguridad, puede ser necesario registrar y eliminar las herramientas 
+cada mes o periodo similar y así puedan cambiar de clave.
+
+\subsection*{\emph{Hardware}}
+A pesar de que el mantenimiento del \hardware sea automático, el 
+administrador debe realizar revisiones periódicas al mismo, 
+independientemente del uso que se le ha dado.

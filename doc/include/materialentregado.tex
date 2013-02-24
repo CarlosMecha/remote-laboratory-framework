@@ -1,0 +1,176 @@
+% Apéndice: Material Entregado
+
+\capitulo{Material entregado}{material}{
+Debido a que este producto contiene múltiples módulos y componentes, 
+se listan a continuación todo lo se ha entregado junto con este 
+documento, y su disposición.
+}
+
+\section*{Componentes}
+\subsection*{Proveedor \index{proveedor}}
+Compone el servicio web de acceso a la plataforma y los \emph{scripts} de la 
+base de datos para poder crearla. Este servicio web debe ser 
+desplegado en alguna plataforma como Tomcat o JBoss que permita 
+aplicaciones Java. Los \emph{scripts} están realizados para el SGBD MySQL.
+
+\subsection*{Monitor \index{monitor}}
+Sirve para obtener información en tiempo real de las herramientas 
+registradas en el sistema. Está compuesto por un servicio y página 
+web con formato para dispositivos móviles o pantallas pequeñas.
+
+\subsection*{Laboratorio \index{laboratorio}}
+Módulo de gestión de los distintos servidores locales que contienen 
+herramientas. Puede instalarse en cualquier plataforma y toma la 
+función de un proceso \emph{demonio} \index{demonio}.
+
+\subsection*{Gestor de laboratorios}
+Es la herramienta para poder administrar todos los laboratorios 
+ejecutados en la red. Aplicación por consola que se recomienda usar en 
+sistemas Unix.
+
+\subsection*{Cliente \index{cliente}}
+Permite acceder a la plataforma RLF. Puede ser utilizado en cualquier 
+sistema operativo con soporte para Java. Utiliza el servicio web 
+propio del proveedor.
+
+\subsection*{Componentes RLF}
+Son un conjunto de herramientas que utilizan todos los módulos. 
+Dispone de un cifrador \index{cifrador} de datos y la capa de 
+comunicación de toda la plataforma mediante sockets \index{socket}.
+
+\subsection*{Bibliotecas \emph{libtool} \index{\emph{libtool}}}
+Conjunto de funciones y métodos específicos para conectar la 
+herramienta con el laboratorio. Están hechas en varios lenguajes de 
+programación.
+
+\subsection*{Herramienta 1: RLF\_ Video}
+Emite video y sonido mediante un servidor HTTP. Está destinada para 
+sistemas Unix fue desarrollada en Shell Bash. Su capa base es el 
+programa/servidor VLC. Es una herramienta multiusuario.
+
+\subsection*{Herramienta 2: RLF\_ Music}
+Reproduce canciones seleccionadas por el usuario en el sistema remoto, 
+por lo que no pueden ser oidas desde el cliente. Pensado para sistemas 
+Unix con el programa MPG123.
+
+\subsection*{Herramienta 3: RLF\_ DummyTool}
+Conjunto de pruebas básicas en consola Shell Bash para Unix. Comprueba 
+la información del sistema en tiempo real.
+
+\subsection*{Herramienta 4: RLF\_ FreeMem}
+Obtiene la memoria en uso de un sistema Windows. Esta herramienta es 
+multiusuario y la información también es en tiempo real.
+
+\subsection*{Herramienta 5: RLF\_ Board}
+Acciones para utilizar la tarjeta Advantec PCI1711BE. Desarrollado para 
+sistemas Windows. Pensado para realizar prácticas de laboratorio de 
+electrónica y automática. Permite enviar un pulso de 5 segundos con 
+el voltaje introducido, obteniendo la respuesta mediante un servicio 
+FTP.
+
+\subsection*{Documentación}
+Todo el código entregado está profusamente comentado para ayudar a 
+desarrollar nuevos módulos a partir de código antiguo. Además, para 
+el código escrito en Java, se ha entregado la documentación del API 
+completa (realizada mediante \emph{javadoc}).
+
+\clearpage
+
+\section*{Distribución}
+La disposición de directorios entregados es la siguiente:
+\begin{verbatim}
+|-- bin
+|   |-- client
+|   |   |-- lib
+|   |   |-- log
+|   |   `-- res
+|   |-- lab
+|   |   |-- log
+|   |   `-- res
+|   |-- labconsole
+|   `-- provider
+|-- doc
+|   |-- api
+|   |   |-- index-files
+|   |   |-- org
+|   |   `-- resources
+|   |-- images
+|   |   `-- user
+|   |-- include
+|   |-- lib
+|   `-- template
+|-- img
+|-- lib
+|-- projects
+|   |-- eclipse
+|   |   |-- RLF_Lab
+|   |   |-- RLF_LabConsole
+|   |   |-- RLF_LabManager
+|   |   |-- RLF_Log
+|   |   `-- RLF_Utils
+|   |-- netbeans
+|   |   |-- RLF_Client
+|   |   `-- RLF_Provider
+|   `-- visual studio
+|       |-- LibTool
+|       |-- RLF_Board
+|       `-- RLF_FreeMem
+|-- src
+|   `-- sql
+`-- tools
+    |-- lib
+    |   |-- Bash
+    |   |-- C
+    |   `-- NET
+    |-- linux
+    |   |-- RLF_DummyTool
+    |   |-- RLF_Music
+    |   `-- RLF_Video
+    `-- windows
+        |-- RLF_Board
+        `-- RLF_FreeMem
+\end{verbatim}
+
+\clearpage
+
+\subsection*{Directorio \emph{bin}}
+Contiene todos los archivos ejecutables de los distintos componentes 
+organizados por carpetas. Si se desea ejecutar esos archivos binarios 
+en otra localización, es necesario copiar todo lo que contienen sus 
+carpetas, ya que es necesario para un correcto funcionamiento.
+
+\subsection*{Directorio \emph{doc}}
+En este directiorio está toda la documentación aportada para el 
+proyecto, desde la descripción de los APIs hasta este propio 
+documento, en \emph{latex} con todos los recursos necesarios para la 
+maquetación del mismo.
+
+\subsection*{Directorio \emph{img}}
+Se agrupan todas las imágenes que se han utilizado para el desarrollo 
+del proyecto. Son las usadas en los componentes aunque no son 
+necesarias para su ejecución, ya que han sido introducidas en el mismo 
+código.
+
+\subsection*{Directorio \emph{lib}}
+Aquí están todas las librerías requeridas para la compilación de 
+los distintos módulos. Cada proyecto tiene su referencia en este 
+directorio. Además, se puede encontrar la propia librería de RLF.
+
+\subsection*{Directorio \emph{projects}}
+Se ha considerado que es más sencillo realizar nuevos módulos o 
+modificar los entregados mediante los proyectos originales de los 
+distintos IDEs, como son Eclipse, NetBeans y Visual Studio. Aquí está 
+contenido de forma organizada haciendo referencia al tipo de IDE.
+
+\subsection*{Directorio \emph{src}}
+Se encuentran los archivos fuente de los componentes que no tienen 
+establecido su propio proyecto. Es el caso de los \emph{scripts} en 
+SQL de las distintas bases de datos.
+
+\subsection*{Directorio \emph{tools}}
+Contiene todas las herramientas entregadas (sus archivos ejecutables) 
+separadas por plataforma y las propias \emph{libtools} en los 
+distintos lenguajes. Antes de mover estos archivos consúltese el 
+Manual del Desarrollador.
+
+\cleardoublepage

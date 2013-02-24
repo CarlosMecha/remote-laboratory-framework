@@ -1,0 +1,29 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "pulse", "pulse.vcxproj", "{0D48E846-35C9-9B52-479B-38D00A27A239}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+		Template|Win32 = Template|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0D48E846-35C9-9B52-479B-38D00A27A239}.Debug|Win32.ActiveCfg = Debug|Win32
+		{0D48E846-35C9-9B52-479B-38D00A27A239}.Debug|Win32.Build.0 = Debug|Win32
+		{0D48E846-35C9-9B52-479B-38D00A27A239}.Release|Win32.ActiveCfg = Release|Win32
+		{0D48E846-35C9-9B52-479B-38D00A27A239}.Release|Win32.Build.0 = Release|Win32
+		{0D48E846-35C9-9B52-479B-38D00A27A239}.Template|Win32.ActiveCfg = Template|Win32
+		{0D48E846-35C9-9B52-479B-38D00A27A239}.Template|Win32.Build.0 = Template|Win32
+		{F2634C2C-E1F8-47CD-A32F-E325BD5AAAA4}.Debug|Win32.ActiveCfg = Debug|Win32
+		{F2634C2C-E1F8-47CD-A32F-E325BD5AAAA4}.Debug|Win32.Build.0 = Debug|Win32
+		{F2634C2C-E1F8-47CD-A32F-E325BD5AAAA4}.Release|Win32.ActiveCfg = Release|Win32
+		{F2634C2C-E1F8-47CD-A32F-E325BD5AAAA4}.Release|Win32.Build.0 = Release|Win32
+		{F2634C2C-E1F8-47CD-A32F-E325BD5AAAA4}.Template|Win32.ActiveCfg = Release|Win32
+		{F2634C2C-E1F8-47CD-A32F-E325BD5AAAA4}.Template|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

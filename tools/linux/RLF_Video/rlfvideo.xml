@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tool SYSTEM "/home/ramon/RLF/rlf/tools/data-tool.dtd" >
+<tool path="/home/ramon/RLF/rlf/tools/linux/RLF_Video" data="true">
+	<out-stream/>
+	<attributes>
+		<name>RLF Video</name>
+		<version>0.1</version>
+		<description>Streaming de video y sonido. Incluye 3 segundos de delay en el envío. Es necesario utilizar programas externos para poder obtener el flujo de datos.</description>
+		<admin>carlos</admin>
+		<role>0</role>
+	</attributes>
+	<constants>
+		<constant name="devices" data-type="string">
+			<value>v4l2:///dev/video0</value>
+			<description>Dispositivos de captura.</description>
+		</constant>
+		<constant name="http_ip" data-type="string">
+			<value>127.0.0.1</value>
+			<description>IP del host.</description>
+		</constant>
+		<constant name="http_port" data-type="int">
+			<value>64000</value>
+			<description>Puerto de acceso.</description>
+		</constant>
+		<constant name="user" data-type="string">
+			<value>video</value>
+			<description>Usuario para la conexión.</description>
+		</constant>
+		<constant name="pass" data-type="string">
+			<value>video</value>
+			<description>Contraseña del usuario.</description>
+		</constant>
+	</constants>
+	<action name="http-streaming" timeout="60">
+		<value>rlfvideo --http</value>
+		<description>Streaming por video mediante el protocolo HMTL. Utilizar un programa como VLC (con recepción de imágenes y sonido por volcado de red) para conectarse al servidor (http://nombre del servidor:puerto/)</description>
+		<socket port="64000" protocol="http" type="media" mode="r"/>
+	</action>
+	<resetter>rlfvideo --clean</resetter>
+</tool>

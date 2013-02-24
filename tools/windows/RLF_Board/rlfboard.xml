@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tool SYSTEM "C:\Users\rodriguezmecha\Documents\My Dropbox\Universidad\Proyecto\rlf\tools\tool.dtd" >
+<tool path="C:\Users\rodriguezmecha\Documents\My Dropbox\Universidad\Proyecto\rlf\tools\windows\RLF_Board" data="false">
+	<in-stream/>
+	<out-stream/>
+	<attributes>
+		<name>RLF Board</name>
+		<version>0.1</version>
+		<description>Controles básicos para la tarjeta Advantech PCI1711. Esta herramienta tiene asociada un servidor FTP para obtener los ficheros generados. Conectar mediante un navegador con el usuario y la contraseña.</description>
+		<admin>carlos</admin>
+		<role>0</role>
+	</attributes>
+	<constants>
+		<constant name="device" data-type="long">
+			<value>0</value>
+			<description>Número de dispositivo para realizar las acciones.</description>
+		</constant>
+		<constant name="channel" data-type="int">
+			<value>0</value>
+			<description>Canal del dispositivo.</description>
+		</constant>
+	</constants>
+	<parameters>
+		<parameter name="volts" data-type="double">
+			<description>Voltaje</description>
+			<max>10</max>
+		</parameter>
+	</parameters>
+	<actions>
+		<action name="Pulse" timeout="6">
+			<value>PULSE.exe</value>
+			<description>Envía un pulso durante 5 segundos obteniendo los datos de salida del circuito.</description>
+			<socket port="64001" protocol="ftp" type="data" mode="r"/>
+			<action_parameter name="volts" type="in"/>
+		</action>
+		<resetter>PULSE.exe --clear</resetter>
+	</actions>
+</tool>

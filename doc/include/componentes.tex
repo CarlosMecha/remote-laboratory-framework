@@ -1,0 +1,402 @@
+% Componentes
+
+\subsection{Base de datos central}
+
+Compone el principal almacén de datos de toda la plataforma RLF. 
+Contiene un conjunto de tablas que organizan la información para que 
+sea accesible mediante el servicio proveedor y los distintos 
+laboratorios. Como se puede ver en la figura \ref{fig:erproveedor} 
+(modelo entidad-relación), contiene las siguientes estructuras:
+
+\begin{itemize}
+\item Una tabla para la información de cada laboratorio. Incluye todos los 
+elementos necesarios para la conexión y su estado principal.
+\item Tablas de información de usuario, diferenciando entre los 
+usuarios clientes y los usuarios administradores.
+\item La información principal de cada herramienta está contenida en 
+la tabla \emph{tool} junto con su estado y en qué laboratorio se 
+encuentra.
+\item Un registro temporal por cada herramienta reservada, 
+relacionando el cliente con la herramienta, y la fecha de la propia 
+reserva.
+\item La descripción de cada herramienta, formada por sus constantes, 
+parámetros, atributos, acciones y servicios externos están 
+almacenados en sus propias tablas.
+\end{itemize}
+
+Cada cambio que se realiza en esta base de datos de forma 
+automatizada, como son procesos de conexión, desconexión, reserva, 
+activación de laboratorios, etc. están agrupados en procedimientos 
+almacenados (interfaz \emph{iBase}) \footnote{Conjunto de 
+instrucciones en una base de datos donde no hay valor de retorno.} 
+para mejorar la seguridad y la fiabilidad del sistema. El resto de 
+cambios concretos, como la insercción de una nueva herramienta, se 
+realizan mediante el procedimiento normal. Se añaden también un 
+conjunto de disparadores e índices para mejorar la velocidad de la 
+base de datos.
+
+Como se ve en la figura \ref{fig:Proveedor} la base de datos 
+interactua directamente con el servidor web, y además con los 
+laboratorios.
+
+\subsection{Servidor Web}
+
+Está compuesto por dos servicios y una página web de acceso a la 
+plataforma (figura \ref{fig:Proveedor}) y el componente de 
+comunicaciones.
+
+\textbf{NOTA:} El componente de comunicaciones es descrito al final de 
+este sección, ya que hay multitud de otros componentes que lo usan a 
+pesar de tener la misma implementación (véase sección 
+\ref{subsec:comunicaciones}). Aunque sea este componente el que se 
+encargue de la recepción y envío de datos a nivel interno, las 
+interfaces las proveen el resto de componentes, por lo que sólo se 
+considera una capa a bajo nivel en la comunicación y será 
+representado como tal.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.55]{images/erproveedor.png}
+	\caption[E-R central]{Estructura de la base de datos central.}
+	\label{fig:erproveedor}
+\end{figure}
+
+\subsubsection{Servicio Monitor}
+Utiliza la información contenida en la base de datos central para que 
+mediante la interfaz de acceso \emph{iMonitor} se obtenga el estado de 
+las herramientas. Los métodos de esta interfaz son:
+
+\begin{itemize}
+\item Autentificación al monitor.
+\item Desconexión del monitor.
+\item Obtención del estado en forma de lista con el identificador de 
+la herramienta, su nombre y su estado.
+\end{itemize}
+
+\subsubsection{Página Web}
+Presenta una interfaz accesible a través de un navegador para utilizar 
+el servicio del monitor. Está preparada para mantener la conexión 
+abierta aunque se deje de atender la página. Se compone de una 
+sección para la autentificación y una lista de herramientas y sus 
+estados.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.6]{images/Proveedor.png}
+	\caption{Servidor Web y Base de datos central.}
+	\label{fig:Proveedor}
+\end{figure}
+
+\subsubsection{Servicio Proveedor}
+Representa la interfaz abstracta de toda la plataforma para el acceso. 
+Se puede decir que es el coordinador de todo el sistema, que permite a 
+los clientes localizar (con la interfaz \emph{iRLF}) los laboratorios 
+e iniciar las conexiones. Se sirve de los datos de la base central 
+mediante la interfaz \emph{iDatos} y comunica a los laboratorios 
+cuándo serán accedidos por los clientes.
+
+Las acciones de la interfaz \emph{iRLF} se listan a continuación:
+
+\begin{itemize}
+\item Conexión al sistema. Cuando un cliente se conecta, genera el 
+\emph{token} correspondiente y se lo envía para la identificación de 
+todas las operaciones siguientes.
+\item Desconexión. Invalida dicho \emph{token} de acceso y libera 
+todas las herramientas que pudiera tener reservadas.
+\item Obtiene el estado actual de las herramientas a las cuales el 
+cliente tiene acceso.
+\item Describe las herramientas las cuales pueden ser accedidas por el 
+cliente. La descripción es un mensaje codificado en JSON precalculado 
+con todos los atributos, constantes, acciones y parámetros de las 
+herramientas.
+\item Reserva las herramientas seleccionadas. Avisa además a los 
+laboratorios para que inicien el contador de tiempo del cliente y 
+devuelve a este la información de dónde se encuentra cada herramienta.
+\end{itemize}
+
+\subsection{Laboratorio}
+\index{laboratorio}
+Este complejo componente gestiona todas las peticiones a las herramientas 
+por parte de los clientes. Está compuesto por tres subcomponentes 
+principales (\emph{Kernel}, gestor de comunicaciones y gestor de 
+ejecución) y por otros tres secundarios (comunicaciones, gestor de 
+herramientas y base de datos) como se puede ver en la figura 
+\ref{fig:Laboratorio}.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.6]{images/Laboratorio.png}
+	\caption{El laboratorio y las herramientas.}
+	\label{fig:Laboratorio}
+\end{figure}
+
+\subsubsection{\emph{Kernel}}
+\index{\emph{Kernel}}
+Es el núcleo del laboratorio, que atiende las peticiones del proveedor 
+(recibidas por la interfaz \emph{iGestiónClientes}) y las de gestión 
+(interfaz \emph{iGestiónLab}) desde el programa administrador. 
+También controla la ejecución y el arranque de los otros dos 
+subcomponentes principales. Es el único componente que tiene acceso a 
+la base de datos central para poder cambiar su estado.
+
+Cuando el laboratorio es armado, el \emph{Kernel} activa a los 
+gestores de comunicaciones y de ejecución que se componen de hilos 
+independientes. Usa al gestor de herramientas cuando recibe una 
+petición de registro o de parada.
+
+Las principales acciones que se concentran en este componente son:
+\begin{itemize}
+\item Iniciar el laboratorio. Avisa al proveedor que ha sido arrancado.
+\item Parar el laboratorio. Sólo se realiza bajo petición de un 
+administrador y cuando no está armado.
+\item Armar y desarmar. En el estado de armado, se pueden recibir 
+peticiones de los clientes y ejecutar las diferentes acciones.
+\item Obtener el estado global del laboratorio y sus herramientas. 
+Sólo es utilizado por los administradores.
+\item Avisar al proveedor (mediante la base de datos) que el tiempo de 
+un cliente ha terminado.
+\item Iniciar el proceso de registrar o eliminar una herramienta. Sólo 
+en el caso de no estar armado.
+\item Realizar una parada de emergencia completa.
+\end{itemize}
+
+\subsubsection{Gestor de ejecución}
+\index{gestor de ejecución}
+Contiene todos los elementos necesarios para organizar las peticiones 
+(enviadas por el gestor de comunicaciones) de ejecución de las 
+diferentes acciones de las herramientas. Controla el tiempo máximo de 
+cada ejecución y realiza el envío de datos entrantes y salientes a 
+modo de \emph{stream} a los clientes, sin formato establecido. Cuando 
+una acción es terminada o interrumpida, genera el mensaje a enviar al 
+cliente. También indica al gestor de herramientas qué cambios se 
+deben hacer en la base de datos de la herramienta
+antes de ejecutar una determinada acción, y recoger estos cuando la 
+acción haya terminado.
+
+\subsubsection{Gestor de comunicaciones}
+\index{gestor de comunicaciones}
+Es el enlace con los clientes. Recibe las peticiones de ejecución por 
+la interfaz \emph{iPeticiones} y las encola en el gestor de ejecución. 
+Cuando ocurre cualquier evento con esas acciones, se lo comunica al 
+cliente mediante el puerto de notificaciones. Con esto se consigue un 
+tratamiento asíncrono. Por último, todos los cronómetros de cada 
+cliente los contiene este gestor, así como la información de cada 
+usuario válido en el sistema.
+
+\subsubsection{Gestor de herramientas}
+\index{gestor de herramientas}
+Componente encargado en la gestión de las herramientas activas en el 
+laboratorio, así como el manejo de su información mediante el 
+subcomponente de la base de datos propia. Valida todas las 
+configuraciones XML introducidas por los administradores y lee, cuando 
+el laboratorio es arrancado, las ya existentes. No funciona como un 
+hilo a parte, si no como una biblioteca de métodos.
+
+Además, toda la información en tiempo real es insertada o leída de 
+la base de datos de la herramienta como si fuese la propia aplicación.
+
+\subsubsection{Base de datos}
+Funciona como un almacén de los datos de acceso de las herramientas. 
+Conforma una estructura simple de una única tabla con los elementos 
+más importantes, siendo la mostrada en la figura \ref{fig:erlaboratorio}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.8]{images/labdata.png}
+	\caption[E-R local]{Estructura de la base de datos del laboratorio.}
+	\label{fig:erlaboratorio}
+\end{figure}
+
+\subsection{Datos de la herramienta}
+Ha sido concebido como una interfaz entre la aplicación y el 
+laboratorio, pero de forma asíncrona. De esta forma, la herramienta es 
+tratada como un objeto externo. El contenido es la estructura directa 
+de la herramienta (figura \ref{fig:erherramienta}). 
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.65]{images/tool.png}
+	\caption[E-R de la herramienta]{Estructura de la base de datos de 
+	la herramienta.}
+	\label{fig:erherramienta}
+\end{figure}
+
+La correspondencia de cada tabla es similar a la base de datos 
+central, que contiene la misma información, a excepción de los 
+atributos, que conforman las características propias de cada 
+herramienta (en el servidor central están representadas como columnas 
+de la tabla principal), y las excepciones y estados de las diferentes 
+acciones.
+
+Está implementada de forma sencilla para obtener una mayor velocidad 
+de escritura y lectura. Es por ello que todas las claves ajenas y otras 
+restricciones han sido desactivadas, y son comprobadas de forma 
+externa.
+
+\subsection{Herramienta}
+Este componente contiene la arquitectura del \emph{framework} de RLF. 
+No se definirán las diferentes herramientas entregadas si no la forma 
+que deben tener las aplicaciones.
+
+\subsubsection{Aplicaciones}
+Son el conjunto de acciones a ejecutar. Están implementadas según las 
+normas del \emph{framework} (ver Manual de desarrollo) y sólo son 
+dependientes del otro componente \emph{Libtool} y de los servicios 
+externos si se requieren.
+
+\subsubsection{Servicios externos}
+Poseen un acceso como puerto de comunicaciones donde los clientes 
+pueden conectarse, pero no es gestionado por el laboratorio ni por el 
+proveedor central.
+
+\subsubsection{\emph{Libtool}}
+\index{\emph{libtool}}
+Funciona como una biblioteca de funciones para la transformación en 
+objeto. Así se pueden obtener los datos escritos por el laboratorio. 
+Las funciones que provee este componente son las siguientes:
+
+\begin{itemize}
+\item Conexión y desconexión con el laboratorio. Si una aplicación 
+requiere lectura o escritura de sus valores, es necesario estar 
+conectado.
+\item Lectura y escritura de parámetros.
+\item Lectura de atributos. Las herramientas no pueden escribir sus 
+propios atributos, ya que estos son definidos por el laboratorio 
+poseedor.
+\item Lectura de constantes.
+\item Generación de excepciones.
+\item Escritura del estado de la acción.
+\end{itemize}
+
+\subsection{Gestión de laboratorios}
+\index{gestión de laboratorios}
+Este componente forma una aplicación usada por los administradores de 
+la plataforma RLF y forma una arquitectura de capas. Cada capa se 
+sirve de la interfaz de la anterior, como se puede ver en la figura 
+\ref{fig:labconsole}.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.65]{images/labconsole.png}
+	\caption[Gestor de laboratorios por capas]{Estructura de capas del gestor de 
+	laboratorios.}
+	\label{fig:labconsole}
+\end{figure}
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.65]{images/Gestor.png}
+	\caption[Gestor de laboratorios]{Componentes del gestor de 
+	laboratorios.}
+	\label{fig:gestorlab}
+\end{figure}
+
+\subsubsection{\emph{LabConsole}}
+\index{\emph{LabConsole}}
+Actua como interfaz textual para enviar peticiones a los laboratorios. 
+Utiliza el conjunto de métodos proveídos por la librería de gestión 
+(interfaz \emph{iGestor} en la figura \ref{fig:gestorlab}).
+
+\subsubsection{Librería de gestión}
+Incluye los parámetros necesarios introducidos mediante la interfaz 
+textual en los mensajes para las peticiones de mantenimiento. Después 
+serán enviadas a los laboratorios, obteniendo una respuesta y 
+descodificándola.
+
+\subsection{Cliente}
+El cliente se muestra como una aplicación de escritorio en Java con 
+una interfaz implementada en Swing. Debe estar configurada para 
+acceder al servidor central de RLF. Al igual que los laboratorios 
+tiene diferentes subcomponentes como hilos independientes (figura 
+\ref{fig:cliente}).
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.65]{images/Cliente.png}
+	\caption[Comunicaciones RLF]{Componentes del sistema de 
+	comunicaciones de la plataforma RLF.}
+	\label{fig:cliente}
+\end{figure}
+
+\subsubsection{Gestor de eventos}
+Es el componente encargado de ``escuchar'' los eventos de la interfaz 
+generados por el usuario para llevar a cabo acciones con el proveedor 
+o las herramientas. Establece una conexión directa con la interfaz 
+\emph{iRLF} generada por el servicio proveedor. Los mensajes enviados 
+con este componente no tienen el formato de dato interno, si no que 
+utiliza el propio formato HTTP + SOAP que se usa en los servicios web.
+
+\subsubsection{Gestor de notificaciones}
+Todas las peticiones que se envían a los laboratorios y las 
+notificaciones que se reciben de estos pasan a través de este 
+componente, que usa el protocolo definido en le componente 
+Comunicaciones. Se sirve de la interfaz \emph{iPeticiones} e 
+implementa \emph{iNotificaciones} con una función de inicio de la 
+acción y otra notificación de tiempo excedido. Actúa como puerto de 
+escucha y posee ejecución paralela al gestor de eventos.
+
+\subsubsection{Interfaz}
+Provee al usuario cliente de todos los mecanismos necesarios para la 
+realizar el acceso completo a la plataforma.
+
+\subsection{Comunicaciones}
+La implementación de este componente, usado en los otros, forma un 
+protocolo de comunicación añadido al modelo TCP/IP (véase sección 
+\ref{subsec:tcpip}) que es la base de las comunicaciones internas de 
+la plataforma en forma de petición/respuesta. Además también tiene 
+la función de librería para enviar y recibir datos, 
+obteniendo directamente la información importante y \emph{parseada}.
+
+En la figura \ref{fig:comunicaciones} se puede ver la disposición de 
+sus subcomponentes.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.65]{images/Comunicaciones.png}
+	\caption[Cliente de escritorio]{Componentes del cliente de 
+	escritorio.}
+	\label{fig:comunicaciones}
+\end{figure}
+
+
+\subsubsection{Cifrador}
+Biblioteca con los métodos necesarios para cifrar datos textuales con 
+el algoritmo \emph{base64} \footnote{Base 64 es un sistema de 
+numeración posicional que usa 64 como base. Es la mayor potencia de 
+dos que puede ser representada usando únicamente los caracteres 
+imprimibles de ASCII.\cite{Tanenbaum}} y la obtención de valores 
+mediante el algoritmo resumen \emph{SHA-1}.
+
+\subsubsection{Red}
+Implementa el protocolo de mensajes RLF. Se basa en un sistema de 
+capas que convierte objetos JSON en mensajes reconocibles por el 
+sistema. Los mensajes están formados por un identificador que 
+corresponde a la operación a realizar y un conjunto de atributos. En 
+la primera capa (capa de objeto) se obtienen esos atributos y se 
+``aplanan'' (un atributo puede ser a la vez otro objeto JSON). En la 
+capa de mensaje se cifra según el algoritmo \emph{base64} para no 
+perder caracteres del mensaje y se añade la cabecera, que es el 
+tamaño total del mensaje (ver figura \ref{fig:protocolo}). El proceso a 
+la inversa también ha sido implementado.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.65]{images/mensaje.png}
+	\caption[Protocolo RLF]{Protocolo RLF.}
+	\label{fig:protocolo}
+\end{figure}
+
+\textbf{NOTA:} Para obtener más información sobre los identificadores 
+de las peticiones, consultar el código adjuntado donde se encuentra la 
+lista exhaustiva de los mismos.
+
+Esos mensajes son enviados y recibidos mediante \emph{sockets} que 
+provee el sistema operativo. Los métodos son los siguientes:
+
+\begin{itemize}
+\item Conexión y desconexión de \emph{sockets} con direcciones remotas.
+\item Envío de una petición/respuesta con un \emph{socket} conectado.
+\item Recepción de una petición/respuesta por un \emph{socket} a la 
+escucha.
+\end{itemize}
+

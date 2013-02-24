@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tool SYSTEM "C:\Users\rodriguezmecha\Documents\My Dropbox\Universidad\Proyecto\rlf\tools\data-tool.dtd" >
+<tool path="C:\Users\rodriguezmecha\Documents\My Dropbox\Universidad\Proyecto\rlf\tools\windows\RLF_FreeMem" data="true">
+	<out-stream/>
+	<attributes>
+		<name>RLF FreeMem</name>
+		<version>0.1</version>
+		<description>Monitorización de memoria disponible en tiempo real en un sistema Windows.</description>
+		<admin>carlos</admin>
+		<role>0</role>
+	</attributes>
+	<constants>
+		<constant name="time" data-type="int">
+			<value>5</value>
+			<description>Tiempo en segundos de obtención del dato.</description>
+		</constant>
+	</constants>
+	<action name="mem" timeout="60">
+		<value>RLF_FreeMem.exe</value>
+		<description>Monitorización constante de la memoria libre.</description>
+	</action>
+	<resetter>RLF_FreeMem.exe --clear</resetter>
+</tool>

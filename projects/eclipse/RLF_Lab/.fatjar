@@ -1,0 +1,14 @@
+#Fat Jar Configuration File
+#Sat Sep 03 12:22:41 CEST 2011
+onejar.license.required=true
+manifest.classpath=
+manifest.removesigners=true
+onejar.checkbox=false
+jarname=/mnt/Box/Dropbox/.100060970/Dropbox/Universidad/Proyecto/rlf/bin/lab/lab.jar
+manifest.mergeall=true
+manifest.mainclass=org.rlf.lab.Main
+manifest.file=<createnew>
+jarname.isextern=true
+onejar.expand=
+excludes=
+includes=

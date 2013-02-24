@@ -1,0 +1,1061 @@
+% Estado del arte
+
+\capitulo{Estado del arte}{arte}{
+Para entender las técnicas y diseño que se van a utilizar en todo el 
+proyecto, se incluye un repaso por la historia de las redes de 
+ordenadores y las bases de datos, así como la evolución de los 
+sistemas de trabajo y de información. También se mostrarán algunas 
+de las características más importantes de todos los recursos 
+utilizados para el desarrollo.
+}
+
+\section{El pasado}
+Desde que Alan Turing (1912-1954) definiera la máquina con su propio nombre 
+\cite{Turing} en 1936, el mundo de la informática o ciencia de la 
+información, ha sufrido un crecimiento a marchas forzadas de una forma 
+súbita comparada con el resto de las ciencias. En el momento que se 
+concreta la definición de algoritmo \footnote{Conjunto de reglas que 
+expresa la manera de resolver un problema o un tipo específico de 
+problemas, en un número finito de pasos o cómputos de 
+expresiones \cite{DiccEncTec}.} comienza la base de la era de la 
+denominada ``sociedad de la información''.
+
+\subsection{Hasta 1930: La prehistoria}
+Sin que se definiera aún esta ciencia, toda la atención estaba 
+centrada en resolver sencillos problemas matemáticos de forma 
+automática. Mediante válvulas y tubos de vacío, se realizaban 
+experimentos con ondas de radio que emulaban sistemas 
+\cite{IEEEhistoria}.
+
+Operaciones tan básicas como las puertas lógicas que sirven como base 
+a los paradigmas informáticos se crearon en 1924 \footnote{Walther 
+Bothe construyó una puerta lógica AND para usarla en experimentos 
+físicos, por lo cual recibió el premio Nobel de Física en 
+1954\cite{IEEEhistoria}.}. Con estas herramientas empezó a surgir el 
+concepto de lenguajes de programación (aún no con ese nombre) que 
+eran necesarios para traducir un lenguaje formal matemático a un 
+conjunto de instrucciones o componentes que definieran una 
+\emph{estructura} electrónica que desempeñara una determinada función. 
+Los estudios se centraban en solventar los costes de crear máquinas 
+especializadas en una única tarea. Se registran los laboratorios Bell, 
+con la idea de buscar soluciones electrónicas para cálculos básicos 
+matemáticos. Gracias a esto, Vannervar Bush pudo completar su máquina 
+que resolvió por primera vez ecuaciones diferenciales de manera 
+autónoma.
+
+\subsection{1930 - 1945: El inicio}
+Kurt Gödel se adentró en los lenguajes formales anteriormente comentados 
+\cite{OxfordReference}, dando paso a que el propio Turing inventara la primera 
+máquina programable capaz de realizar diferentes acciones 
+según las instrucciones administradas. Con ello, el matemático pudo realizar 
+el primer juego de ajedrez donde el adversario era una máquina 
+completamente autónoma. El cálculo de cada jugada podía durar varias 
+horas.
+
+En 1941, se inventa, por parte de Konrad Zuse, la computadora 
+programable y completamente automática. Se llamó ``K3'' (véase 
+figura \ref{fig:z3} y los ordenadores actuales tienen muchas 
+similitudes con ella. A partir de ese año, las sucesiones de 
+computadoras creadas por parte de grupos de científicos 
+y matemáticos aumentaron en capacidad y redujeron sus limitaciones, 
+con lo que se encontraron nuevos problemas que solventar, aunque 
+seguían siendo máquinas que no se podían comunicar unas con otras.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=2]{images/z3.png}
+	\caption[El ordenador ``K3'']{El equipo de Konrad Zuse podía almacenar hasta 64 palabras.}
+	\label{fig:z3}
+\end{figure}
+
+
+\subsection{1945 - 1960: La agencia \emph{ARPA} \index{ARPA|see{\emph{ARPANET}}}}
+En estos años Turing realiza un estudio sobre la comunicación en 
+las computadoras, pero en este caso, atendiendo a la interacción con 
+los asistentes humanos. Fue uno de los primeros pasos para entender el 
+avance que ocurrió como consecuencia de la guerra fría, la creación 
+de ARPA \footnote{Agencia de Proyectos de Investigación Avanzada. 
+Organización creada para investigación de defensa que originalmente 
+sólo disponía de una pequeña oficina, sin investigadores ni 
+científicos \cite{Tanenbaum}.}, la organización que más adelante 
+diera a conocer uno de los inventos más importantes del siglo XX, la 
+red de ordenadores.
+
+La empresa IBM empezó a crear las computadoras de forma industrial, ya 
+programables, y estandarizó el lenguaje ensamblador \cite{Ensamblador} 
+como forma de programación para sus máquinas. A la vez, lenguajes 
+como Fortran y Cobol, que aún se pueden utilizar, salieron a la luz 
+como sustitutos para este engorroso lenguaje, que no era escalable y mucho menos 
+portable, ya que cada \software estaba realizado para una máquina con 
+unas especificaciones físicas muy concretas. Estos lenguajes 
+utilizan un compilador \footnote{Programa especial que convierte 
+instrucciones a alto nivel en código máquina o ensamblador 
+\cite{Ensamblador}.} desarrollado generalmente por la misma empresa 
+que provee el conjunto de herramientas para el desarrollo de 
+aplicaciones.
+
+\subsection{1960 - 1970: Creación de \emph{ARPANET} \index{Internet!\emph{ARPANET}}}
+Los inventos fueron sucediéndose de año en año, aumentando la 
+capacidad de cada máquina y reduciendo sus costes. Aún era pronto 
+para que aparecieran los ordenadores personales, pero el número de 
+computadoras creció, y con ello algunas necesidades como la interacción 
+entre las mismas. Es aquí cuando por parte de la organización ARPA 
+se aglutinaron algunos de los primeros conceptos que iban apareciendo sobre 
+las redes de ordenadores. También se aplica, en 1969, el primer 
+protocolo de comunicación en redes, complejo conocido como NCP 
+\footnote{\emph{Net Control Protocol}. Conjunto de primitivas que 
+permiten la realización de tareas de comunicación a alto nivel 
+\cite{Tanenbaum}.}. Al final de la década, la fibra óptica se 
+empieza a utilizar para comunicaciones en redes militares que aumenta 
+de forma considerable la velocidad de las mismas.
+
+Por otro lado, se dan las primeras pinceladas a los conceptos de 
+programación estructurada, en la que actualmente se basan los 
+lenguajes más modernos y potentes. El mismo grupo que creó años 
+antes el lenguaje Cobol, introduce en el mercado la primera solución 
+al almacenamiento masivo de datos en formato electrónico, el IDS 
+(Almacén de Datos Integrado \cite{WDatabase}). Desde ese momento, las 
+bases de datos y las redes estuvieron estrechamente unidas.
+
+\subsection{1970 - 1980: Evolución de la comunicación}
+\label{subsec:Los70}
+Una vez la base de las comunicaciones fue creada, los distintos grupos 
+de investigación aplicaron todas las técnicas aprendidas a los 
+sistemas en red. Esto suponía que los datos en bruto no era lo único 
+que se compartía, sino conjuntos de datos coherentes y estructurados. 
+Empezaron a enviarse ficheros enteros con protocolos como FTP 
+(\emph{File Transfer Protocol}) y se crearon almacenes de datos a los 
+que se accedía por medio de una red. Modelos tan importantes 
+actualmente como TCP/IP \footnote{Arquitectura que se cimenta en los 
+dos protocolos TCP e IP, que hace posible la conexión entre múltiples 
+redes heterogéneas \cite{Tanenbaum}. (Ver página 
+\pageref{subsec:tcpip}).} en los que se basa Internet aparecieron como 
+respuesta al problema que se presentaba a los desarrolladores para 
+implementar comunicaciones entre ordenadores. El primer correo 
+electrónico llegó a su destino gracias a Ray Tomlison en 1971.
+
+Por parte de IBM, en esta década se crearon las bases de datos 
+relacionales, que, al contrario que sus predecesoras, permiten la 
+navegación por medio de enlaces entre los mismos, como se muestra en 
+la figura \ref{fig:relationalDB}. Después se estandarizó el lenguaje 
+SQL\index{base de datos!SQL}, \footnote{\emph{Structured Query 
+Language}. Lenguaje creado para el manejo y la búsqueda de datos en 
+los gestores de bases de datos relacionales.} que se conserva hasta 
+nuestros días con ligeros cambios.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.6]{images/relational.png}
+	\caption[Esquema relacional de una base de datos]{Los esquemas relacionales permiten enlazar unos datos con otros.}
+	\label{fig:relationalDB}
+\end{figure}
+
+Los ordenadores se podía comunicar sin dificultades gracias a 
+la aparición de \emph{Ethernet} que utilizaba un cable único para 
+unir varias computadoras de forma local. También, Microsoft y Apple se 
+crearon con el fin de proveer los primeros ordenadores personales. El 
+número de máquinas creció de forma imprevista hasta para estas 
+empresas \cite{NuevasRedes}.
+
+\subsection{1980 - 1990: La era de los ordenadores personales}
+Desde el punto de vista de las redes, esta década fue la época del 
+afianzamiento de las tecnologías anteriormente desarrolladas. 
+Aparecieron sistemas que posibilitaban una mayor transparencia en las 
+comunicaciones, como los servidores DNS \footnote{Sistema de Nombres 
+de Dominio. Organiza las máquinas dentro de dominios y hace una 
+correspondencia de un nombre con la dirección de un 
+\emph{host}\cite{Tanenbaum}.} que permitían localizar otras máquinas 
+a  partir de un identificador más ``amigable'' que un número de 
+128 \emph{bits}.
+
+En 1983, ARPANET se separa de los fines militares para pasar las redes al 
+ámbito civil. Para muchos, esta fue la creación de Internet\index{Internet}. La 
+aparición de lenguajes y tecnologías sufrió un crecimiento 
+exponencial, apareciendo organizaciones como GNU \footnote{\emph{GNU 
+is Not Unix.} Proyecto para crear un sistema operativo completamente 
+libre bajo licencia GPL \cite{LinuxKernel}.}, Cisco Systems, Adobe, 
+etc. Surgen, también, los estándares que servirán para el desarrollo 
+de las interfaces de comunicación actuales, como XML (\emph{eXtended Markup 
+Language}).
+
+Con el auge de la nueva forma de programación orientada a objetos, 
+se crean las nuevas bases de datos, que establecieron todo su 
+contenido como entidades coherentes. Esto sirvió también para una optimización 
+en la utilización de los enlaces o claves entre datos.
+
+\subsection{1990 - 2000: La aparición de las \emph{puntocom}}
+\label{subsec:Los90}
+La inversión necesaria para poder tener un ordenador personal se fue
+reduciendo al cabo del tiempo, haciendo posible que las familias pudieran 
+disponer de una o varias máquinas en su propio hogar.
+
+El \emph{Word Wide Web} (www\index{Internet!www}) se crea como una nueva forma de entender 
+\index{Internet}, donde usuarios y empresas pueden publicar su información de 
+manera sencilla y accesible desde cualquier parte del mundo con acceso 
+a una línea telefónica. Es aquí cuando el modelo de trabajo de las empresas 
+y la forma de enseñanza empieza a modificarse. Aparecen por primera 
+vez (aunque de forma rudimentaria) las plataformas 
+\emph{online}, que permiten acceder a información y procesos de forma 
+remota desde un ordenador personal, como son \emph{RPC}, y CORBA\index{CORBA} 
+de las que se hablará en la sección \ref{sec:comunicacion}.
+
+Muchas empresas aprovechan este ``boom'' para modificar sus modelos de 
+negocio y aparecer en el escaparate mundial. Se publican portales 
+donde compartir información de forma anónima, con soporte para 
+realizar preguntas y contestarlas sobre todos los aspectos del 
+conocimiento (web social). La información pasa a ser parte de la sociedad de manera 
+pública y donde se acuñarán términos como ``la nube'' y los 
+``sistemas distribuidos''. La cantidad de información contenida en 
+Internet empieza a ser imposible de tratar con el formato actual y 
+se plantea hacer cambios estructurales para incorporar la Web 
+Semántica, y la Web 2.0. Sun Microsystems crea \index{Java} su máquina 
+virtual en 1995.
+
+Durante este periodo, las limitaciones de velocidad y capacidad se van 
+reduciendo de manera exponencial (como se muestra en la figura 
+\ref{fig:modem-growth}), lo que permite que la información que se puede 
+compartir aumente y varíe, en forma de vídeos, música, etc. Las bases 
+de datos se convierten en almacenes gestionados automáticamente, 
+llamados \emph{Data Warehouse} que supone otro escalón más para el 
+negocio y las transacciones monetarias por Internet.
+
+\begin{figure}
+	\centering
+	\includegraphics[scale=0.8]{images/modem-growth.png}
+	\caption[Velocidad de conexión]{Velocidad de conexión comparada con la ley de Moore \cite{CloudComputing}.}
+	\label{fig:modem-growth}
+\end{figure}
+
+Además, aparecen nuevos dispositivos de comunicación inalámbrica, como el 
+\emph{Bluetooth} \footnote{Red inalámbrica de corto alcance creada por 
+el consorcio de L.M. Ericsson, IBM, Intel, Nokia y Toshiba 
+\cite{Tanenbaum}.}, \emph{Wifi} \footnote{Red inalámbrica LAN que 
+utiliza protocolos derivados del 802.11 \cite{Tanenbaum}.} y GPRS, 
+\footnote{Servicio de Radio de Paquetes Generales. Es la generación 
+2.5 de los sistemas inalámbricos en móviles. Los paquetes van por 
+encima de las redes GSM \cite{Tanenbaum}.} que permiten ampliar aún 
+más la difusión de Internet y solventar más limitaciones físicas. 
+Podemos ver en la figura \ref{fig:internet-growth} la evolución en la 
+década de los noventa del número de entradas DNS que era accesible a 
+través de Internet.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.68]{images/internet-growth.png}
+	\caption[Entradas en los DNS]{Número de entradas en los DNS públicos \cite{CloudComputing}.}
+	\label{fig:internet-growth}
+\end{figure}
+
+\subsection{2000 - 2010: El crecimiento exponencial}
+No sólo ha crecido el número de nodos de red en Internet, sino 
+también la forma de concebir los sistemas de computación y 
+almacenamiento de datos. Es cuando se crean las grandes granjas de 
+ordenadores, se empiezan a sustituir los supercomputadores por 
+múltiples ordenadores personales conectados en red que abaratan los 
+costes de mantenimiento y escalabilidad. Aparece la nueva estructura 
+de bases de datos en la ``nube'' para compartir información 
+remotamente y de forma transparente. Con ellas se desarrollan 
+\emph{APIs} \footnote{Interfaz de Programación de Aplicaciones. 
+Conjunto de funciones y procedimientos que ofrece cierta biblioteca 
+para ser utilizada por otro \emph{software} \cite{Tanenbaum}.} de código 
+libre para que las distintas plataformas puedan acceder a esas bases de 
+datos desde cualquier parte del mundo.
+
+Además, evolucionan los pequeños dispositivos portátiles, con gran 
+capacidad de cálculo y almacenamiento, que, mediante baterías, permiten 
+una autonomía de muchas horas, sin necesidad de cables ni otras 
+limitaciones físicas. Para muchos, estos dispositivos podrán llegar a 
+sustituir a los ordenadores como se conocen en la actualidad, 
+reduciendo su tamaño y aumentando su velocidad y potencia.
+
+Una nueva forma de trabajo a distancia se empieza a poner en práctica 
+en algunas administraciones y empresas, el ``teletrabajo''. Para ello 
+se utilizan sistemas de acceso remoto, de los que se ha hablado antes. 
+En el \emph{Valle del Silicio}, en California (Estados Unidos), muchas 
+empresas tecnológicas apuestan por dar a sus empleados un día a la 
+semana, en el que pueden trabajar a distancia desde sus casas, aumentando 
+la satisfacción de los trabajadores.
+
+Como una consecuencia lógica del aumento de máquinas, tanto 
+portátiles como fijas, de diferentes empresas y con diferentes 
+soluciones, se crea un nuevo problema, la heterogeneidad de la forma 
+de trabajar de estos dispositivos.
+
+\section{El presente}
+\label{sec:presente}
+
+Todas las miradas están centradas en la infraestructura del 
+\emph{cloud computing} \index{cloud computing|see{``nube''}} o 
+``nube'' \index{sistema distribuido!``nube''}. Ningún 
+organismo oficial, negocio, centro de enseñanza o de investigación se 
+puede concebir sin la ayuda de esta tecnología, que ahorra cantidades 
+muy importantes de capital en personal y recursos físicos. Por otro 
+lado, se invierten grandes fortunas en el desarrollo e implantación de 
+nuevas soluciones empleando este sistema.
+
+Aparecen lo que se conoce como los sistemas SOI (Infraestructuras 
+Orientadas a Servicio) que solucionan las nuevas exigencias de 
+flexibilidad y cambio que necesitan los modelos de negocio. 
+Implementan arquitecturas orientadas a servicio (SOA) que contienen 
+componentes (tanto físicos como lógicos) fácilmente reemplazables y 
+que aportan homogeneización y escalabilidad. Partiendo de una 
+plataforma rígida, como se encuentran en los sistemas tradicionales, 
+se debe conseguir una respuesta ``on demand'' situando el servicio 
+como cliente.
+
+La desventaja más importante de estos sistemas es la definición de un mapa 
+claro de dependencias entre componentes (debido a su complejidad), lo 
+que aporta la necesidad de predecir de forma más concreta la carga que 
+tiene cada componente. Es por esto que entra en juego el reparto de 
+carga dinámico que viene siendo uno de los grandes problemas a los que 
+se enfrentan los desarrolladores e investigadores en esta época. Como 
+solución parcial, se añaden sistemas de monitorización para obtener 
+información en tiempo real del conjunto del sistema. Se verá más 
+adelante que en este mismo proyecto, se han utilizado estas 
+herramientas.
+
+Es por esto que casi todas las grandes compañías de informática están
+poniendo cada vez más empeño en ofrecer más y mejores recursos 
+\emph{cloud computing}: SalesForge.com (Forge.com) Amazon (Amazon EC2 y 
+S3), Microsoft(Windows Azure), Google (Google Apps Engine), IBM 
+(SmartCloud)\ldots Se puede ver en la figura \ref{fig:eCloudComputing} 
+la tendencia por adaptar las nuevas tecnologías surgidas de la 
+``nube''.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.6]{images/eCloudComputing.png}
+	\caption[Evolución de la ``nube'']{El desarrollo de la ``nube'' es la gran apuesta de esta 
+	década.}
+	\label{fig:eCloudComputing}
+\end{figure}
+
+Es aquí donde toma importancia el concepto de \emph{virtualización} \index{virtualización}. 
+En los sistemas tradicionales, el \hardware limitaba los componentes 
+\software a utilizar, pero gracias a la virtualización, la parte 
+física de los sistemas pasa a un segundo plano, siendo invisible para 
+los desarrolladores de soluciones. Aunque a primera vista suponga una 
+gran carga para estos sistemas, ya que \emph{aplana} las características 
+de cada \hardware , a la larga aporta una gran ventaja a la hora de 
+modificarlos. Siendo un concepto muy importante en este 
+proyecto, sólo se podrá tratar por encima, ya que el sistema de 
+virtualización usado en el mismo es sencillo debido a la finalidad del 
+mismo.
+
+El dinero invertido en estas nuevas tecnologías suele venir de 
+capitales privados con el apoyo de grandes empresas, pero se está 
+viendo el aumento de los productos \emph{open source} 
+\footnote{``Código abierto es el término con el que se conoce al 
+\software distribuido y desarrollado libremente.''\cite{LinuxKernel}} 
+que son mantenidos en parte por universidades y 
+desarrolladores anónimos. Es decir, la ``nube'' es accesible incluso a 
+empresas y comunidades de poco capital. Muchos de los servicios se 
+pueden obtener (en versión reducida generalmente) gratis, como es el 
+caso del almacenamiento en \emph{Dropbox}, la gestión de proyectos en 
+\emph{GitHub}, publicación web en \emph{Godaddy}, etc. Por tanto, los 
+servicios son tanto B2C (de negocio para clientes) y B2B (de negocio 
+para negocios, término referido también al \emph{outsourcing}).
+
+Uno de los proyectos más ambiciosos \emph{open source} para la 
+creación de una plataforma \emph{cloud computing} completamente gratis se 
+llama OpenNebula \index{Internet!OpenNebula}, desarrollado en parte por investigadores de la 
+Universidad Complutense de Madrid \cite{openNebula}. Este sistema 
+provee al usuario, mediante un conjunto de herramientas (tanto 
+comerciales como libres) de su propia ``nube'' accesible desde 
+cualquier parte del mundo (véase figura \ref{fig:openNebula}).
+
+Haciendo referencia a este proyecto, en la actualidad no existe ningún 
+producto que atienda todos los requisitos y objetivos propuestos en 
+este documento. Las plataformas más parecidas, desarrolladas por 
+empresas para su propio uso, como es el caso de la plataforma de 
+programas de trabajo de Telefónica sólo proveen un entorno 
+\emph{software}.
+
+\begin{figure}
+	\centering
+	\includegraphics[scale=0.6]{images/opennebula.png}
+	\caption[OpenNebula]{OpenNebula utiliza servicios comerciales como soporte.}
+	\label{fig:openNebula}
+\end{figure}
+
+\section{El futuro}
+
+Es difícil predecir el futuro teniendo en cuenta la velocidad que ha 
+tomado la evolución de la tecnología en este último medio siglo, 
+aunque está claro que el desarrollo de Internet será la pieza clave 
+que mueva la sociedad de la información.
+
+Las limitaciones físicas que ahora existen serán un mero recuerdo y 
+los nuevos tipos de computadores, como los biológicos o los cuánticos 
+sustituirán a los ordenadores personales actuales, reducidos en 
+tamaño y aumentados en capacidad y potencia. La cantidad de 
+información que se pueda almacenar no será más un problema y los 
+esfuerzos se centrarán en la velocidad y optimización.
+
+Ya ha empezado la era de la domótica\index{domótica}, donde las propias casas son 
+elementos integrados en sistemas complejos conectados a Internet, 
+automáticos e independientes. En realidad, la domótica no es más que 
+manejar \hardware de forma remota. En la figura \ref{fig:domotica} se 
+muestra un dispositivo de control de \emph{hardware} acoplado a una 
+casa.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.6]{images/domotica.png}
+	\caption[Componente domótico]{La domótica puede ser un componente más en la 
+	construcción inmobiliaria.}
+	\label{fig:domotica}
+\end{figure}
+
+
+\section{Los sistemas y modelos de trabajo}
+Al igual que las arquitecturas de las redes de ordenadores, las 
+plataformas de trabajo convencional se pueden clasificar dependiendo 
+de su distribución y sus tipos de comunicación. A continuación, se 
+establecen los tipos básicos de sistemas que serán clave para el 
+entendimiento de este proyecto.
+
+\subsection{Sistema individual}
+Se puede considerar como una red de un solo nodo como se puede ver en 
+la figura \ref{fig:sindividual}. Es aquel sistema 
+donde no existe comunicación y todo depende de un mismo elemento. Es 
+así como se ha trabajado hasta antes de la revolución de la sociedad 
+de la información de forma tecnológica.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.5]{images/sindividuales.png}
+	\caption[Sistema individual]{Máquinas en un sistema individual.}
+	\label{fig:sindividual}
+\end{figure}
+
+Los dispositivos portátiles son un caso especial de un sistema 
+individual, sólo que permite el desplazamiento del propio nodo entre 
+otras redes, por lo que puede salir de esta categoría y aplicarse a 
+las siguientes. Actualmente se consideran sistemas portátiles también 
+a los \emph{Smartphones} \footnote{Teléfono móvil con funciones 
+avanzadas de gestión de programas y acceso a Internet.}, 
+\emph{Tablets} \footnote{Dispositivo portátil de 
+mayor capacidad y tamaño que un móvil, generalmente para uso 
+multimedia e Internet, aunque cada vez más para acciones más 
+complejas.} y \emph{Netbooks} \footnote{Ordenadores de tamaño reducido 
+con una gran autonomía debido a la batería que poseen, pensados para 
+trabajos ligeros y el acceso a Internet}. En la última década, las empresas que 
+tradicionalmente se dedicaban a los ordenadores personales, han 
+cambiado su modelo de producción a estos dispositivos portátiles, 
+desarrollando plataformas completas y \software específico para ellas.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.5]{images/android.png}
+	\caption[Android]{El sistema operativo Android está 
+	disponible para \emph{tablets} y \emph{smartphones}.}
+	\label{fig:android}
+\end{figure}
+
+Las grandes empresas se han abierto camino en estos dispositivos 
+gracias a los nuevos sistemas operativos Android (figura 
+\ref{fig:android}), Windows Phone 7 e 
+iOS, de Google, Microsoft y Windows respectivamente. El resto se ha 
+ido desplazando para ocupar una cuota mínima en el mercado actual, 
+debido a su falta de apoyos por la comunidad de desarrolladores, como 
+son Symbian de Nokia, Palm de ahora HP y el Sistema RIM de los 
+dispositivos Blackberry.
+
+\subsection{Sistemas centralizados}
+Son aquellos en los que los nodos dependen de otros especiales que 
+administran y manejan toda la comunicación. En terminología técnica 
+se consideran como los paradigmas de Cliente/Servidor (figura 
+\ref{fig:client-server}, varios nodos o 
+clientes se conectan a un servidor para solicitar servicios)
+\cite{Tanenbaum}. Generalmente, los nodos centrales son de mayor 
+tamaño o capacidad, y también tienen una mayor responsabilidad. Sin 
+ellos, la comunicación no existe y, por lo tanto, el desarrollo es 
+imposible. Es aquí donde se permite compartir, además de datos, 
+\emph{hardware} y recursos que se ponen a disposición de los nodos 
+del sistema.
+
+\begin{figure}
+	\centering
+	\includegraphics[scale=0.6]{images/scentralizado.png}
+	\caption[Sistema centralizado]{Esquema de un sistema centralizado.}
+	\label{fig:client-server}
+\end{figure}
+
+También es donde aparecen los sistemas por niveles, que son la 
+evolución propia de los sistemas centralizados, donde un nodo 
+central de un sistema es un nodo cliente más en un nivel superior, 
+como podemos ver en la figura \ref{fig:multilevel-server}.
+
+\begin{figure}
+	\centering
+	\includegraphics[scale=0.3]{images/sjerarquico.png}
+	\caption[Sistema jerárquico]{Representación de un sistema centralizado por niveles.}
+	\label{fig:multilevel-server}
+\end{figure}
+
+El problema más típico de estos sistemas es su falta de robustez, 
+siendo dependiente de un sistema central. Además, la escalabilidad 
+está limitada por la potencia de estos nodos centrales, que tienen que 
+atender todas las peticiones.
+
+\subsection{Sistemas distribuidos \index{sistema distribuido}}
+Suponen la evolución a los sistemas centralizados. Son un conjunto de 
+nodos donde, de forma transparente, funcionan como uno único 
+\cite{Tanenbaum}. Su escalabilidad es mucho mayor que los sistemas 
+centralizados, debido a la homogeneidad de roles. Para poder controlar 
+estas arquitecturas, aparecen el \index{\emph{middleware}}. Estas 
+plataformas no pueden concebirse sin los términos 
+\emph{virtualización} y \emph{comunicación}.
+
+Estos sistemas ofrecen unas características que se listan a 
+continuación \cite{DAD}.
+
+Ventajas:
+\begin{itemize}
+	\item Reducción del coste del computador y del acceso a la red.
+	\item Compartición de recursos.
+	\item Escalabilidad.
+	\item Tolerancia a fallos. Al no depender de un sólo sistema 
+	central, existe la posibilidad que después de que ocurra un fallo, 
+	el conjunto del sistema no se vea afectado.
+\end{itemize}
+
+Inconvenientes:
+\begin{itemize}
+	\item Múltiples puntos de fallo.
+	\item Seguridad. Considerado como el gran inconveniente en estos 
+	sistemas debido a los innumerables puntos de acceso.
+\end{itemize}
+
+\subsection{Internet y la ``nube''}
+Comprende múltiples sistemas centralizados y distribuidos, organizados 
+de manera jerárquica que ofrecen servicios a los nodos de la red. Desde la 
+descarga de información, hasta la compartición, uso y publicación de 
+la misma. El término ``nube'' \index{sistema distribuido!``nube''} 
+aparece como referencia a los servicios 
+(generalmente almacenaje de información) en Internet, que se proveen, 
+siendo transparente al usuario donde se encuentran, aunque 
+disponible para su acceso en todo momento. La limitación de capacidad 
+pasa a un segundo plano ya que entran en juego las granjas de 
+ordenadores anteriormente mencionadas \cite{CloudComputing}.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.6]{images/cloudComputing.png}
+	\caption[La ``nube'']{La ``nube'' provee servicios a multitud de dispositivos.}
+	\label{fig:cloudcomputing}
+\end{figure}
+
+Esta ``nube'' es accesible desde cualquier dispositivo con conexión a 
+Internet (figura \ref{fig:cloudcomputing}, lo que hace que sea 
+necesario disponer de plataformas que 
+acepten varios tipos de formatos, tanto estándar como privativos. Esto 
+ha supuesto un gran avance para homogeneizarlas y poder obtener 
+servicios sin preocuparse de restricciones y limitaciones. Está 
+compuesta por capas que son intermediarios para acceder a las máquinas 
+finales.
+
+\subsection{Sistemas \emph{clusters} y \emph{grid}}
+Son casos especiales de sistemas centralizados, en los que el servicio 
+principal es la capacidad de cálculo. Están formados por nodos 
+genéricos baratos, fácilmente reemplazables. Los \emph{grids} son 
+agrupaciones de \emph{clusters} (como los de la figura 
+\ref{fig:cluster}) accesibles a través de Internet, 
+poniéndolos a disposición para que realicen una tarea por nodo.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.9]{images/cluster.png}
+	\caption[\emph{Cluster}]{Varios ordenadores personales forman un \emph{cluster}.}
+	\label{fig:cluster}
+\end{figure}
+
+Actualmente muchas empresas ofrecen servicios de \emph{clusters} y 
+\emph{grid} para otras empresas, que suponen un gran ahorro. Está 
+estimado que los negocios que contratan estos servicios pueden 
+ahorrarse hasta un millón de dólares al año \cite{amazon}.
+
+\section{Las plataformas virtuales \index{virtualización}}
+Debido a la extensión que supondría comentar todas las plataformas de 
+desarrollo actuales (o las usadas en el proyecto), sólo se pondrá 
+atención a aquellas que formen parte del sistema a emplear en el 
+proyecto, es decir, las plataformas virtuales.
+
+La estrategia de la virtualización está compuesta por múltiples 
+campos. Desde la virtualización de un sistema operativo completo, es 
+decir, emularlo en otro sistema, por lo que se podría tener varios 
+sistemas operativos en ejecución a la vez en una única máquina, hasta 
+la emulación de almacenamiento, que conforma un grupo de 
+``contenedores'' de datos, incompatibles entre ellos y heterogéneos, 
+formando una única unidad. En los servidores actuales se utiliza esta 
+técnica para conseguir una serie de ventajas explicadas a 
+continuación \cite{vmware}:
+
+\begin{itemize}
+	\item Rápida incorporación de nuevos recursos para los servidores virtualizados.
+	\item Reducción de los costes de espacio, de \hardware y consumo necesario.
+	\item Administración global centralizada y simplificada.
+	\item Permite gestionar los centros de cálculo como un \emph{pool} 
+	de recursos o agrupación de toda la capacidad de procesamiento, 
+	memoria, red y almacenamiento disponible en nuestra 
+	infraestructura.
+	\item Mejora en los procesos de réplica de sistemas. Tanto para 
+	pruebas como para \emph{backups}.
+	\item Aislamiento: Un fallo general de sistema de una máquina 
+	virtual no afecta al resto de máquinas virtuales.
+	\item Migración en caliente de máquinas virtuales (sin pérdida de 
+	servicio) de un servidor físico a otro, eliminando la necesidad de 
+	paradas planificadas por mantenimiento de los servidores físicos.
+	\item Balanceo dinámico de máquinas virtuales entre los servidores 
+	físicos, como se ha comentado en \ref{sec:presente}.
+\end{itemize}
+
+Existe un caso específico en el que sólo se virtualiza una parte 
+concreta del sistema. Esto también supone muchas ventajas en cuanto al 
+desarrollo de aplicaciones y el uso de determinados servicios en 
+cualquier tipo de máquina.
+
+\subsection{Java y su máquina virtual}
+\label{subsec:Java}
+Java \index{Java} se puede denominar como un conjunto de herramientas (bastante 
+amplio) que ha obtenido mucha fama desde su creación. Aparte de ser 
+un lenguaje de programación orientado a objetos, tiene por detrás 
+muchos servicios que lo hacen el lenguaje más utilizado del mundo en 
+la creación de aplicaciones. Consta de \cite{java2}:
+
+\begin{enumerate}
+	\item El lenguaje de programación orientado a objetos.
+	\item Bibliotecas estándar para todas las plataformas.
+	\item Compilador a \emph{bytecode}, entendible por la máquina 
+	virtual.
+	\item La máquina virtual de Java que ejecuta ese código. Hace que 
+	cualquier programa escrito en este lenguaje funcione en cualquier 
+	plataforma independientemente del sistema instalado.
+\end{enumerate}
+
+Es una plataforma que compila e interpreta código. Pero se pueden 
+incluir también todas las otras herramientas que permiten añadir 
+versatilidad a este conjunto:
+
+\begin{enumerate}
+	\item La edición estándar de Java contiene bibliotecas para la 
+	realización de interfaces gráficas.
+	\item También dispone de \emph{applets} que permiten añadir 
+	aplicaciones a entornos web de manera sencilla.
+	\item La edición de empresa (o J2EE) dispone de herramientas web 
+	para la creación de páginas y servicios web con la sintaxis 
+	normal. Estas herramientas son JSP, Servlets y Filtros.
+	\item Compilador a \emph{bytecode}, entendible por la máquina 
+	virtual.
+	\item Dispone de conectores para cualquier base de datos del 
+	mercado, por lo que es sencillo utilizar estos productos en las 
+	aplicaciones.
+	\item Aunque no es propio de la plataforma de Java, Google ha 
+	desarrollado un SDK \footnote{\emph{Software Development Kit.} 
+	Conjunto de bibliotecas para el desarrollo de aplicaciones en una 
+	determinada plataforma.} a disposición de los usuarios, para poder 
+	crear aplicaciones para su sistema operativo Android en este 
+	lenguaje.
+\end{enumerate}
+
+Todo no son ventajas. Java tiene mala fama porque al ser un sistema 
+virtualizado, utiliza más recursos y es más lento que los lenguajes 
+completamente compilados, como lo son C o C++. Aún así, es 
+indiscutible que debida a la gran versatilidad de la que dispone, es 
+una herramienta indispensable para un programador.
+
+\subsubsection*{J2EE: Java 2 Enterprise Edition}
+\index{Java!J2EE}
+\label{subsubsec:j2ee}
+
+Esta versión más amplia, como ya se ha comentado, dispone de varias 
+herramientas para la implementación de aplicaciones con un alto grado 
+de comunicaciones, desde páginas web simples a servicios web 
+sustentados en servidores. También se ha desarrollado gracias a Java 
+programas como GlassFish y Tomcat, que permiten incluir estos 
+servicios mediante un único archivo y son accesibles por red. La 
+versión de empresas contiene todo lo necesario para crear servidores 
+de aplicaciones, en diversas capas distribuidas, flexible y escalable.
+
+A partir de ahí, se han creado multitud de \framework s y otras 
+herramientas para un desarrollo más sencillo y más estructurado.
+
+Actualmente el futuro de Java es un poco incierto debido a que la 
+empresa Oracle compró Sun Microsystem, y ha optado por políticas que 
+impiden el desarrollo libre de esta plataforma.
+
+\section{El almacenamiento}
+\label{sec:almacenamiento}
+Se obtiene una correspondencia entre las plataformas de 
+almacenaje masivo de información con los distintos tipos de sistemas 
+ya que están basadas en ellos. Se puede decir que 
+el almacenamiento es la segunda parte más importante de la 
+informática, después del tratamiento de esos datos. Es por ello que 
+la vía de las bases de datos ha ido en constante evolución de forma 
+paralela a las comunicaciones entre ordenadores.
+
+No se explicará la capa más baja del almacenaje de la información, 
+como son los sistemas de ficheros ya que no compete a este proyecto. 
+Los sistemas de almacenaje pasan a ser grandes administradores de 
+información que no sólo se preocupan por contener los datos, sino 
+también por ofrecer soluciones para la búsqueda y el mantenimiento de los 
+mismos.
+
+\subsection{Sistemas Gestores de Bases de Datos}
+Son conocidos como el producto final de la base de datos \index{base de datos} en sí. 
+Engloban al conjunto de herramientas necesarias para utilizar todo lo 
+referente a esas bases de datos. Desde el lenguaje de consulta SQL 
+(ver página \pageref{subsec:Los70}) hasta los motores de optimización 
+y búsqueda, administración de usuarios y seguridad, comunicaciones, 
+incluso algunas proveen herramientas específicas para acceder a la 
+información desde otras plataformas mediante conectores.
+
+Existen en la actualidad multitud de soluciones para almacenamiento, 
+adecuadas al uso que se les vaya hacer, con gran cantidad de datos o 
+plataformas especialmente ligeras para una rápida utilización.
+
+En este proyecto se van a centrar en usar dos específicas para dos 
+necesidades distintas, como son MySQL y SQLite.
+
+\subsection{SQLite \index{base de datos!SQLite}}
+Este gestor tiene una característica muy importante y es que es 
+extremadamente ligero. Tan ligero que se usa en dispositivos de baja 
+capacidad como los anteriormente mencionados \emph{smartphones}. No 
+está preparado para manejar grandes cantidades de información, ni de 
+tratamiento avanzado de datos, como, por ejemplo, las claves ajenas de 
+las tablas. Dispone de una interfaz muy sencilla y accesible desde 
+cualquier lenguaje de programación, sacando el máximo rendimiento 
+desde C. A costa de su flexibilidad, se han sacrificado las tareas de 
+mantenimiento y de optimización, por lo que no cuenta con procesos que 
+ayuden a obtener la información de manera más rápida. No dispone de 
+acceso remoto a la información y se comporta como un fichero binario 
+en el sistema operativo.
+
+Se puede ver en la figura \ref{fig:sqlite} que dispone de una 
+estructura mucho más sencilla que el resto de soluciones que existen 
+en la actualidad. SQLite es código libre y se puede obtener de manera 
+totalmente gratuita.
+
+\begin{figure}
+	\centering
+	\includegraphics[scale=0.9]{images/sqlite.png}
+	\caption[Estructura de SQLite]{SQLite no dispone de procesos de optimización.}
+	\label{fig:sqlite}
+\end{figure}
+
+\subsection{MySQL \index{base de datos!MySQL}}
+Muy popularizado en Internet, este gestor gratuito pero con licencia 
+doble (comercial y libre) es una solución media para la mayoría de 
+los proyectos existentes. Contiene todas las opciones de un gran 
+gestor empresarial, pero con un tamaño más reducido y menos 
+optimizado. Es perfecto para cantidades moderadas de información (como 
+las utilizadas en pequeñas y medianas empresas), y se han realizado 
+multitud de versiones para optimizar sus capacidades, como Google, que 
+la modificó para aumentar su capacidad de mantenimiento (por motivos 
+estructurales), o Facebook, que actualmente sigue utilizando los 
+servidores con MySQL.
+
+Posee múltiples procesos de mantenimiento que necesitan estar en 
+constante ejecución, además les da acceso de forma remota, por 
+lo que es idóneo para sistemas con un alto grado de comunicación.
+
+Existen multitud más de soluciones, como son Oracle Database, la 
+\emph{open source} por excelencia, PostgreSQL, también empresariales como 
+las proporcionadas por IBM y los grandes almacenes de datos.
+
+\section{La comunicación}
+\label{sec:comunicacion}
+Todas las comunicaciones en los ordenadores actuales poseen una misma 
+estructura definida por los protocolos que intervienen en ellas. 
+Aunque cada protocolo tenga una función, debido a que el sistema está 
+definido por capas, comparten muchos de los elementos. Para empezar 
+esta sección, se definirá el modelo actual que se aplica a Internet, 
+ya que es el que se utilizará en este proyecto. Después, se dará un 
+repaso a las distintas tecnologías que están por encima de ese 
+modelo, y las utilidades y características más importantes de cada una.
+
+\subsection{El modelo TCP/IP\index{TCP/IP}}
+\label{subsec:tcpip}
+Es un modelo de referencia que se usó para ARPANET, a pesar de existir 
+otro estándar definido en 1983 desarrollado por la ISO (Organización 
+Internacional de Estándares), que es el que se ha mantenido hasta nuestros 
+días. Se basa en una pila de capas, cada cual usa sus capas inferiores 
+y les proporciona más funcionalidad. Así, la capa de menor nivel es 
+la más básica.
+
+Estas capas tienen unos protocolos que actúan con la información que 
+le llega de una capa superior, como se ve en la figura \ref{fig:tcpip}.
+
+\begin{figure}
+	\centering
+	\includegraphics[scale=0.6]{images/tcpip.png}
+	\caption[Modelo TCP/IP]{Modelo TCP/IP y modelo OSI desarrollado en 1983.}
+	\label{fig:tcpip}
+\end{figure}
+
+\subsubsection*{Capa de red}
+Es la capa de menor nivel y se encarga de las tareas más básicas de 
+comunicación. Realmente, localiza una dirección MAC 
+\footnote{Dirección única asignada a cada interfaz de red, 
+correspondiente con la subcapa de Control de Acceso al Medio 
+\cite{Tanenbaum}.} correspondiente a una máquina y envía bit a bit 
+toda la información suministrada por capas superiores. Además añade 
+comprobaciones de errores a nivel de bit. Esta es dependiente de 
+la estructura de red, y existen versiones para redes LAN, ARPANET, 
+Radio de paquete y SATNET.
+
+\subsubsection*{Capa de interred}
+Permite mantener la transparencia entre distintas redes, por lo 
+que es el centro de unión entre toda la arquitectura. Su trabajo es 
+permitir que los equipos inyecten datos dentro de cualquier red y que 
+éstos viajen a su destino de manera independiente.
+
+Su protocolo principal es IP (Protocolo de Internet) y da nombre al 
+modelo.
+
+\subsubsection*{Capa de transporte}
+Permite a una máquina origen y destino mantener una conversación 
+completa, independientemente de cuantos ``saltos entre redes'' tengan 
+que realizar los datos.
+
+Los protocolos de esta capa son TCP (Protocolo de Control de 
+Transporte), orientado a conexión y seguro que también da nombre al modelo, y 
+UPD (Protocolo de Datagrama de Usuario) para aplicaciones que no 
+deseen control de flujo.
+
+\subsubsection*{Capa de aplicación}
+Es la última capa que está en contacto con el usuario. Es sobre ella 
+donde el \emph{software} de las máquinas puede crear sus propios 
+protocolos, teniendo por debajo todos los anteriormente descritos. Los 
+protocolos más famosos comprenden:
+
+\begin{description}
+	\item[HTTP:] Protocolo de Transferencia de Hipertexto 
+	\cite{CommYRedes}. Es base para la WWW (\ref{subsec:Los90}). Puede 
+	transferir cualquier tipo de archivo a través de Internet. Está 
+	estructurado de forma Cliente/Servidor orientado a transacciones.
+	\item[FTP:] Es el protocolo estándar de Internet para envío de 
+	archivos. Tiene la característica de usar dos tipos de conexión, 
+	una de control y otra de datos \cite{TCPIllustrated}.
+	\item[SMTP:] Protocolo Simple de Transferencia de Correos. Es 
+	parecido al protocolo FTP pero su finalidad es enviar y recibir 
+	mensajes enviados de un usuario a otro a través de la red 
+	\cite{TCPIllustrated}.
+	\item[DNS:] Sistema de Nombres de Dominio. Se compone de una base 
+	de datos distribuida que hace la correspondencia entre nombres de 
+	máquinas y sus direcciones.
+\end{description}
+
+Los protocolos deben ser implementados sobre un sistema de envío, 
+desde los más simples, como los \emph{sockets}, hasta plataformas 
+complejas como \emph{.NET} \index{.NET}. A continuación se describirán los más 
+importantes.
+
+\subsection{Sockets}
+\index{socket}
+Son la abstracción básica que contienen los diferentes sistemas 
+operativos para enviar datos mediante los distintos protocolos de 
+nivel de transporte anteriormente detallados. A bajo nivel, funcionan 
+como posiciones de memoria donde se escriben y se leen datos, conectan 
+dos procesos de forma bidireccional entre dos máquinas 
+\cite{SistemasOperativos}.
+
+Su funcionamiento es sencillo:
+
+\begin{enumerate}
+	\item Se crea el \socket asignándole un protocolo de transporte 
+	(generalmente TCP o UDP).
+	\item Al \socket se le asigna un puerto de la máquina al que 
+	conectarse o al que va a escuchar (dependiendo si es del lado del 
+	cliente o del servidor). Desde ese momento, este está a la espera 
+	y preparado para la comunicación.
+	\item Mediante operaciones de lectura y escritura (similares a la 
+	escritura y lectura de ficheros) se envían y reciben datos entre 
+	los dos extremos de la comunicación.
+	\item Se cierran los \emph{sockets} de conexión. 
+\end{enumerate}
+
+Con este mecanismo se han creado los protocolos complejos y las 
+plataformas que se describen a continuación.
+
+\subsection{Llamadas a procedimientos remotos}
+Se trata de una implementación por medio de \emph{sockets} que permite 
+invocaciones remotas de funciones. De forma transparente al 
+programador, se realiza la comunicación, se procesa en la otra 
+máquina y se devuelve el resultado. Son la base de las plataformas 
+distribuidas, basadas en objetos \cite{SistemasOperativos}. Su 
+evolución directa son las \emph{Invocaciones a Procedimientos Remotos}.
+
+\subsection{Java RMI}
+Compone el conjunto de herramientas implementadas para la máquina 
+virtual \index{Java!máquina virtual} de Java (ver sección 
+\ref{subsec:Java}), que permiten realizar aplicaciones distribuidas, 
+ocultando las comunicaciones para que el desarrollador programe como si 
+todo el contenido estuviera en la misma máquina.
+
+Se basa en una estructura de servicios a los que, mediante un registro de 
+nombres, los clientes acceden y obtienen la localización del servicio 
+requerido \cite{JavaRMI}. Estos pueden invocar métodos que no se encuentran en su 
+propia máquina. Cada aplicación contiene una interfaz donde se 
+especifican los métodos remotos y los parámetros de los mismos.
+
+Como se puede ver en la figura \ref{fig:rmi}, el \emph{RMI Registry} 
+debe ser accesible desde todos los nodos de la red. Estos, mediante 
+una etiqueta, obtienen la localización del objeto dentro de la red. 
+Después son conectados a la máquina que lo posee y los objetos son 
+enviados serializados \footnote{Un objeto serializado es su 
+representación íntegra de forma textual, que se puede escribir o leer 
+de un fichero (al igual que enviar como un dato más). Generalmente es 
+usado para guardar objetos en el estado actual.} para su posterior uso.
+
+\begin{figure}
+	\centering
+	\includegraphics[scale=0.4]{images/rmi.png}
+	\caption[Estructura de Java RMI]{Arquitectura de Java RMI \cite{DAD}.}
+	\label{fig:rmi}
+\end{figure}
+
+El inconveniente más importante es que esta plataforma sólo se puede 
+utilizar en \emph{software} para se ejecute en la \index{Java!máquina virtual} de Java, 
+limitando el número de programas que pueden interactuar con ella.
+
+\subsection{CORBA}
+
+Con una arquitectura muy parecida a Java RMI, es una plataforma más 
+compleja que permite interactuar independientemente del lenguaje de 
+programación utilizado en el \emph{software}. Esto hace posible que se 
+realicen comunicaciones entre distintas arquitecturas de forma 
+transparente al usuario y al desarrollador. A pesar de los lenguajes 
+utilizados, CORBA\index{CORBA} está basado en el paradigma orientado a objetos, por 
+lo que, aunque se estén utilizando lenguajes como C o Matlab, se 
+realizan invocaciones a métodos.
+
+Se caracteriza por definir las interfaces de acceso con un lenguaje 
+llamado IDL (Lenguaje de Definición de Interfaces) que, al igual que 
+en Java RMI, todos los nodos deben poseer. Está considerada como una 
+de las arquitecturas más difíciles de utilizar debido a su gran 
+complejidad y al número de configuraciones posibles. Actualmente está 
+siendo utilizada en proyectos de gran envergadura donde se requiere 
+una alta interoperabilidad.
+
+En la figura \ref{fig:corba} se puede apreciar las distintas capas de 
+la arquitectura.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.3]{images/corba.png}
+	\caption[Estructura de CORBA]{Componentes de un sistema CORBA \cite{DAD}.}
+	\label{fig:corba}
+\end{figure}
+
+\subsection{Framework .NET\index{.NET}}
+Esta plataforma fue desarrollada por Microsoft para dar salida a los 
+lenguajes en los que se puede desarrollar \emph{software} en Windows, 
+aunque también dispone de plataforma en sistemas Unix. Al igual que 
+Java, utiliza una ``máquina virtual'' para ejecutar el código 
+compilado (CLR o \emph{Common Language Runtime}, figura \ref{fig:dotnet} \cite{dotNet}). 
+Gracias a ello, se aglutinaron todos los lenguajes de la plataforma 
+(C\#, J\#, Visual C++, Visual Basic y .NET \index{.NET!ASP.NET}) 
+creando una solución muy versátil. Además, permite la comunicación, 
+al igual que Java RMI\index{Java!Java RMI}, transparente 
+al usuario entre estos programas. La potencia es mayor cuando se 
+pueden incluir servicios web nativamente.
+
+Para desarrollar en esta plataforma se dispone de un entorno 
+especializado, Visual Studio, que añade más posibilidades a .NET.
+
+\begin{figure}
+	\centering
+	\includegraphics[scale=0.35]{images/dotnet.png}
+	\caption[Estructura de .NET]{Arquitectura de .NET \cite{DAD}.}
+	\label{fig:dotnet}
+\end{figure}
+
+En los últimos años, ha surgido un auge ya que Microsoft permitió 
+añadir compatibilidad con .NET a su sistema operativo para 
+dispositivos móviles, \emph{Windows Phone 7}.
+
+\subsection{Servicios Web\index{servicio web}}
+Como ya se comentó en la página \pageref{sec:presente}, la tendencia 
+pasa a ser la creación de servicios destinados tanto a otras empresas 
+como a clientes finales. Estos servicios se pueden considerar como 
+aplicaciones completas a las que se accede remotamente.
+
+Por motivos de seguridad, se aceptó que la forma de comunicar estos 
+servicios fuera a través de los métodos tradicionales de Internet, es 
+decir, mediante los protocolos ya establecidos, como es HTTP. Este 
+protocolo se quedó pequeño pronto y se plantearon añadir más 
+funcionalidades por encima sin perder esa base. Es así como se crean 
+los protocolos de intercambio de objetos (más complejos que simple 
+información), como SOAP, que utiliza un formato XML para el envío e 
+identificación de los objetos (véase figura \ref{fig:serviciosweb}).
+
+Como en las anteriores plataformas descritas, los servicios web se 
+definen mediante una interfaz común llamada WSDL\index{servicio 
+web!WSDL} (\emph{Web Service Description Language}), donde los clientes 
+pueden obtener toda la información de los métodos a utilizar, sus 
+parámetros y sus excepciones. Surgen vías alternativas que aprovechan 
+los métodos de comunicación actuales de los 
+navegadores\index{Internet!navegador} de Internet, para obtener el 
+máximo beneficio de estos servicios. Un ejemplo es REST, cada vez más 
+extendido, el cual realiza las peticiones mediante la URL de la propia 
+página, introduciendo como parámetros el método a ejecutar. Este 
+sistema es usado en sitios web como Facebook y son de gran ayuda a los 
+desarrolladores ya que no necesitan ningún tipo de librería externa 
+para poder utilizar por completo los distintos servicios que provee la 
+empresa.
+
+\begin{figure}
+	\centering
+	\includegraphics[scale=0.55]{images/serviciosweb.png}
+	\caption[Servicios web]{Estructura típica de un sistema con varios servicios web.}
+	\label{fig:serviciosweb}
+\end{figure}
+
+\section{Las limitaciones}
+A lo largo de este capítulo se ha demostrado cómo se han ido 
+superponiendo unas soluciones a otras, al igual que aparecían nuevos 
+problemas y nuevas necesidades surgidas a partir de las propias 
+soluciones. Aún queda mucho camino para resolver las grandes 
+limitaciones de potencia y capacidad, pero otras pueden ser 
+solventadas mediante las ideas surgidas de los investigadores, 
+estudiantes e ingenieros.
+
+\subsection{La interoperabilidad \index{Java!interoperabilidad} 
+\index{.NET!interoperabilidad}}
+Desde que se creó el ``K3'', cada empresa, investigador o científico 
+ha implantado sus soluciones sin preocuparse de la interacción con su 
+entorno, pero en estos tiempos, ha sido una de las necesidades más 
+urgentes debido a la gran cantidad de dispositivos y productos que 
+existen en el mercado. Las empresas que sólo miran por su producto se 
+condenan al fracaso a largo plazo. La competencia es mayor y 
+las guerras de productos incomodan cada vez más al cliente, que, por lo 
+general, no tiene una compañía como exclusiva.
+
+Gracias a que el desarrollo de las distintas soluciones en cuanto a 
+comunicación y almacenaje se ha mantenido al margen de productos muy 
+concretos, parece ser que la solución al problema de interoperabilidad 
+pasa obligatoriamente por estos campos. Con la aparición de la 
+``nube'' y los sistemas virtuales, se ha salvado este gran obstáculo 
+(en mayor o menor medida). Pero sigue faltando soluciones más 
+genéricas para \software . Aparte de Java y .NET, no existen otras 
+plataformas que permitan ejecutar programas independientemente de la 
+máquina ni del sistema operativo. Es lógico entonces que si se desea 
+solventar un problema se necesite utilizar cualquiera de esos dos sistemas.
+
+\subsection{Acceso remoto}
+Se ha avanzado mucho desde que cada máquina era independiente una de 
+otra, y todo lo necesario estaba contenido en la misma. Ahora la 
+sustitución de una de estas en una red o un sistema complejo es casi 
+inmediato, sin tener que realizar \emph{backups} concretos ni 
+alterando la estructura de dicha red. Cada nuevo producto que se crea 
+en la actualidad deja de verse como algo instalado en una máquina, 
+sino más bien como un conjunto de programas que necesitan estar 
+comunicados en servidores, clientes, terminales, etc. Por supuesto, 
+sigue habiendo \hardware que aún es imposible su acceso remoto, y es 
+este proyecto el que pretende solucionar en gran medida este problema, 
+usando las tecnologías anteriormente mencionadas, y aprendiendo de la 
+evolución de los sistemas.
+
+\cleardoublepage

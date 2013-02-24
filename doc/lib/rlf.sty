@@ -1,0 +1,135 @@
+\ProvidesPackage{lib/rlf} 
+
+% Página limpia
+\newcommand{\emptypage}{\thispagestyle{empty}\cleardoublepage}
+
+% Portada del capítulo simple
+\newcommand{\capitulo}[3]{
+	\chapter{#1}
+	\label{cap:#2}
+	\vspace{11cm}
+	\noindent \rule{15cm}{1pt}\\
+	\paragraph{#3}
+	\newpage
+}
+
+% Requisito de capacidad
+\newcommand{\reqcapacidad}[5]{
+	\begin{table}[H]
+	\begin{center}
+		\stepcounter{rcap}
+	\begin{tabular}{|| m{3.5cm} | m{3.5cm} | m{3.5cm} | @{\extracolsep{\fill}} c ||}
+		
+		\hline
+		\hline
+		\multicolumn{4}{|| c ||}{\textbf{#1}}\\
+		\hline
+		\textsc{Identificador} & RUC-\arabic{rcap} &
+		\textsc{Prioridad} & #3 \\
+		\hline
+		\textsc{Fuente} & #2 &
+		\textsc{Necesidad} & #4 \\
+		\hline
+		\multicolumn{4}{|| c ||}{\textsc{Descripción}}\\
+		\hline
+		\multicolumn{4}{|| p{14cm} ||}{#5}\\
+		\hline
+		\hline
+		
+	\end{tabular}
+	\end{center}
+	\end{table}
+}
+
+% Requisito de restricción
+\newcommand{\reqrestriccion}[5]{
+	\begin{table}[H]
+	\begin{center}
+		\stepcounter{rres}
+	\begin{tabular}{|| m{3.5cm} | m{3.5cm} | m{3.5cm} | @{\extracolsep{\fill}} c ||}
+		\hline
+		\hline
+		\multicolumn{4}{|| c ||}{\textbf{#1}}\\
+		\hline
+		\textsc{Identificador} & RUR-\arabic{rres} &
+		\textsc{Prioridad} & #3 \\
+		\hline
+		\textsc{Fuente} & #2 &
+		\textsc{Necesidad} & #4 \\
+		\hline
+		\multicolumn{4}{|| c ||}{\textsc{Descripción}}\\
+		\hline
+		\multicolumn{4}{|| p{14cm} ||}{#5}\\
+		\hline
+		\hline
+	\end{tabular}
+	\end{center}
+	\end{table}
+}
+
+% Requisito funcional
+\newcommand{\reqfuncional}[5]{
+	\begin{table}[H]
+	\begin{center}
+		\stepcounter{rfun}
+	\begin{tabular}{|| m{3.5cm} | m{3.5cm} | m{3.5cm} | @{\extracolsep{\fill}} c ||}
+		\hline
+		\hline
+		\multicolumn{4}{|| c ||}{\textbf{#1}}\\
+		\hline
+		\textsc{Identificador} & RUR-\arabic{rfun} &
+		\textsc{Prioridad} & #3 \\
+		\hline
+		\textsc{Fuente} & #2 &
+		\textsc{Necesidad} & #4 \\
+		\hline
+		\multicolumn{4}{|| c ||}{\textsc{Descripción}}\\
+		\hline
+		\multicolumn{4}{|| p{14cm} ||}{#5}\\
+		\hline
+		\hline
+	\end{tabular}
+	\end{center}
+	\end{table}
+}
+
+% Requisito no funcional
+\newcommand{\reqnofuncional}[5]{
+	\begin{table}[H]
+	\begin{center}
+		\stepcounter{rnof}
+	\begin{tabular}{|| m{3.5cm} | m{3.5cm} | m{3.5cm} | @{\extracolsep{\fill}} c ||}
+		\hline
+		\hline
+		\multicolumn{4}{|| c ||}{\textbf{#1}}\\
+		\hline
+		\textsc{Identificador} & RUR-\arabic{rnof} &
+		\textsc{Prioridad} & #3 \\
+		\hline
+		\textsc{Fuente} & #2 &
+		\textsc{Necesidad} & #4 \\
+		\hline
+		\multicolumn{4}{|| c ||}{\textsc{Descripción}}\\
+		\hline
+		\multicolumn{4}{|| p{14cm} ||}{#5}\\
+		\hline
+		\hline
+	\end{tabular}
+	\end{center}
+	\end{table}
+}
+
+% Párrafo seleccionando los márgenes horizontales
+\newenvironment{parhmargin}[2]{% 
+\begin{list}{}{% 
+\setlength{\parindent}{0em}
+\setlength{\topsep}{0pt}%
+\setlength{\leftmargin}{#1}% 
+\setlength{\rightmargin}{#2}% 
+\setlength{\listparindent}{\parindent}% 
+\setlength{\itemindent}{\parindent}% 
+\setlength{\parsep}{\parskip}% 
+}% 
+\item[]}{\end{list}} 
+
+

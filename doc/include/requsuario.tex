@@ -1,0 +1,485 @@
+% Requisitos del usuario
+
+\newcounter{rcap}
+\newcounter{rres}
+
+\subsection{Requisitos de capacidad}
+
+\reqcapacidad{General: \emph{Hardware} remoto}
+{Cliente A}{Alta}{Esencial}
+{
+El \emph{hardware} será controlado desde la plataforma sin necesidad de 
+configurarlo en el lugar físico donde se encuentra.
+}
+
+\reqcapacidad{General: \emph{Hardware} distribuido}
+{Cliente A}{Alta}{Esencial}
+{
+El \emph{hardware} que se pondrá a disposición de los clientes estará 
+distribuido en varios ordenadores.
+}
+
+\reqcapacidad{General: \emph{Hardware} exclusivo}
+{Cliente A}{Alta}{Esencial}
+{
+Todo \emph{hardware} sólo podrá ser usado por un único cliente, sin 
+que el uso de otros pueda influirle.
+}
+
+\reqcapacidad{General: \emph{Hardware} multidisciplinar}
+{Cliente A}{Alta}{Esencial}
+{
+La plataforma RLF contendrá una interfaz de acceso genérica para 
+cualquier tipo de \emph{hardware}.
+}
+
+\reqcapacidad{General: Plataforma accesible}
+{Cliente A}{Alta}{Esencial}
+{
+La plataforma será accesible para los clientes desde cualquier 
+ordenador conectado a Internet, siendo posible la configuración para 
+limitar este acceso.
+}
+
+\reqcapacidad{General: Acceso central}
+{Cliente A}{Alta}{Esencial}
+{
+Independientemente de dónde se encuentre el \emph{hardware} el que el 
+cliente quiere utilizar, se accederá desde una misma dirección para 
+todo el sistema.
+}
+
+\reqcapacidad{General: Plataforma modular}
+{Cliente B}{Alta}{Esencial}
+{
+La plataforma RLF estará compuesta por módulos que interactuarán entre 
+ellos, al menos dos, los servidores locales o \textbf{laboratorios} 
+\index{laboratorio} y el servidor central o \textbf{proveedor} 
+\index{proveedor}.
+}
+
+\reqcapacidad{General: Cliente del la plataforma}
+{Cliente B}{Baja}{Opcional}
+{
+Para acceder a la plataforma se dispondrá de un \textbf{cliente} 
+\index{cliente} que no limitado por el sistema operativo donde se 
+encuentre.
+}
+
+\reqcapacidad{General: Servicios como \emph{hardware}}
+{Cliente B}{Media}{Esencial}
+{
+El \emph{hardware} deberá ser encapsulado como un tipo de servicio 
+genérico, llamado \textbf{herramienta}\index{herramienta}.
+}
+
+\reqcapacidad{Proveedor: Base de datos central}
+{Cliente A}{Alta}{Esencial}
+{
+El proveedor contendrá la información en una base de datos central a la 
+que accederá cada vez que se requiera utilizar dicha información.
+}
+
+\reqcapacidad{Proveedor: Usuarios clientes}
+{Cliente A}{Alta}{Esencial}
+{
+Los clientes poseerán un nombre de usuario, una contraseña, un 
+email y un rol específico para acceder a las herramientas.
+}
+
+\reqcapacidad{Proveedor: Usuarios administradores}
+{Cliente B}{Media}{Esencial}
+{
+Los administradores serán autentificados en la base de datos del 
+proveedor para controlar el acceso a sistemas críticos.
+}
+
+\reqcapacidad{Proveedor: Servicio Web}
+{Cliente B}{Alta}{Esencial}
+{
+El proveedor contendrá una interfaz de acceso para la conexión a 
+través de Internet y así permitirá a los clientes utilizar los 
+servicios de la plataforma.
+}
+
+\reqcapacidad{Proveedor: Información en tiempo real}
+{Cliente B}{Alta}{Esencial}
+{
+Los clientes obtendrán la información del proveedor actualizada, tanto 
+del estado de las herramientas como el de los laboratorios.
+}
+
+\reqcapacidad{Proveedor: Información de las herramientas}
+{Cliente A}{Alta}{Esencial}
+{
+La información de las herramientas estará contenida en la base de datos 
+del proveedor para obtener una mayor respuesta cuando los clientes la 
+soliciten.
+}
+
+\reqcapacidad{Proveedor: Información de los laboratorios}
+{Cliente A}{Alta}{Esencial}
+{
+Al ser un sistema con un componente central, la información de cada 
+laboratorio, es decir, dónde se localiza y cómo puede contarse a él, 
+se encontrará en la base de datos del proveedor.
+}
+
+\reqcapacidad{Proveedor: Acciones}
+{Cliente A}{Alta}{Esencial}
+{
+Las acciones que se podrán llevar a cabo mediante la interfaz de 
+acceso al proveedor serán conexión o desconexión de un cliente, 
+obtención de la información de las herramientas y su estado, y 
+reserva de las mismas.
+}
+
+\reqcapacidad{Proveedor: Monitor}
+{Cliente B}{Baja}{Opcional}
+{
+El proveedor tendrá otra interfaz de acceso limitada únicamente para 
+conectar y desconectar del sistema, y además obtener el estado actual 
+de las herramientas.
+}
+
+\reqcapacidad{Proveedor: Seguridad en el acceso}
+{Cliente B}{Media}{Opcional}
+{
+Todas las comunicaciones del proveedor con los clientes estarán 
+debidamente cifradas ya que pueden atravesar redes inseguras.
+}
+
+\reqcapacidad{Proveedor: Registro de herramientas}
+{Cliente B}{Media}{Esencial}
+{
+El proveedor dará acceso a los laboratorios para que registren 
+herramientas, generando un identificador único para cada herramienta y 
+una clave de uso.
+}
+
+\reqcapacidad{Proveedor: Tiempo de acceso máximo}
+{Cliente A}{Media}{Esencial}
+{
+A cada usuario se le asignará un tiempo de acceso máximo contado en 
+minutos, que una vez sobrepasado se expulsa del sistema.
+}
+
+\reqcapacidad{Proveedor: Reserva de herramientas}
+{Cliente A}{Alta}{Esencial}
+{
+El proveedor se encargará de bloquear las herramientas reservadas por 
+los clientes para que no puedan ser usadas.
+}
+
+\reqcapacidad{Laboratorios: Comunicación}
+{Cliente B}{Alta}{Esencial}
+{
+Toda la comunicación entrante y saliente de un laboratorio se 
+realizará mediante red.
+}
+
+\reqcapacidad{Laboratorios: Base de datos}
+{Cliente B}{Alta}{Esencial}
+{
+Cada laboratorio contendrá su propia base de datos, que elimina el tráfico 
+en la red y permite hacer operaciones locales más rápidas. En ellas 
+se almacenará la información de las herramientas.
+}
+
+\reqcapacidad{Laboratorios: Administración}
+{Cliente A}{Alta}{Esencial}
+{
+Los laboratorios contarán con una interfaz de acceso para poder 
+administrarlos sin necesidad de una parada total del sistema.
+}
+
+\reqcapacidad{Laboratorios: Registro de herramientas}
+{Cliente A}{Alta}{Esencial}
+{
+Cada laboratorio estará al cargo de varias herramientas, que deberá 
+gestionar y administrar.
+}
+
+\reqcapacidad{Laboratorios: Acceso a las herramientas}
+{Cliente B}{Alta}{Esencial}
+{
+Para eliminar el tráfico del proveedor, los laboratorios aceptarán
+peticiones de los clientes que previamente se hayan conectado al 
+sistema y hayan reservado las herramientas necesarias.
+}
+
+\reqcapacidad{Laboratorios: Eliminación de herramientas}
+{Cliente A}{Baja}{Esencial}
+{
+Se podrá eliminar una herramienta concreta de un laboratorio si así se 
+requiere.
+}
+
+\reqcapacidad{Laboratorios: Mantenimiento}
+{Cliente A}{Baja}{Esencial}
+{
+Para aportar seguridad, los laboratorios tendrán un estado de 
+``mantenimiento'' donde no se permite la comunicación con los 
+clientes, en el cual se podrá realizar tareas de administración del 
+mismo.
+}
+
+\reqcapacidad{Laboratorios: Ejecuciones de las herramientas}
+{Cliente A}{Alta}{Esencial}
+{
+Los laboratorios sólo permitirán una instancia de ejecución por 
+herramienta. Esto conlleva la creación de una cola de peticiones para 
+la ejecución de estas.
+}
+
+\reqcapacidad{Laboratorios: Comunicación con las herramientas}
+{Cliente A}{Alta}{Esencial}
+{
+Un laboratorio se comunicará con las herramientas que tiene asignadas 
+mediante un mecanismo asíncrono para que una herramienta con fallos no 
+bloquee la ejecución.
+}
+
+\reqcapacidad{Laboratorios: Parada de emergencia}
+{Cliente A}{Baja}{Opcional}
+{
+Cada laboratorio podrá ser parado de manera urgente por parte de un 
+administrador, que cierra todas las ejecuciones activas y elimina 
+las pendientes. Después, el laboratorio se desactivará.
+}
+
+\reqcapacidad{Laboratorios: \emph{Logs}}
+{Cliente B}{Baja}{Esencial}
+{
+Cada laboratorio poseerá su propio mecanismo de registro de eventos y 
+errores, que puede ser consultado por un administrador.
+}
+
+\reqcapacidad{Laboratorios: Información en tiempo real}
+{Cliente A}{Media}{Esencial}
+{
+Cada vez que un laboratorio cambie su estado, el proveedor será 
+informado, incluso cuando se realizan paradas de emergencia.
+}
+
+\reqcapacidad{Herramientas: Acciones}
+{Cliente A}{Alta}{Esencial}
+{
+Cada herramienta podrá realizar varias acciones, todas relacionadas 
+con el mismo \emph{hardware}. El usuario elegirá una y la 
+configurará. No será posible ejecutar a la vez dos acciones de la misma 
+herramienta.
+}
+
+\reqcapacidad{Herramientas: Configuración de las acciones}
+{Cliente B}{Alta}{Esencial}
+{
+Cada acción tendrá asociada unos parámetros de salida y de entrada, 
+con un tipo de datos establecido y una descripción. Mediante la 
+definición de los valores de estos parámetros la acción se configura 
+para su ejecución. Los parámetros de salida sólo se leerán por parte 
+del cliente cuando la acción ha terminado.
+}
+
+\reqcapacidad{Herramientas: Excepciones y estado final de la acción}
+{Cliente A}{Media}{Esencial}
+{
+Las acciones, durante su ejecución, podrán lanzar excepciones que 
+informan al usuario de un error, además, cada finalización tendrá 
+asociada un estado incluido por el desarrollador.
+}
+
+\reqcapacidad{Herramientas: Constantes}
+{Cliente A}{Baja}{Esencial}
+{
+Las herramientas podrán contener varias constantes con un tipo de datos 
+concreto y un valor que no varía desde que se registra la herramienta.
+}
+
+\reqcapacidad{Herramientas: Atributos}
+{Cliente A}{Baja}{Esencial}
+{
+Los laboratorios definirán los atributos propios de cada herramienta, 
+donde se incluyen el identificador, la clave, nombre, descripción, rol, 
+versión y administrador responsable de la herramienta.
+}
+
+\reqcapacidad{Herramientas: Entrada y salida}
+{Cliente B}{Alta}{Esencial}
+{
+Las herramientas dispondrán de una entrada y salida textual para poderse 
+comunicar con el usuario.
+}
+
+\reqcapacidad{Herramientas: Servicios externos}
+{Cliente A}{Alta}{Esencial}
+{
+Para dar funcionalidad extra a cada herramienta, las acciones podrán 
+tener asociadas servicios externos, que se activarán en la ejecución y 
+que pueden ser usadas por los clientes.
+}
+
+\reqcapacidad{Herramientas: Archivo de descripción}
+{Cliente A}{Alta}{Esencial}
+{
+Para definir una herramienta por completo y registrarla en la 
+plataforma RLF, se dispondrá de un fichero con un formato establecido 
+que será leído en el momento del registro en el laboratorio.
+}
+
+\reqcapacidad{Herramientas: Librerías \emph{libtool}}
+{Cliente B}{Alta}{Opcional}
+{
+\index{\emph{libtool}}Como forma de abstracción, se incluirán
+librerías para la comunicación de la herramienta con el laboratorio 
+correspondiente. Estas librerías proveerán las funciones de acceso y 
+desconexión, lectura y escritura de parámetros, lectura de constantes 
+y atributos, lanzamiento y lanzamiento de excepciones.
+}
+
+\reqcapacidad{Herramientas: Herramientas de datos}
+{Cliente A}{Media}{Opcional}
+{
+Esta categoría especial de herramientas permitirá acceder a varios 
+clientes a la vez, pero sin interactuar con el \emph{hardware}. No 
+disponen de entrada textual, ni de parámetros de configuración. Sólo 
+tendrán una acción asignada.
+}
+
+\reqcapacidad{Herramientas: Limpiadores}
+{Cliente B}{Media}{Esencial}
+{
+Existirá por cada herramienta una acción especial que establece el 
+\emph{hardware} de la herramienta a su estado original. No podrá ser 
+utilizada por los clientes y de forma automática se lanzará cuando se 
+detecta errores en alguna acción.
+}
+
+\reqcapacidad{Herramientas: Tiempo máximo de ejecución}
+{Cliente B}{Media}{Esencial}
+{
+Cada acción poseerá un tiempo máximo de ejecución que el laboratorio 
+monitoriza. Cuando ese tiempo es sobrepasado, se parará la ejecución por 
+completo y se establece el estado de acción fallida.
+}
+
+\reqcapacidad{Cliente: Visualización simultánea}
+{Cliente A}{Alta}{Esencial}
+{
+La interfaz del cliente será capaz de visualizar a la vez varias 
+acciones de distintas herramientas.
+}
+
+\reqcapacidad{Cliente: Uso de las herramientas}
+{Cliente B}{Alta}{Esencial}
+{
+Se proveerá al usuario de una ``consola'' (con entrada y salida textual) 
+para el manejo de cada una de las acciones.
+}
+
+\reqcapacidad{Cliente: Acciones}
+{Cliente A}{Alta}{Esencial}
+{
+La interfaz permitirá al cliente conectarse y desconectarse del sistema, 
+reservar herramientas, comprobar la información de las mismas y su 
+estado en tiempo real, y la ejecución de acciones.
+}
+
+\reqcapacidad{Cliente: Reserva múltiple}
+{Cliente A}{Alta}{Optativa}
+{
+Un cliente podrá reservar de manera simultánea varias herramientas a 
+las que tiene acceso.
+}
+
+\reqcapacidad{Cliente: Monitor}
+{Cliente A}{Baja}{Optativa}
+{
+La aplicación cliente dispondrá con una aplicación auxiliar por la que 
+acceder la monitor central.
+}
+
+\reqcapacidad{Cliente: Información}
+{Cliente A}{Media}{Esencial}
+{
+Todos los datos públicos de las herramientas serán mostrados al cliente 
+por medio de la interfaz, añadiendo las descripciones a los parámetros.
+}
+
+\subsection{Requisitos de restricción}
+
+\reqrestriccion{General: Cantidad de comunicación}
+{Cliente A}{Media}{Esencial}
+{
+La información trasmitida en las comunicaciones, así como el número 
+de estas deberán ser reducidas al mínimo para no saturar cada componente.
+}
+
+\reqrestriccion{General: Sistema escalable}
+{Cliente B}{Alta}{Esencial}
+{
+Todo el sistema será escalable, es decir, que no influya en su 
+funcionamiento el hecho de aumentar o disminuir el número de 
+laboratorios o clientes.
+}
+
+\reqrestriccion{Proveedor: Control de seguridad}
+{Cliente B}{Media}{Esencial}
+{
+Los clientes que no se desconecten de forma válida en el sistema o que 
+sufran errores, el proveedor no les permitirá volver a conectarse hasta 
+que un administrador dé el visto bueno.
+}
+
+\reqrestriccion{Proveedor: Bloqueos de peticiones}
+{Cliente B}{Alta}{Esencial}
+{
+El proveedor contará con mecanismos para atender varias peticiones a la 
+vez sin dejar ninguna a la espera.
+}
+
+\reqrestriccion{Laboratorios: Portables}
+{Cliente B}{Alta}{Esencial}
+{
+Los laboratorios funcionarán sin problemas en diversos sistemas operativos con 
+una única implementación.
+}
+
+\reqrestriccion{Laboratorios: Acciones asíncronas}
+{Cliente A}{Media}{Esencial}
+{
+Todas las acciones que se llevan a cabo en los laboratorios serán
+asíncronas, para no detener ni bloquear ningún componente que 
+interfiera con ellos.
+}
+
+\reqrestriccion{Laboratorios: Ejecuciones externas}
+{Cliente A}{Alta}{Esencial}
+{
+Las acciones se ejecutarán en los laboratorios como programas externos 
+para no añadir carga a la plataforma.
+}
+
+\reqrestriccion{Laboratorios: Máximo número de ejecuciones}
+{Cliente A}{Alta}{Esencial}
+{
+Cada laboratorio poseerá un número máximo de acciones en ejecución 
+(configurado por el propio administrador). Cuando ocurre esto, las 
+acciones que están pendientes tomarán el estado de espera.
+}
+
+\reqrestriccion{Herramientas: Parada}
+{Cliente A}{Alta}{Esencial}
+{
+Las herramientas deberán estar preparadas para sufrir paradas sin 
+previo aviso, aunque no es necesario que devuelvan el estado original 
+al \emph{hardware}.
+}
+
+\reqrestriccion{Cliente: Control de seguridad web}
+{Cliente A}{Media}{Esencial}
+{
+El control de seguridad aplicado a los usuarios para el cliente de 
+escritorio no bloqueará la cuenta cuando ocurran errores en el cliente 
+web.
+}

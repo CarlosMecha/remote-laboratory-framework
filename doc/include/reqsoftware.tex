@@ -1,0 +1,499 @@
+% Requisitos del software
+
+\newcounter{rfun}
+\newcounter{rnof}
+
+\subsection{Requisitos funcionales}
+
+\reqfuncional{General: Aplicaciones}
+{RUC-1, RUC-9}{Alta}{Esencial}
+{
+El \emph{hardware} será controlado completamente por aplicaciones 
+que formarán parte de las herramientas y serán ejecutadas mediante 
+peticiones de las aplicaciones cliente.
+}
+
+\reqfuncional{\emph{Framework}: Desarrollo versátil}
+{RUC-4}{Alta}{Esencial}
+{
+El \emph{framework} de diseño de herramientas no impondrá 
+restricciones en cuanto a lenguaje de programación, plataforma ni 
+estructura del código.
+}
+
+\reqfuncional{\emph{Framework}: Desarrollo cómodo}
+{RUC-41}{Alta}{Esencial}
+{
+Se permitirán utilizar las funciones del sistema de entrada y salida 
+por teclado para la comunicación de las herramientas con el cliente. 
+Aunque la información que pasa a través de ellas sea enviada por la red.
+}
+
+\reqfuncional{Comunicaciones: Modelo TCP/IP}
+{RUC-5, RUC-24}{Alta}{Esencial}
+{
+Todas las comunicaciones serán basadas en el modelo estándar TCP/IP y 
+utilizarán un protocolo especialmente diseñado para RLF. Cada nodo 
+contendrá una IP de acceso, y la plataforma se identificará con la IP 
+del proveedor.
+}
+
+\reqfuncional{Comunicaciones: Dirección de la plataforma}
+{RUC-6, RUC-7}{Alta}{Esencial}
+{
+La plataforma se identificará con la IP del proveedor, que será por 
+la que se podrá acceder.
+}
+
+\reqfuncional{Comunicaciones: Protocolo de comunicaciones}
+{RUC-5, RUC-19}{Media}{Esencial}
+{
+El protocolo de comunicaciones será utilizado por todos los módulos y 
+no variará su implementación.
+}
+
+\reqfuncional{Comunicaciones: Protocolo síncrono}
+{RUC-24}{Media}{Esencial}
+{
+El protocolo de comunicaciones será un modelo de petición/respuesta 
+síncrono, aunque las acciones globales no lo sean.
+}
+
+\reqfuncional{General: Vía de acceso}
+{RUC-6}{Alta}{Esencial}
+{
+El proveedor será el encargado de indicar a las aplicaciones cliente 
+dónde se encuentran los laboratorios.
+}
+
+\reqfuncional{Proveedor: Acceso a la base de datos}
+{RUC-10}{Alta}{Esencial}
+{
+El administrador podrá insertar, eliminar y modificar datos de la base 
+de datos central. Será gestionada mediante la aplicación que el 
+propio SGBD provea. El proveedor accederá mediante el driver 
+correspondiente en la plataforma de desarrollo.
+}
+
+\reqfuncional{Proveedor: Autenticación}
+{RUC-11, RUC-12}{Media}{Esencial}
+{
+La autentificación de cualquier usuario, independientemente del tipo 
+de rol, será validada por el proveedor.
+}
+
+\reqfuncional{Proveedor: Interfaz de acceso}
+{RUC-13}{Alta}{Esencial}
+{
+Las aplicaciones cliente usarán las funciones contenidas en el 
+proveedor, las cuales, serán divididas en dos interfaces, 
+con una estructura de servicio web definido por los ficheros WSDL y 
+así dar acceso a las aplicaciones cliente.
+}
+
+\reqfuncional{Proveedor: Actualizaciones de datos}
+{RUC-14}{Alta}{Esencial}
+{
+Los datos almacenados en el proveedor serán los últimos en actualizar. Por
+cada actualización correcta de datos realizadas por los distintos 
+módulos se deberá considerar como un cambio permanente.
+}
+
+\reqfuncional{Proveedor: Información comprimida}
+{RUC-15}{Baja}{Opcional}
+{
+Cuando un cliente solicite información sobre una herramienta, se 
+entregará un conjunto de datos previamente comprimidos y calculados 
+para una mayor velocidad de respuesta.
+}
+
+\reqfuncional{Proveedor: Información de cada laboratorio}
+{RUC-16}{Alta}{Esencial}
+{
+Cuando un cliente reserve una herramienta, se le entregará la 
+información de conexión del laboratorio que la contiene, como es la 
+IP y el puerto.
+}
+
+\reqfuncional{Proveedor: Funciones web}
+{RUC-17, RUC-18}{Alta}{Esencial}
+{
+Las funciones de las dos interfaces de acceso proveerán parámetros 
+de entrada y salida, así como excepciones. Estos objetos serán 
+capaces de ser serializados, para poder ser enviados mediante el 
+protocolo HTTP y SOAP.
+}
+
+\reqfuncional{Proveedor: Seguridad en las herramientas}
+{RUC-20}{Alta}{Esencial}
+{
+Las claves y los identificadores de las herramientas serán únicos y 
+no reutilizables. Las claves se generarán mediante funciones 
+\emph{hash} a partir de la fecha y el identificador obtenido. 
+}
+
+\reqfuncional{Proveedor: Tiempo máximo asignado}
+{RUC-21}{Alta}{Esencial}
+{
+Los clientes tendrán preasignado un tiempo almacenado en la base 
+de datos, que será cronometrado por los propios laboratorios en los que 
+estén registrados.
+}
+
+\reqfuncional{Proveedor: Bloqueo de herramientas}
+{RUC-3, RUC-22}{Alta}{Esencial}
+{
+La base de datos contendrá información de quién tiene reservada
+cada herramienta, impidiendo que herramientas que no sean de datos se 
+encuentren accesibles por dos clientes, por lo se requerirá un bloqueo 
+de escritura y lectura en la información cada vez que se requiera reservar.
+}
+
+\reqfuncional{Laboratorios: Localización de las aplicaciones}
+{RUC-2}{Alta}{Esencial}
+{
+En cada laboratorio se almacenarán, de forma local, todas las 
+aplicaciones implicadas en las ejecuciones de las herramientas que 
+tienen asignadas. 
+}
+
+\reqfuncional{Laboratorios: Base de datos}
+{RUC-25}{Alta}{Esencial}
+{
+La base de datos de cada laboratorio contendrá la ruta de acceso a la 
+herramienta, su clave y su identificador. Será de baja capacidad y 
+portable, por lo tanto, el SGBD será SQLite.
+}
+
+\reqfuncional{Laboratorios: Comunicación con las herramientas}
+{RUC-32}{Alta}{Esencial}
+{
+El laboratorio creará una base de datos ligera (SQLite) para ofrecer 
+comunicaciones con la herramienta. De manera asíncrona obtendrá los 
+datos que se origen en la ejecución de la misma.
+}
+
+\reqfuncional{Laboratorios: \emph{Kernel}}
+{RUC-26}{Alta}{Esencial}
+{
+Un laboratorio ofrecerá una capa de gestión llamada \emph{Kernel} que 
+será independiente de las comunicaciones con los clientes y las 
+ejecuciones de herramientas.
+}
+
+\reqfuncional{Laboratorios: Funciones del \emph{Kernel}}
+{RUC-30, RUC-34}{Alta}{Esencial}
+{
+El \emph{Kernel} de cada laboratorio será el encargado de enviar y 
+recibir comunicaciones con el proveedor, además de añadir y eliminar 
+herramientas. También armarán y realizarán las acciones necesarias 
+para desarmar el laboratorio.
+}
+
+\reqfuncional{Laboratorios: Parada de emergencia en el \emph{Kernel}}
+{RUC-30}{Alta}{Esencial}
+{
+Cuando el \emph{Kernel} reciba una parada de emergencia detendrá los 
+gestores anexos inmediatamente, lo que permitirá al administrador 
+acceder al \emph{hardware} de forma más rápida.
+}
+
+\reqfuncional{Laboratorios: Gestor de comunicaciones}
+{RUC-28}{Alta}{Esencial}
+{
+Capa superior que administrará todas las peticiones recibidas por los 
+clientes así como las notificaciones de las ejecuciones.
+}
+
+\reqfuncional{Laboratorios: Tiempo máximo de un cliente}
+{RUC-21}{Media}{Esencial}
+{
+Cada gestor de comunicaciones controlará el tiempo que pasa el cliente 
+registrado en el laboratorio. Cuando se sobrepasa, informa al 
+proveedor y deniega cualquier intento posterior de comunicación.
+}
+
+\reqfuncional{Laboratorios: Gestor de ejecución}
+{RUC-31, RUC-36}{Alta}{Esencial}
+{
+Capa superior que administrará todas las ejecuciones de las acciones y 
+de los limpiadores.
+}
+
+\reqfuncional{Laboratorios: Tiempo máximo de una acción}
+{RUC-47}{Media}{Esencial}
+{
+El gestor de ejecución se encargará de controlar el tiempo máximo de 
+cada acción, que será interrumpida en el instante que lo sobrepase.
+}
+
+\reqfuncional{Herramientas: Aplicaciones}
+{RUC-9, RUC-36}{Alta}{Esencial}
+{
+Cada herramienta contendrá un conjunto de aplicaciones de escritorio 
+que ayudarán a manejar y configurar el \emph{hardware}.
+}
+
+\reqfuncional{Herramientas: Base de datos}
+{RUC-37}{Alta}{Esencial}
+{
+Toda la información de las acciones estarán disponible en la base de 
+datos creada por el laboratorio en cada herramienta. Y podrá ser 
+modificada por el usuario a través del mismo para la configuración de 
+las mismas herramientas.
+}
+
+\reqfuncional{Herramientas: Base de datos}
+{RUC-37, RUC-39}{Alta}{Esencial}
+{
+Toda la información de las acciones estarán disponible en la base de 
+datos creada por el laboratorio en cada herramienta. Y podrá ser 
+modificada por el usuario a través del mismo para la configuración de 
+las mismas herramientas.
+}
+
+\reqfuncional{Herramientas: Generación de datos}
+{RUC-38, RUC-40}{Media}{Esencial}
+{
+Los datos generados en la ejecución de un acción serán guardados en 
+la base de datos para su posterior consulta.
+}
+
+\reqfuncional{Herramientas: Servicios externos}
+{RUC-42}{Alta}{Esencial}
+{
+La abstracción mediante \emph{sockets} de servicios externos de cada 
+herramienta permitirá al usuario utilizarlos como servicios de la 
+propia plataforma, con diferentes orígenes.
+}
+
+\reqfuncional{Herramientas: Archivo de descripción}
+{RUC-43}{Alta}{Esencial}
+{
+Los archivos de descripción de herramientas seguirán dos esquemas, 
+dependiendo del tipo de herramienta, con un formato XML.
+}
+
+\reqfuncional{Herramientas: Herramientas de datos}
+{RUC-45}{Media}{Opcional}
+{
+Para los clientes, las herramientas de datos siempre estarán 
+disponibles, independientemente del número de usuarios usándolas, y 
+dispondrán de un mecanismo autónomo de \emph{broadcast} de información.
+}
+
+\reqfuncional{Herramientas: Limpiadores}
+{RUC-46}{Media}{Esencial}
+{
+Estas acciones serán especificadas en el archivo de descripción y 
+tendrán preferencia en cuanto a las peticiones de ejecución normales. 
+Una herramienta no se podrá ejecutar si ha ocurrido un error y no se 
+ha ejecutado con anterioridad el limpiador.
+}
+
+
+\reqfuncional{\emph{Libtool}: Base de datos}
+{RUC-44}{Alta}{Esencial}
+{
+Esta abstracción permitirá la conexión a la base de datos de la 
+herramienta para la lectura y escritura de información. El lenguaje de 
+programación dependerá de la implementación de la propia herramienta.
+}
+
+\reqfuncional{\emph{Libtool}: Base de datos}
+{RUC-44}{Alta}{Esencial}
+{
+Esta abstracción permitirá la conexión a la base de datos de la 
+herramienta para la lectura y escritura de información. El lenguaje de 
+programación dependerá de la implementación de la propia herramienta.
+}
+
+\reqfuncional{Cliente de escritorio: Función}
+{RUC-8}{Media}{Esencial}
+{
+La aplicación cliente principal será ejecutada como aplicación de 
+escritorio que utilizará el servicio web proveedor para la 
+interacción con la plataforma RLF.
+}
+
+\reqfuncional{Cliente de escritorio: Ventanas de ejecución}
+{RUC-48, RUC-49}{Alta}{Esencial}
+{
+Por cada acción en ejecución, el cliente tendrá activa una ventana 
+independiente con acceso de entrada y salida por teclado.
+}
+
+\reqfuncional{Cliente de escritorio: Herramientas}
+{RUC-51, RUC-53}{Alta}{Esencial}
+{
+Por cada herramienta, la interfaz del cliente poseerá una pestaña que 
+contendrá toda su información. Se podrán seleccionar de forma 
+independendiente para su posterior reserva.
+}
+
+\reqfuncional{Cliente de escritorio: Conexión}
+{RUC-50}{Alta}{Esencial}
+{
+El cliente conservará la información de conexión durante toda la 
+ejecución, sin ser necesario volver a conectarse para realizar 
+múltiples reservas.
+}
+
+\reqfuncional{Cliente de escritorio: Actualización}
+{RUC-50}{Baja}{Esencial}
+{
+Se ofrecerá al cliente la posibilidad de actualizar la información 
+del número de herramientas como de su estado sin necesidad de cerrar 
+la aplicación.
+}
+
+\reqfuncional{Cliente web: Función}
+{RUC-18, RUC-52}{Baja}{Opcional}
+{
+Los clientes podrán acceder a la página web de la plataforma para 
+comprobar el estado actual de las herramientas, si están disponibles, 
+ocupadas o no conectadas. El formato deberá ser compatible para 
+dispositivos con pantalla pequeña.
+}
+
+\reqfuncional{Gestor de laboratorios: Función}
+{RUC-26}{Baja}{Esencial}
+{
+Para gestionar los laboratorios se proveerá de una aplicación de 
+consolta con acceso por red con las acciones de armar, desarmar, 
+parar, registrar y eliminar herramientas, y comprobar el estado del 
+laboratorio.
+}
+
+\reqfuncional{Registro: \emph{Logs}}
+{RUC-34}{Baja}{Esencial}
+{
+Todo componente en la plataforma se servirá de un conjunto de 
+registros para indicar errores y funciones realizadas.
+}
+
+\subsection{Requisitos no funcionales}
+
+\reqnofuncional{Comunicaciones: Sistema escalable}
+{RUR-2}{Media}{Esencial}
+{
+La plataforma utilizará su propio sistema de comunicaciones y de altas 
+de laboratorios, sin utilizar soluciones ya implementadas como Java 
+RMI, CORBA o RPC.
+}
+
+\reqnofuncional{Comunicaciones: Protocolo JSON}
+{RUR-1}{Media}{Esencial}
+{
+El protocolo de comunicaciones estará basado en el formato JSON, 
+previamente cifrado, que reduce de forma considerable los datos a 
+enviar de los objetos a enviar.
+}
+
+\reqnofuncional{Comunicaciones: Protocolo JSON avanzado}
+{RUR-1}{Media}{Esencial}
+{
+Cada objeto enviado entre módulos puede contener otros objetos como 
+atributos también en formato JSON.
+}
+
+\reqnofuncional{Comunicaciones: Peticiones y respuestas}
+{RUR-1}{Media}{Esencial}
+{
+Cada petición o respuesta tendrá asociado un número de operación 
+que se incluirá en la cabecera del mensaje.
+} 
+
+\reqnofuncional{Proveedor: \emph{Token} de acceso y uso}
+{RUR-3}{Media}{Esencial}
+{
+Cada cliente tiene asociado un atributo con un límite de tiempo que 
+será generado cada vez que se conecte para reducir el tráfico de 
+comunicaciones y sólo tener que identificarse mediante esa cadena de 
+caracteres. Cuando se desconecta será invalidado.
+} 
+
+\reqnofuncional{Proveedor: Servicio Web J2EE}
+{RUR-4}{Alta}{Esencial}
+{
+El proveedor será un conjunto de dos servicios web publicados en una 
+plataforma Tomcat, además de la base de datos MySQL. El servicio web 
+principal llamado RLF\_Provider y el secundario, RLF\_Monitor.
+} 
+
+\reqnofuncional{Laboratorios: Máquina virtual de Java}
+{RUR-5}{Alta}{Esencial}
+{
+Los laboratorios estarán implementados en Java y utilizarán drivers 
+de conexión a las bases de datos SQLite.
+}
+
+\reqnofuncional{Laboratorios: Archivos ejecutables}
+{RUR-5}{Alta}{Esencial}
+{
+Para configurar un laboratorio se proveerá de un fichero de 
+configuración junto con el archivo ejecutable.
+}
+
+\reqnofuncional{Laboratorios: Ficheros fuente}
+{RUR-5}{Alta}{Esencial}
+{
+Todo recurso necesario para la ejecución de los laboratorios será 
+contenida en un directorio que deberá acompañarse con el ejecutable.
+}
+
+\reqnofuncional{Laboratorios: Conexiones}
+{RUR-6}{Alta}{Esencial}
+{
+Cada laboratorio posee un puerto de conexión con el proveedor, otro de 
+notificaciones para el cliente, uno de recepción de peticiones y por 
+último, el puerto de control de mantenimiento.
+}
+
+\reqnofuncional{Laboratorios: Asincrónos}
+{RUR-6}{Alta}{Esencial}
+{
+Por cada petición de ejecución se enviará en qué instante empezará 
+a funcionar, ya que es posible que no sea instantáneo si hay 
+sobrecarga en el laboratorio.
+}
+
+\reqnofuncional{Laboratorios: Ejecuciones}
+{RUR-7}{Alta}{Esencial}
+{
+El laboratorio se servirá de peticiones al sistema y señales para 
+ejecutar las acciones, así como de un servicio de \emph{pipeling} para 
+redirigir la entrada y la salida de la propia acción.
+}
+
+\reqnofuncional{Laboratorios: Colas de ejecución}
+{RUR-8}{Alta}{Esencial}
+{
+Cada laboratorio poseerá un contenedor de acciones en ejecución, donde 
+está limitado por su configuración inicial. Todas las peticiones de 
+ejecución, si los contenedores están completos, serán retrasadas.
+}
+
+\reqnofuncional{\emph{Framework}: Parada}
+{RUR-9}{Alta}{Esencial}
+{
+Aunque no se impondrá ninguna norma a los desarrolladores en cuestión 
+de bloqueo de ficheros o de programas por el motivo de las paradas 
+inesperadas, se instará en la manera de no mantener ficheros abiertos 
+ni componentes susceptibles de ocasionar errores en el futuro.
+}
+
+\reqnofuncional{Cliente de escritorio: Máquina virtual de Java}
+{RUR-4}{Alta}{Esencial}
+{
+La aplicación de escritorio será implementada en Java para su 
+portabilidad y se requerirá configurar mediante un archivo adjuntado 
+con el ejecutable.
+}
+
+\reqnofuncional{Cliente web: Múltiple conexión}
+{RUR-8}{Alta}{Esencial}
+{
+Mediante el uso de \emph{tokens} almacenados en la base de datos del 
+proveedor una desconexión no es obligatoria en el cliente web.
+}

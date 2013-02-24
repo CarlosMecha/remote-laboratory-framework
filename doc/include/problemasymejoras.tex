@@ -1,0 +1,226 @@
+% Problemas y mejoras
+
+\capitulo{Problemas y mejoras}{problemas}{
+Se recoge en este capítulo los problemas derivados de la 
+implementación de la plataforma RLF así como los trabajos futuros que 
+se deberán tener en cuenta para posteriores versiones.
+}
+
+\section{Problemas encontrados en el desarrollo}
+Se listan a continuación los problemas referentes a la implementación 
+y a las tecnologías usadas. Sólo han sido incluidos aquellos más importantes 
+que han determinado el desarrollo de la plataforma RLF.
+
+\subsection{La sincronización}
+Siendo un problema que arrastran muchas de las plataformas que existen 
+actualmente en el mercado, fue arrastrado desde el principio de la 
+implementación. Se ha invertido mucho tiempo en conseguir un sistema 
+que es asíncrono a partir de muchos componentes síncronos.
+
+Los sistemas síncronos \cite{SistemasOperativos} son aquellos que se 
+bloquean a la espera de una comunicación concreta por parte del otro 
+interlocutor. En cambio, los sistemas asíncronos, pueden realizar 
+otras tareas mientras el otro interlocutor genera la información. Los 
+distintos componentes síncronos que se aprecian, como la entrada y 
+salida estándar de todas las herramientas, han sido modificados para 
+poder permitir no bloquear al resto de componentes.
+
+Esto se ha conseguido con la sustitución de los mecanismos de lectura 
+y escritura (de \emph{sockets}, ficheros y teclado) tradicionales, que 
+se presentan en la máquina virtual de Java como \emph{streams} 
+pertenecientes a las librerías ``java.io''. A partir de la versión 
+1.4.2 de Java, Sun Microsystems añadió las librerías ``java.nio'' 
+\index{Java!nio} \cite{JavaNIO} que aportaban una nueva forma de ver 
+la entrada y salida para la máquina virtual. El conjunto fue llamado 
+Java New I/O, en referencia al sistema antiguo, Java I/O. La 
+estructura de estas librerías es muy parecida a los sistemas Unix, 
+puediendo utilizar funciones no bloqueantes, y algunas herramientas 
+muy útiles para no malgastar tiempo de cálculo. Además, incluyen 
+\emph{buffers} gestionados por el propio sistema operativo anfitrión 
+que dotan de una mayor velocidad a la, de por si lenta, máquina de 
+Java.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.9]{images/io-vs-nio.png}
+	\caption[Java.io VS Java.nio]{Comparación de las librerías 
+	``java.io'' y su nueva versión ``java.nio''.}
+	\label{fig:niovsio}
+\end{figure}
+
+En la figura \ref{fig:niovsio} se puede comprobar como con las 
+distintas versiones de estos dos conjuntos librerías se mejora la 
+velocidad de lectura y escritura. Se realizó el estudio con varios 
+ficheros de distinto tamaño (coordenada X) y la velocidad de lectura y 
+posterior escritura en KB/s (coordenada Y). Las series corresponden a 
+dos experimentos, A y B, con la versión 2.2 de ``java.io'' y la 
+versión 2.4 de ``java.nio'' \cite{Javaiovsnio}.
+
+\subsection{La portabilidad de Java}
+Aunque es una plataforma que puede ejecutarse en múltiples sistemas, 
+Java necesita ``una ayuda'' para poder realizar bien su cometido en 
+Linux y Windows por igual. El primer problema que se encuentra es en 
+el acceso a archivos del sistema de ficheros. El árbol de rutas es 
+distinto para \emph{ext4} \footnote{Sistema de ficheros que las distribuciones 
+Linux usan en la actualidad}. que para \emph{ntfs} \footnote{Sistema 
+de ficheros moderno para las últimas versiones de Windows, como XP, 
+Vista y Windows 7.}. Esto conlleva a que el código de implementación 
+debe ser lo suficientemente genérico como para que no surjan problemas 
+a la hora de portar los distintos componentes.
+
+Aunque en el desarrollo de RLF no se ha optado en ningún momento por 
+la división de código, es decir, incluir un código para cada 
+sistema operativo, se han realizado múltiples cambios en el diseño 
+para adaptarlo a un único código. Se puede ver a continuación, un 
+ejemplo de división de código atendiendo al sistema operativo 
+\cite{java2}:
+
+\begin{verbatim}
+String osName = System.getProperty("os.name");
+if ((osName.equals("Windows NT") 
+    || osName.equals("Windows 7")
+    || osName.equals("Windows XP")) {
+        // Do something...
+} else if ((osName.equals("Linux")
+    || osName.equals("Mac")) {
+        // Do another thing...
+} else {
+        // Cry.
+}
+\end{verbatim}
+
+\subsection{\emph{Streaming} de vídeo y Java}
+Fueron muchos días los que se intentó, sin éxito, utilizar la 
+cámara web de la herramienta RLF\_Video a través de Java. Para ello 
+se utilizó el \emph{framework} aportado por Sun Microsystems para el 
+control de sistemas multimedia llamado JMF (\emph{Java Media 
+Framework}).
+
+A pesar de que el nuevo dueño de las tecnologías Java, Oracle, 
+indique en su página que sigue en activo y se está desarrollando 
+actualmente aplicaciones con él, la última versión data de 2001, con 
+la versión de Java anterior a la 1.4.2 (la primera considerada 
+``moderna''). Además, la documentación para el desarrollo ya no es 
+accesible desde las páginas oficiales.
+
+Se optó por utilizar el servidor de VLC, incluido en las 
+distribuciones Linux y adecuarlo mediante BASH para poder ejecutarlo 
+desde la plataforma RLF.
+
+\subsection{La tarjeta PCI-1711-BE}
+\index{PCI-1711-BE}
+Uno de los elementos más importante que se ha aportado a las 
+herramientas presentadas, es la interactividad con un \emph{hardware} 
+donde su acceso era en el mismo lugar donde se encontraba. Se utilizó 
+una tarjeta que provee de entradas y salidas electrónicas, llamada 
+Advantech PCI-1711-BE que disponía de un conjunto de librerías para 
+interactuar por medio del \emph{software}, que podían ser utilizadas 
+en sistemas Windows y Linux.
+
+Todo intento por utilizar la documentación (escrita en 1996) y las 
+herramientas aportadas fue un fracaso hasta que se consiguieron unos 
+ejemplos que se podían utilizar en el IDE Visual Studio 2005. Siendo 
+aún incompatibles con los sistemas actuales, mediante sustitución de 
+código antiguo y de librerías que ya no existen en Windows, se pudo 
+adecuar a la plataforma .NET, y con ello, a la plataforma RLF.
+
+Se puede ver a continuación el código original de algunos ejemplos de 
+dicha tarjeta:
+
+\begin{verbatim}
+/*
+ (...)
+ * Revision       : 1.00                                           *
+ * Date           : 7/1/2003                   Advantech Co., Ltd. *
+ (...)
+ */
+ 
+ (...)
+ 
+// Estos tipos de datos no son compatibles con .NET
+DWORD  dwErrCde;
+ULONG  lDevNum;
+long   lDriverHandle;
+USHORT usChan;
+ (...)
+ 
+// Funciones no soportadas por Windows
+getch();
+ (...)
+
+
+\end{verbatim}
+
+\clearpage
+
+\section{Próximos pasos}
+No cabe duda que la plataforma RLF aquí presentada necesita más 
+desarrollo para poder afianzarla como un producto comercial. Estando 
+aún en la versión \emph{Prototype}, requiere de determinadas tareas 
+para poder ser implantada en entornos de trabajo. Se recopilan a 
+continuación los próximos trabajos propuestos:
+
+\begin{itemize}
+\item Se pueden aplicar pruebas de estrés a la plataforma mayores de 
+las que se incluyen en la sección \ref{sec:pruebasestres}, contando 
+con varias decedas de laboratorios, y varios cientos de usuarios.
+\item Acoplamiento del sistema de cifrado de comunicaciones con 
+túneles SSH que aportarían blindaje a la plataforma, de la misma 
+forma que se muestra en la figura \ref{fig:ssh}.
+\item Diseño de tareas automatizadas para la base de datos del 
+proveedor, como comprobación de nodos de la red o de usuarios con 
+estados erróneos.
+\item Creación de ``paquetes'' de aplicaciones para alumnos, que 
+permitan obtener todo el \emph{software} necesario en un solo 
+instalador (como por ejemplo, reproductores de video, clientes FTP, 
+etc) pudiendo además reservar las herramientas en conjunto con 
+anterioridad.
+\end{itemize}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.7]{images/ssh.png}
+	\caption[Túnel SSH]{Ejemplo de la arquitectura de un túnel SSH.}
+	\label{fig:ssh}
+\end{figure}
+
+\subsection{Próximas versiones de RLF}
+Dada la base de RLF Prototype, cabe proponer otras funciones que, con unos 
+determinados cambios, pueden llevarse a cabo, aprovechando las 
+características principales del mismo. Las líneas de desarrollo 
+pueden variarse e incluso crear nuevas, todo depende de las necesidades 
+del centro que utilice RLF. Se muestra en la figura \ref{fig:versiones} 
+continuación una idea de las próximas versiones y sus cambios.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.7]{images/versiones.png}
+	\caption[Próximas líneas RLF]{Próximas posibles líneas RLF.}
+	\label{fig:versiones}
+\end{figure}
+
+\begin{description}
+\item[RLF.org] Corresponde a la evolución natural del proyecto, con 
+mejoras de estabilidad y seguridad, y una fase completa de 
+\emph{tests} de estrés. Sería la candidata para salir al 
+mercado y adecuarse a varias líneas de trabajo. 
+\item[RLF.edu] Línea especializada en entornos educativos, donde se 
+pueden establecer configuraciones estándar para la realización de 
+prácticas, como por ejemplo, que todos los laboratorios contengan una 
+herramienta de vídeo, y que obligue a la interfaz a contener un 
+reproductor de \emph{streaming} embebido.
+\item[RLF@home] Cambiando el sistema de reserva de herramientas, y 
+liberando de carga a los laboratorios, se puede convertir en una 
+plataforma para edificios o casas inteligentes. Así se podrían 
+gestionar distintos dispositivos desde el cliente.
+\item[RLF Science] Al igual que algunos centros de investigación, se 
+pueden alquilar por determinado tiempo elementos \emph{hardware} a 
+usuarios de Internet. Como por ejemplo, en el observatorio astronómico 
+de Chile, se puede utilizar el telescopio si se paga una cuota. 
+También puede servir como plataforma para sistemas \emph{grid}, 
+proporcionando capacidad de cálculo y de almacenamiento sustituyendo las 
+herramientas \emph{hardware} por terminales de acceso a distintos 
+nodos de una red de computación.
+\end{description}
+
+

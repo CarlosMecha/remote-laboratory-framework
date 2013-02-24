@@ -1,0 +1,38 @@
+﻿Build started 04-Sep-11 16:38:02.
+     1>Project "C:\Users\rodriguezmecha\Documents\My Dropbox\Universidad\Proyecto\rlf\projects\visual studio\RLF_FreeMem\RLF_FreeMem.vcxproj" on node 2 (rebuild target(s)).
+     1>_PrepareForClean:
+         Deleting file "Release\RLF_FreeMem.lastbuildstate".
+       InitializeBuildStatus:
+         Creating "Release\RLF_FreeMem.unsuccessfulbuild" because "AlwaysCreate" was specified.
+       GenerateTargetFrameworkMonikerAttribute:
+       Skipping target "GenerateTargetFrameworkMonikerAttribute" because all output files are up-to-date with respect to the input files.
+       ClCompile:
+         c:\Program Files\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /AI"C:\Program Files\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0" /Zi /clr /nologo /W3 /WX- /O2 /Oy- /D WIN32 /D NDEBUG /D _UNICODE /D UNICODE /EHa /MD /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yc"StdAfx.h" /Fp"Release\RLF_FreeMem.pch" /Fo"Release\\" /Fd"Release\vc100.pdb" /TP /FU"C:\Users\rodriguezmecha\Documents\My Dropbox\Universidad\Proyecto\rlf\tools\lib\NET\LibTool.dll" /FU"C:\Program Files\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Core.dll" /FU"C:\Program Files\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Data.dll" /FU"C:\Program Files\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.dll" /FU"C:\Program Files\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Xml.dll" /analyze- /errorReport:prompt stdafx.cpp /clr:nostdlib 
+         stdafx.cpp
+         c:\Program Files\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /AI"C:\Program Files\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0" /Zi /clr /nologo /W3 /WX- /O2 /Oy- /D WIN32 /D NDEBUG /D _UNICODE /D UNICODE /EHa /MD /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yu"StdAfx.h" /Fp"Release\RLF_FreeMem.pch" /Fo"Release\\" /Fd"Release\vc100.pdb" /TP /FU"C:\Users\rodriguezmecha\Documents\My Dropbox\Universidad\Proyecto\rlf\tools\lib\NET\LibTool.dll" /FU"C:\Program Files\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Core.dll" /FU"C:\Program Files\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Data.dll" /FU"C:\Program Files\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.dll" /FU"C:\Program Files\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Xml.dll" /analyze- /errorReport:prompt AssemblyInfo.cpp RLF_FreeMem.cpp /clr:nostdlib 
+         AssemblyInfo.cpp
+         RLF_FreeMem.cpp
+         Generating Code...
+         c:\Program Files\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /Zi /clr /nologo /W3 /WX- /O2 /Oy- /D WIN32 /D NDEBUG /D _UNICODE /D UNICODE /EHa /MD /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release\\" /Fd"Release\vc100.pdb" /TP /analyze- /errorReport:prompt "C:\Users\rodriguezmecha\AppData\Local\Temp\.NETFramework,Version=v4.0.AssemblyAttributes.cpp"
+         .NETFramework,Version=v4.0.AssemblyAttributes.cpp
+       ResourceCompile:
+         c:\Program Files\Microsoft SDKs\Windows\v7.0A\bin\rc.exe /D _UNICODE /D UNICODE /l"0x0409" /nologo /fo"Release\app.res" app.rc 
+       Link:
+         c:\Program Files\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\rodriguezmecha\Documents\My Dropbox\Universidad\Proyecto\rlf\projects\visual studio\RLF_FreeMem\Release\RLF_FreeMem.exe" /INCREMENTAL:NO /NOLOGO /MANIFEST /ManifestFile:"Release\RLF_FreeMem.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"C:\Users\rodriguezmecha\Documents\My Dropbox\Universidad\Proyecto\rlf\projects\visual studio\RLF_FreeMem\Release\RLF_FreeMem.pdb" /TLBID:1 /DYNAMICBASE /FIXED:NO /NXCOMPAT /MACHINE:X86 Release\app.res
+         Release\AssemblyInfo.obj
+         Release\RLF_FreeMem.obj
+         Release\stdafx.obj
+         "Release\.NETFramework,Version=v4.0.AssemblyAttributes.obj"
+         RLF_FreeMem.vcxproj -> C:\Users\rodriguezmecha\Documents\My Dropbox\Universidad\Proyecto\rlf\projects\visual studio\RLF_FreeMem\Release\RLF_FreeMem.exe
+       Manifest:
+         c:\Program Files\Microsoft SDKs\Windows\v7.0A\bin\mt.exe /nologo /verbose /outputresource:"C:\Users\rodriguezmecha\Documents\My Dropbox\Universidad\Proyecto\rlf\projects\visual studio\RLF_FreeMem\Release\RLF_FreeMem.exe;#1" /manifest Release\RLF_FreeMem.exe.intermediate.manifest
+       _CopyFilesMarkedCopyLocal:
+         Copying file from "C:\Users\rodriguezmecha\Documents\My Dropbox\Universidad\Proyecto\rlf\tools\lib\NET\LibTool.dll" to "C:\Users\rodriguezmecha\Documents\My Dropbox\Universidad\Proyecto\rlf\projects\visual studio\RLF_FreeMem\Release\LibTool.dll".
+       FinalizeBuildStatus:
+         Deleting file "Release\RLF_FreeMem.unsuccessfulbuild".
+         Touching "Release\RLF_FreeMem.lastbuildstate".
+     1>Done Building Project "C:\Users\rodriguezmecha\Documents\My Dropbox\Universidad\Proyecto\rlf\projects\visual studio\RLF_FreeMem\RLF_FreeMem.vcxproj" (rebuild target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:06.05

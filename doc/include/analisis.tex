@@ -1,0 +1,398 @@
+% Análisis
+
+\capitulo{Análisis}{analisis}{
+Este capítulo está centrado en la especificación de la plataforma 
+RLF, cómo se concivió y todas las funcionalidades que ofrece. Además 
+de los requisitos establecidos que debe cumplir.
+}
+
+\section{Introducción}
+\label{sec:introduccion}
+El análisis de este producto ha sido guiado por los estándares 
+recogidos por la Agencia Espacial Europea para los proyectos de 
+Ingeniería del Software \cite{esa}. La estructura de contenidos se ha 
+mantenido aunque se han modificado algunos de los apartados 
+considerados innecesarios ya que se especifican para un conjunto de 
+documentos que describan un producto, y no para uno solo, como ocurre 
+en este caso.
+
+Para el desarrollo de RLF Prototype se ha contado con dos clientes del ámbito 
+educativo, cada uno especializado en un área que han determinado las 
+funciones que contiene el sistema. Así, se cuenta con un cliente 
+ingeniero industrial (\textbf{Cliente A}) y con un cliente ingeniero 
+informático (\textbf{Cliente B}).
+
+En primera instancia, se especifican las condiciones generales del 
+proyecto, así como sus capacidades más notables. A continuación, se 
+listan todos los requisitos que fueron impuestos para la creación del 
+producto, así como en conjunto de acciones a realizar por los 
+distintos usuarios. Por último, se tratarán los requisitos desde el 
+punto de vista del diseño.
+
+Una vez todos los aspectos del análisis estén recogidos y 
+establecidos, se pasará a diseñar desde el punto de vista técnico el 
+sistema RLF.
+
+\section{Descripción general}
+\subsection{Capacidades generales}
+El producto RLF cumple la finalidad de ofrecer servicios a los 
+usuarios. La lista de capacidades que se muestra a continuación es el 
+resultado de un primer análisis, que posteriormente serán 
+desarrollados para una mayor comprensión:
+
+\begin{itemize}
+\item RLF provee de herramientas, generalmente con componentes 
+\emph{hardware}, a los usuarios, los cuales pueden utilizarlas de 
+forma exclusiva durante un determinado tiempo.
+\item Las herramientas ofrecen un conjunto de acciones a realizar. 
+Estas acciones son configuradas por parte del usuario para adecuarse a 
+sus necesidades.
+\item El usuario está informado en todo momento del estado del 
+sistema y de las acciones comandadas, así como de las herramientas a 
+las que tiene acceso.
+\item Cada acción tiene la libertad de utilizar todo su potencial 
+mediante servicios externos a la plataforma RLF.
+\item Los usuarios pueden acceder al sistema en tiempo real sin limitaciones 
+horarias, siendo posible utilizarlo de manera remota.
+\item Se establecen un conjunto de normas, o maneras de trabajar, para 
+desarrollar nuevas herramientas, que se comportan de manera estándar 
+para su inmediato uso.
+\item Proporciona mecanismos para asegurar la integridad tanto del 
+\emph{software} como \emph{hardware} que se ofrece mediante la 
+plataforma RLF.
+\end{itemize}
+
+\subsection{Restricciones generales}
+Como cada producto \emph{software}, RLF cumple unas determinadas 
+restricciones que se aclararon también en el análisis inicial. Son 
+las que han condicionado el diseño de la plataforma:
+
+\begin{itemize}
+\item Ningún componente de la RLF está limitado por el 
+sistema que lo contiene, ya que forma parte de un sistema 
+multiplataforma, siendo las herramientas la única excepción.
+\item La plataforma RLF responde de igual manera independientemente de 
+dónde se encuentren los distintos componentes, siendo posible 
+contenerla en una misma máquina, o en una red de computadores.
+\item Se asegura la integridad de cada componente por separado, sin 
+permitir que por un mal uso o por conjestión aparezcan errores 
+inesperados.
+\end{itemize}
+
+\subsection{Características de los usuarios}
+Se identifican principalmente tres tipos de usuario para los que va 
+destinada el sistema. Cada uno desempeña un rol distinto, y por lo 
+tanto, se determinan distintas características y responsabilidades 
+para cada uno. Cabe esclarecer que dentro de cada categoría de 
+usuario, puede haber distintos niveles, pero que estos no son 
+determinantes en el uso de la plataforma. Los roles que se especifican 
+a continuación no son jerárquicos ni comparten acciones:
+
+\begin{itemize}
+\item \textbf{Administradores:} Personal técnico que gestiona y 
+mantiene la plataforma RLF en constante funcionamiento. Realizan 
+tareas necesarias para asegurar la disponibilidad completa del 
+producto, así como gestionar todos los datos que componen el conjunto 
+de información manejado por el sistema. Es por ello que deben poseer 
+conocimientos medios de utilización de bases de datos y diversos 
+sistemas operativos.
+\item \textbf{Desarrolladores:} Profesionales encargados de crear las 
+herramientas para su posterior utilización por parte de los clientes. 
+Deben cumplir un conjunto de normas aplicadas al \emph{framework} para 
+desarrollar el \emph{software} necesario que la plataforma RLF pueda 
+manejar. Tienen una interacción muy limitada con el sistema.
+\item \textbf{Clientes:} Son los usuarios finales de la plataforma, 
+que mediante las distintas aplicaciones cliente (aquellas que dan 
+acceso a RLF) pueden utilizar las herramientas asignadas.
+\end{itemize}
+
+Se entiende que una misma persona puede poseer varios roles. No se 
+tienen en cuenta los usuarios indirectos de la plataforma, que no 
+acceden a ella, como son los profesores en un entorno educativo que 
+definen el conjunto de herramientas a la cual un usuario tiene acceso, 
+o los administradores de red que se encargan del buen funcionamiento 
+de la misma. Estas acciones recaerán directamente en el usuario 
+administrador. 
+
+\subsection{Entorno operacional}
+En este punto se analizan las necesidades tecnológicas del sistema 
+desde el punto de vista de los usuarios. Se debe distinguir entre las 
+necesidades de cada uno de los roles anteriormente comentadas:
+
+\begin{table}[H]
+\begin{center}
+\begin{tabular}{|| p{12cm} ||}
+	\hline
+	\hline
+	\multicolumn{1}{|| c ||}{\textsc{Administrador}}\\
+	\hline
+	\hline
+	Ordenador portatil con acceso a redes \emph{Ethernet} e 
+	inalámbricas. No es necesario que disponga de interfaz gráfica. Se 
+	requiere Java JRE y MySQL Query Browser (véase el apéndice 
+	\ref{cap:despliegue}).\\
+	\hline
+	\hline
+\end{tabular}
+\end{center}
+	\caption{Entorno operacional del administrador.}
+	\label{tab:entornoadmin}
+\end{table}
+
+\begin{table}[H]
+\begin{center}
+\begin{tabular}{|| p{12cm} ||}
+	\hline
+	\hline
+	\multicolumn{1}{|| c ||}{\textsc{Desarrollador}}\\
+	\hline
+	\hline
+	Ordenador con acceso a redes. Requiere los elementos para 
+	poder desarrollar las herramientas en el lenguaje deseado. 
+	Dependiendo de la configuración de la plataforma puede ser 
+	necesario un cliente FTP.\\
+	\hline
+	\hline
+\end{tabular}
+\end{center}
+	\caption{Entorno operacional del desarrollador.}
+	\label{tab:entornodes}
+\end{table}
+
+\begin{table}[H]
+\begin{center}
+\begin{tabular}{|| p{12cm} ||}
+	\hline
+	\hline
+	\multicolumn{1}{|| c ||}{\textsc{Cliente}}\\
+	\hline
+	\hline
+	Cualquier tipo de máquina que contenga una acceso a la red y la 
+	máquina virtual Java.\\
+	\hline
+	Dispositivo portatil tipo \emph{smartphone} o \emph{tablet} con 
+	acceso a redes inalámbricas y navegador de Internet compatible con 
+	Javascript.\\
+	\hline
+	\hline
+\end{tabular}
+\end{center}
+	\caption{Entorno operacional del cliente.}
+	\label{tab:entornoclient}
+\end{table}
+
+\section{Requisitos del usuario}
+A continuación se listan todos los requisitos impuestos por los 
+clientes A y B (ver sección \ref{sec:introduccion})
+para el diseño de la plataforma RLF. Están clasificados dependiendo 
+de su tipo, si aportan funcionalidad o si registren, y contienen una 
+subclasificación dependiendo de a qué componente se refieran. Las 
+características de un requisito vienen dadas por su identificador, 
+prioridad en cuanto a implantación, fuente, necesidad y descripción.
+
+% Requisitos del usuario.
+\input{include/requsuario}
+
+\section{Casos de uso}
+Un caso de uso define una serie de pasos o actividades que deben 
+realizarse para llevar a cabo un proceso. Las entidades o personajes 
+que participan en un caso de uso se denominan actores.
+
+Este apartado se separa en dos partes. La primera es una 
+representación gráfica de los distintos casos de uso ordenados por 
+actores (administrador, desarrollador y cliente). En la segunda parte 
+se explicarán textualmente algunos de los más influyentes, que 
+representan las funcionalidades más importantes; \emph{Publicar 
+herramienta} y \emph{Ejecutar acción}.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.6]{images/casos1.png}
+	\caption{Casos de uso: Administrador y desarrollador}
+	\label{fig:casos1}
+\end{figure}
+
+Como se aprecia en la figura \ref{fig:casos1} el administrador tiene 
+responsabilidades de mantenimiento del sistema, y todas sus 
+funcionalidades están relacionadas con esta tarea. El desarrollador en 
+cambio, dentro del sistema sólo podrá realizar parte de la función 
+\emph{Publicar herramienta}. Se explicará más adelante este caso 
+particular, el cual requiere de dos actores para poder completarse. En 
+la figura \ref{fig:casos2} se comprueba que el usuario necesita haber 
+iniciado sesión para realizar el resto de funciones, además de que 
+para ejecutar una acción sea necesario reservar la herramienta que la 
+contiene.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.6]{images/casos2.png}
+	\caption{Casos de uso: Cliente}
+	\label{fig:casos2}
+\end{figure}
+
+A continuación se muestra la información de los dos casos de uso 
+anteriormente señalados, donde se incluye los prerequisitos para 
+llevarlos a cabo, los posibles escenarios secundarios y su descripción 
+detallada.
+
+\newcounter{casos}
+
+\begin{table}
+\begin{center}
+	\stepcounter{casos}
+\begin{tabular}{|| c | p{10cm} ||}
+	\hline
+	\multicolumn{2}{|| c ||}{\textbf{CU-\arabic{casos}: Publicar herramienta}}\\
+	\hline
+	\textsc{Actores} & Administrador, desarrollador \\
+	\hline
+	\textsc{Precondiciones} &
+	\begin{itemize}
+		\item El desarrollador debe haber implementado la herramienta 
+		de acuerdo con las normas del \emph{framework}.
+		\item El laboratorio debe estar desarmado.
+	\end{itemize}\\
+	\hline
+	\textsc{Postcondiciones} &
+	\begin{itemize}
+		\item La herramienta estará a disposición de los usuarios para poder 
+		utilizarla.
+	\end{itemize}\\
+	\hline
+	\multicolumn{2}{|| c ||}{\textsc{Descripción}}\\
+	\hline
+	\multicolumn{2}{|| p{14cm} ||}{
+	El desarrollador crea una herramienta para incluirla en la 
+	plataforma. El administrador obtiene los datos necesarios para 
+	registrarla y se lo indica al desarrollador.
+	}\\
+	\hline
+	\multicolumn{2}{|| c ||}{\textsc{Escenario principal}}\\
+	\hline
+	\multicolumn{2}{|| p{14cm} ||}{
+	\begin{enumerate}
+		\item El administrador introduce el fichero de configuración 
+		en el laboratorio mediante la aplicación de mantenimiento.
+		\item El laboratorio pide una nueva clave e identificador al 
+		proveedor.
+		\item El laboratorio valida la configuración y crea las 
+		estructuras en su base de datos y la generada para la propia 
+		herramienta.
+		\item El laboratorio envía al proveedor la información sobre 
+		la nueva herramienta y establece su estado como ``no 
+		disponible''.
+		\item El administrador recibe la nueva clave y el 
+		identificador.
+		\item El desarrollador modifica el código para incluir la 
+		nueva clave.
+		\item El administrador arma el laboratorio.
+	\end{enumerate}
+	}\\
+	\hline
+	\multicolumn{2}{|| c ||}{\textsc{Escenario secundario}}\\
+	\hline
+	\multicolumn{2}{|| p{14cm} ||}{
+	\begin{enumerate}
+		\item El administrador introduce el fichero de configuración 
+		en el laboratorio mediante la aplicación de mantenimiento.
+		\item El laboratorio pide una nueva clave e identificador al 
+		proveedor.
+		\item El laboratorio determina que la configuración no está 
+		bien construida y tiene errores.
+		\item El administrador recibe el error encontrado.
+	\end{enumerate}
+	}\\
+	\hline
+	\hline
+\end{tabular}
+\end{center}
+	\label{caso:CU-\arabic{casos}}
+\end{table}
+
+\begin{table}
+\begin{center}
+	\stepcounter{casos}
+\begin{tabular}{|| c | p{10cm} ||}
+	\hline
+	\multicolumn{2}{|| c ||}{\textbf{CU-\arabic{casos}: Ejecutar acción}}\\
+	\hline
+	\textsc{Actores} & Cliente \\
+	\hline
+	\textsc{Precondiciones} &
+	\begin{itemize}
+		\item La herramienta debe haber sido reservada por el usuario.
+	\end{itemize}\\
+	\hline
+	\textsc{Postcondiciones} &
+	\begin{itemize}
+		\item La acción se ejecuta en el laboratorio e interactua con 
+		el cliente.
+	\end{itemize}\\
+	\hline
+	\multicolumn{2}{|| c ||}{\textsc{Descripción}}\\
+	\hline
+	\multicolumn{2}{|| p{14cm} ||}{
+	El cliente desea ejecutar una acción de una herramienta concreta.
+	}\\
+	\hline
+	\multicolumn{2}{|| c ||}{\textsc{Escenario principal}}\\
+	\hline
+	\multicolumn{2}{|| p{14cm} ||}{
+	\begin{enumerate}
+		\item El cliente selecciona la acción a ejecutar y pulsa el 
+		botón.
+		\item La interfaz muestra los parámetros de entrada y los 
+		servicios externos de los que dispone la herramienta.
+		\item El cliente introduce el valor de esos parámetros y pulsa 
+		``Execute''.
+		\item El cliente abre los servicios externos indicados con 
+		anterioridad.
+		\item La aplicación cliente envía al laboratorio la petición 
+		de ejecución y se pone a la espera.
+		\item Cuando el laboratorio lo dispone, envía a la aplicación 
+		cliente la confirmación de ejecución y la información de 
+		conexión para el envío y recepción de datos.
+		\item La aplicación cliente se conecta con los nuevos 
+		parámetros al laboratorio y empieza a recibir los datos de la 
+		ejecución.
+		\item El cliente interacciona con la ejecución.
+	\end{enumerate}
+	}\\
+	\hline
+	\multicolumn{2}{|| c ||}{\textsc{Escenario secundario}}\\
+	\hline
+	\multicolumn{2}{|| p{14cm} ||}{
+	\begin{enumerate}
+		\item El cliente selecciona la acción a ejecutar y pulsa el 
+		botón.
+		\item La interfaz muestra los parámetros de entrada y los 
+		servicios externos de los que dispone la herramienta.
+		\item El cliente introduce el valor de esos parámetros y pulsa 
+		``Execute''.
+		\item El cliente abre los servicios externos indicados con 
+		anterioridad.
+		\item La aplicación cliente envía al laboratorio la petición 
+		de ejecución y se pone a la espera.
+		\item El laboratorio devuelve un fallo por no poder ejecutar 
+		la herramienta.
+		\item La aplicación cliente muestra el error por pantalla.
+	\end{enumerate}
+	}\\
+	\hline
+	\hline
+\end{tabular}
+\end{center}
+	\label{caso:CU-\arabic{casos}}
+\end{table}
+
+\clearpage
+\section{Requisitos del \emph{software}}
+Los requisitos que aquí se muestran son la respuesta desde el punto de 
+vista del diseño del \emph{software} a los requisitos de usuario 
+(tanto de capacidad como de restricción). La estructura es idéntica a 
+los anteriores excepto que el tipo cambia a funcional y no funcional.
+
+% Requisitos del software.
+\input{include/reqsoftware}
+
+\cleardoublepage

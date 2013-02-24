@@ -1,0 +1,97 @@
+#!/bin/bash
+
+#
+# Remote Laboratory Framework Video
+#
+# by Carlos A. Rodríguez Mecha
+# v0.1
+# 
+# Herramienta RLF de captura de video.
+#
+{
+	
+	# Librerías:
+	source lib/libtool.sh;
+	
+	# Variables:
+	VIDEO_IP="";
+	VIDEO_PORT="";
+	VIDEO_DEVICES="";
+	VIDEO_USER="";
+	VIDEO_PASS="";
+	VIDEO_KEY="fe3389e9b53a162ba3ed9d872fee62e5253fc862";
+	
+	#
+	# Función principal.
+	#
+	{
+	
+		if [ "$1" != "--http" ] && [ "$1" != "--clean" ]; then {
+			exit 1;
+		} fi;
+		
+		# 0. Liberar video y audio.
+		if [ "$1" == "--clean" ]; then {
+			
+			# # # # # # # # # # # # # # # #
+			killall vlc;
+			exit 0;
+		} fi;
+		
+		# 1. Se inicia la conexión.
+		RLF_Init $VIDEO_KEY;
+		if [ $? -ne $RLF_SUCCESS ]; then {
+			echo "Error de conexión con el laboratorio." 1>&2;
+			exit 1;
+		} fi;
+		
+		# 2. Se obtienen las constantes necesarias.
+		RLF_GetConst 'devices';
+		if [ $? -ne $RLF_SUCCESS ]; then {
+			echo "Error de obtención de datos del laboratorio." 1>&2;
+			RLF_Finalize;
+			exit 1;
+		} fi;
+		VIDEO_DEVICES=$RLF_DATA_VALUE;
+		
+		RLF_GetConst 'user';
+		if [ $? -ne $RLF_SUCCESS ]; then {
+			echo "Error de obtención de datos del laboratorio." 1>&2;
+			RLF_Finalize;
+			exit 1;
+		} fi;
+		VIDEO_USER=$RLF_DATA_VALUE;
+		
+		RLF_GetConst 'pass';
+		if [ $? -ne $RLF_SUCCESS ]; then {
+			echo "Error de obtención de datos del laboratorio." 1>&2;
+			RLF_Finalize;
+			exit 1;
+		} fi;
+		VIDEO_PASS=$RLF_DATA_VALUE;
+		
+		RLF_GetConst 'http_ip';
+		if [ $? -ne $RLF_SUCCESS ]; then {
+			echo "Error de obtención de datos del laboratorio." 1>&2;
+			RLF_Finalize;
+			exit 1;
+		} fi;
+		VIDEO_IP=$RLF_DATA_VALUE;
+		
+		RLF_GetConst 'http_port';
+		if [ $? -ne $RLF_SUCCESS ]; then {
+			echo "Error de obtención de datos del laboratorio." 1>&2;
+			RLF_Finalize;
+			exit 1;
+		} fi;
+		VIDEO_PORT=$RLF_DATA_VALUE;
+		
+		RLF_Finalize 0 'Http streamming...';
+		
+		# 3. Se inicia la transmisión.
+		# cvlc $VIDEO_DEVICES --sout '#transcode{vcodec=mp4v,acodec=mpga,vb=800,ab=128,deinterlace}:standard{access=http{user="'$VIDEO_USER'",pwd="'$VIDEO_PASS'",mime="video/mp4"},mux=ts,dst='$VIDEO_IP':'$VIDEO_PORT'}';
+		cvlc $VIDEO_DEVICES --sout '#transcode{vcodec=h264,vb=800,scale=1,acodec=mp4a,ab=128,channels=2,samplerate=44100}:std{access=http,mux=ts,dst='$VIDEO_IP':'$VIDEO_PORT'}';
+		exit 0;
+		
+	}
+}

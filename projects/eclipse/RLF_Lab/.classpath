@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="/mnt/Box/Dropbox/.100060970/Dropbox/Universidad/Proyecto/rlf/lib/gson-1.7.1.jar"/>
+	<classpathentry kind="lib" path="/mnt/Box/Dropbox/.100060970/Dropbox/Universidad/Proyecto/rlf/lib/jdom.jar"/>
+	<classpathentry kind="lib" path="/mnt/Box/Dropbox/.100060970/Dropbox/Universidad/Proyecto/rlf/lib/mysql-connector-java-5.1.17-bin.jar"/>
+	<classpathentry kind="lib" path="/mnt/Box/Dropbox/.100060970/Dropbox/Universidad/Proyecto/rlf/lib/rlf_log-v0.1.jar"/>
+	<classpathentry kind="lib" path="/mnt/Box/Dropbox/.100060970/Dropbox/Universidad/Proyecto/rlf/lib/rlf_utils-v0.1.jar"/>
+	<classpathentry kind="lib" path="/mnt/Box/Dropbox/.100060970/Dropbox/Universidad/Proyecto/rlf/lib/sqlitejdbc-v056.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

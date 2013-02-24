@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jax-ws xmlns="http://www.netbeans.org/ns/jax-ws/1">
+  <services>
+    <service name="Provider">
+      <implementation-class>org.rlf.provider.ws.Provider</implementation-class>
+    </service>
+    <service name="Monitor">
+      <implementation-class>org.rlf.monitor.ws.Monitor</implementation-class>
+    </service>
+  </services>
+  <clients/>
+  <jsr109>false</jsr109>
+</jax-ws>

@@ -1,0 +1,105 @@
+#!/bin/bash
+
+#
+# Remote Laboratory Framework Video
+#
+# by Carlos A. Rodríguez Mecha
+# v0.1
+# 
+# Herramienta de prueba para sistemas Linux.
+#
+{
+	
+	# Librerías:
+	source lib/libtool.sh;
+
+	# Variables:
+	MEM_COMMAND="";
+	EXIT_WORD=".exit";
+	KEY="d91f7fed304aa0c0f9fbbb39d84d5e0247606e74";
+	FIN=0;
+	
+	#
+	# Función principal.
+	#
+	{
+	
+		if [ "$1" != "--echo" ] && [ "$1" != "--cpu" ] && [ "$1" != "--clean" ]; then {
+			exit 1;
+		} fi;
+		
+		# 0. Liberar.
+		if [ "$1" == "--clean" ]; then {
+			
+			# # # # # # # # # # # # # # # #
+			
+			exit 0;
+		} fi;
+		
+		# 1. Se inicia la conexión.
+		RLF_Init $KEY;
+		if [ $? -ne $RLF_SUCCESS ]; then {
+			
+			echo "Error de conexión con el laboratorio." 1>&2;
+			exit 1;
+		} fi;
+		
+		# 3. Ejecución.
+		if [ "$1" == "--echo" ]; then {
+			
+			RLF_GetParameter 'exit_word';
+			
+			if [ $? -ne $RLF_SUCCESS ]; then {
+				echo "Error de conexión con el laboratorio." 1>&2;
+				exit 1;
+			} fi;
+			
+			if [ $RLF_DATA_MODIFIED -ne 1 ]; then {
+				echo "No se ha definido la palabra de salida, se utilizará "$EXIT_WORD;
+			} else {
+				EXIT_WORD=$RLF_DATA_VALUE;
+			} fi;
+			NECHOS=0;
+			while [ $FIN -ne 1 ]; do {
+				echo "Para salir escriba "$EXIT_WORD;
+				echo "Lo escrito será repetido.";
+				read WROTE;
+				if [ "$WROTE" == "$EXIT_WORD" ]; then {
+					FIN=1;
+				} fi;
+				NECHOS=$(($NECHOS+1));
+				echo $WROTE;
+				
+			} done;
+			PARAMETER=`echo $NECHOS`;
+			RLF_SetParameter 'nechos' $PARAMETER;
+			
+			RLF_Finalize 0 'Correcto.';
+			
+		} else {
+		
+			MEM_COMMAND=$RLF_DATA_VALUE;
+			while [ $FIN -ne 1 ]; do {
+				echo "Para conocer la memoria libre en la máquina introduzca 1.";
+				echo "Para conocer el nombre de la máquina introduzca 2.";
+				echo "Para salir escriba "$EXIT_WORD;
+				read WROTE;
+				if [ "$WROTE" == "$EXIT_WORD" ]; then {
+					echo "Adios!";
+					FIN=1;
+				} elif [ "$WROTE" == "1" ]; then {
+					cat /proc/meminfo | head -n 2 | tail -n 1;
+				} elif [ "$WROTE" == "2" ]; then {
+					hostname;
+				} else {
+					echo "Comando no reconocido.";
+				} fi;
+				
+			} done;
+			RLF_Finalize 0 'Correcto.';
+		} fi;
+		
+		exit 0;
+		
+	}
+}

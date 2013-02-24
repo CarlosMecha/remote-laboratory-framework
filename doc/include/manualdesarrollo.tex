@@ -1,0 +1,328 @@
+% Apéndice: Manual de desarrollo
+
+\capitulo{Guía de desarrollo de herramientas}{desarrollo}{
+Este proyecto basa su versatilidad en la gran cantidad de soluciones 
+que se pueden aportar en forma de conjuntos de aplicaciones (llamadas 
+herramientas). Aquí se explican los métodos necesarios para 
+realizar dichas herramientas.
+}
+
+\section*{Estructura de una herramienta}
+Las herramientas son conjuntos de aplicaciones sin interfaz gráfica que se 
+comunican con la plataforma RLF mediante una librería llamada 
+\emph{libtool}. Se caracterizan por:
+
+\begin{itemize}
+\item Cada herramienta puede tener una o varias acciones a realizar 
+(es decir, una o varias aplicaciones) que sólo se podrá ejecutar una 
+instancia de ellas, siendo imposible ejecutar dos o más a la vez.
+\item La herramienta puede tener una salida estándar (textual) y una 
+entrada también textual que serán las que el usuario visualice.
+\item Generalmente estas están asociadas a un \hardware específico, 
+como puede ser una cámara de vídeo.
+\item Pueden ofrecer uno o varios servicios externos, los cuales 
+requieren que el usuario se conecte a ellos de forma independiente a 
+la plataforma, llamados \emph{sockets}. Por ejemplo, pueden ser 
+servicios externos un servidor FTP o HTML, \emph{streaming} de 
+archivos multimedia, conexión a una base de datos, etc.
+\item Las herramientas y sus componentes se definen en un fichero XML 
+con un formato determinado, y se usará para darlas de alta en la 
+plataforma RLF.
+\item Aquellas que poseen el tipo ``Herramienta de datos'' no disponen 
+de entrada estándar y sólo contienen una acción (o aplicación). 
+Además esa acción no tiene parámetros de salida ni de entrada.
+\item Cada acción tiene un número determinado de parámetros de 
+entrada, salida o ambos que serán definidos antes de ejecutarla, así 
+como unas constantes que no variarán su valor. 
+Cuando se termine la ejecución, se almacena un resultado, y las 
+excepciones que puedan ocurrir.
+\end{itemize}
+
+En cuanto a los ficheros que debe contener una herramienta, posee una 
+carpeta principal (llamada \emph{root}) donde será la ruta base para 
+acceder a todas las aplicaciones.
+
+\section*{Desarrollar una nueva herramienta}
+Lo primero es realizar el fichero de configuración que defina el 
+comportamiento de la herramienta. Se deberá decidir si la herramienta 
+pasa a ser ``de Datos''. Dependiendo del tipo, se tendrá que rellenar 
+un fichero XML u otro. Se muestran a continuación dos ejemplos de 
+ambos tipos:
+
+\subsection*{Configuración}
+
+\begin{verbatim}
+<!-- EJEMPLO DE UNA HERRAMIENTA -->
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tool SYSTEM
+   "/home/rodriguezmecha/Universidad/Proyecto/rlf/tools/tool.dtd"
+>
+<tool
+   path="/home/rodriguezmecha/Universidad/Proyecto/rlf/tools/linux/RLF_DummyTool"
+   data="false"
+>
+    <in-stream/>
+    <out-stream/>
+    <attributes>
+        <name>RLF DummyTool</name>
+        <version>0.1</version>
+        <description>
+           Ejecuciones básicas para realizar pruebas en Linux. 
+           Comprende dos acciones que ejecutan operaciones de entrada 
+           y salida por teclado y acceso a ficheros locales.
+        </description>
+        <admin>carlos</admin>
+        <role>0</role>
+    </attributes>
+    <constants>
+    </constants>
+    <parameters>
+        <parameter name="exit_word" data-type="string">
+            <description>Palabra con la que salir del programa.</description>
+        </parameter>
+        <parameter name="nechos" data-type="int">
+            <description>Número de echos realizados.</description>
+        </parameter>
+    </parameters>
+    <actions>
+        <action name="echo" timeout="5">
+            <value>rlfdummytool --echo</value>
+            <description>Repite la entrada por teclado.</description>
+            <action_parameter name="exit_word" type="in"/>
+            <action_parameter name="nechos" type="out"/>
+        </action>
+        <action name="cpu-info" timeout="7">
+            <value>rlfdummytool --cpu</value>
+            <description>
+               Obtiene información básica sobre el sistema (nombre de 
+               la máquina y memoria libre) bajo petición del usuario.
+            </description>
+        </action>
+        <resetter>rlfdummytool --clean</resetter>
+    </actions>
+</tool>
+\end{verbatim}
+
+Son pocas las diferencias que hay entre las dos configuraciones, sólo 
+denotar el atributo \emph{data} y la forma de declarar las acciones. 
+Cada tipo de herramienta tiene un DTD para comprobar la estructura de 
+la configuración (llamados \emph{tool.dtd} y \emph{data-tool.dtd}).
+
+\begin{verbatim}
+<!-- EJEMPLO DE UNA HERRAMIENTA DE DATOS -->
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tool SYSTEM
+   "/home/rodriguezmecha/Universidad/Proyecto/rlf/tools/data-tool.dtd"
+>
+<tool 
+   path="/home/rodriguezmecha/Universidad/Proyecto/rlf/tools/linux/RLF_Video"
+   data="true"
+>
+    <out-stream/>
+    <attributes>
+        <name>RLF Video</name>
+        <version>0.1</version>
+        <description>
+            Streaming de video y sonido. Incluye 3 segundos de delay 
+            en el envío. Es necesario utilizar programas externos para 
+            poder obtener el flujo de datos.
+        </description>
+        <admin>carlos</admin>
+        <role>0</role>
+    </attributes>
+    <constants>
+        <constant name="devices" data-type="string">
+            <value>
+               v4l:///dev/video0:input-slave=alsa://:v4l-norm=0
+               :v4l-frequency=0:file-caching=300
+            </value>
+            <description>Dispositivos de captura.</description>
+        </constant>
+        <constant name="http_ip" data-type="string">
+            <value>192.168.1.128</value>
+            <description>IP del host.</description>
+        </constant>
+        <constant name="http_port" data-type="int">
+            <value>64000</value>
+            <description>Puerto de acceso.</description>
+        </constant>
+        <constant name="user" data-type="string">
+            <value>video</value>
+            <description>Usuario para la conexión.</description>
+        </constant>
+        <constant name="pass" data-type="string">
+            <value>video</value>
+            <description>Contraseña del usuario.</description>
+        </constant>
+    </constants>
+    <action name="http-streaming" timeout="60">
+        <value>rlfvideo --http</value>
+        <description>
+           Streaming por video mediante el protocolo HMTL. Utilizar un 
+           programa como VLC (con recepción de imágenes y sonido por 
+           volcado de red) para conectarse al servidor (http://nombre 
+           del servidor:puerto/)
+        </description>
+        <socket port="64000" protocol="http" type="media" mode="r"/>
+    </action>
+    <resetter>rlfvideo --clean</resetter>
+</tool>
+\end{verbatim}
+
+En primer lugar se encuentra la cabecera de la configuración, donde se 
+indica el tipo de herramienta, su esquema DTD correspondiente 
+(incluido en el proyecto) y su carpeta \emph{root} bajo el nombre de 
+\emph{path}. A continuación se especifica si se dispone de entrada y 
+salida estándar (\emph{in-stream} y \emph{out-stream}).
+
+Después están los atributos de cada herramienta, donde se definen su 
+nombre, descripción, administrador (debe estar registrado en la base 
+de datos), versión y rol \index{rol}(número donde el 0 es la base, y es más 
+restrictivo según se va añadiendo valores).
+
+Las constantes definen valores fijos que no pueden ser cambiados, pero 
+que todas las acciones pueden utilizar y obtener. Se componen de un 
+tipo de datos, nombre, valor y descripción.
+
+Los parámetros son definidos sólo en las herramientas normales, y se 
+componen de un nombre, descripción, un valor máximo, mínimo y por 
+defecto (opcional). Más adelante se les relaciona con las acciones.
+
+Las acciones son diferentes comandos con un nombre, una descripción y 
+un tiempo máximo de ejecución. A partir de ahí, se definen los 
+parámetros que tienen asociados (indicando si son de entrada, salida o 
+ambos. También tienen asociadas los \emph{sockets} que utilizará el 
+comando para proveer el servicio externo, indicando su puerto, el 
+protocolo, el tipo (media, datos o gráficos) y si es de lectura, 
+escritura o ambos. Hay que recordar que esos comandos serán llamados a 
+partir del directorio root, es decir, en el primer caso, la acción ``cpu-info'' 
+se llamará de la forma \texttt{<path>/rlfdummytool --cpu}.
+
+Como acción especial está el \emph{resetter} o limpiador, que no 
+podrá ser ejecutado por el usuario y sirve para establecer a un estado 
+seguro el \hardware asociado a la herramienta. No tiene parámetros ni 
+servicios externos.
+
+\subsection*{Uso de la librería \emph{libtool}}
+Como ya se ha comentado, esta librería sirve para poner en contacto a 
+la herramienta con la plataforma, y es necesario utilizarla para poder 
+registrarla. Se ha añadido a este proyecto tres librerías escritas en 
+C/C++, Bash y .NET, compartiendo todas la misma estructura de funciones:
+
+\begin{enumerate}
+\item \textbf{RLF\_ Init:} Inicia la conexión con la plataforma. Es 
+necesario introducir la clave que se proporcionó al registrar la 
+herramienta. Sin esta función no se puede acceder a ninguna otra. Si 
+se está ejecutando una acción la cual no ha sido ordenada por la 
+plataforma, no se permitirá el acceso a la misma.
+\item \textbf{RLF\_ Finalize:} Desconecta la herramienta, indicando un 
+código de finalización (establecido por el administrador) y una 
+descripción. Es obligatorio realizarlo antes de cerrar la aplicación 
+o antes de que no haya una finalización concreta (por ejemplo, antes 
+de un bucle infinito). Hay que tener en cuenta que la aplicación puede 
+ser detenida en cualquier momento por varios motivos, por lo que debe 
+estar preparada para ello.
+\item \textbf{RLF\_ GetConst:} Obtiene la constante indicada por el nombre y 
+es almacenada en la estructura correspondiente (ver código para más 
+información).
+\item \textbf{RLF\_ GetAttribute:} Obtiene el atributo correspondiente con el 
+nombre introducido. Estos atributos son gestionados por la plataforma.
+\item \textbf{RLF\_GetParameter:} Obtiene el valor y la información de 
+cualquier tipo de parámetro relacionado con la acción en ejecución 
+actual. Estos valores han sido establecidos por el usuario.
+\item \textbf{RLF\_ SetParameter:} Establece el valor textual de un parámetro 
+de salida que esté asociado a la misma acción.
+\item \textbf{RLF\_ ThrowException:} Lanza una excepción al usuario con un 
+nombre y una descripción. No interrumpe el ciclo de ejecución.
+\end{enumerate}
+
+\textbf{NOTA:} Para obtener más información sobre las librerías 
+específicas en cada lenguaje consultar el código entregado.
+
+A continuación se muestra un ejemplo de una acción programada en 
+Visual C++ que obtiene la memoria libre del sistema y la envía a la 
+salida estándar cada cierto tiempo. Es parte de una herramienta de 
+datos:
+
+\begin{verbatim}
+// 1. Inicio RLF
+RLF_Manager ^ manager = gcnew RLF_Manager();
+try {
+    manager->init(TOOLKEY);
+} catch (RLF_Exception ^ e){
+        Console::WriteLine("Error con la base de datos al iniciar. " + e->getMsg());
+        stream->Flush();
+        return 1;
+}
+
+// 2. Obtención de la constante de tiempo.
+try {
+    time = Convert::ToInt32(manager->getConst("time")->getValue());
+} catch (RLF_Exception ^ e){
+    Console::WriteLine("Error con la base de datos al obtener datos." + e->getMsg());
+    try {
+        manager->finalize(1, "Error.");
+    } catch (...){
+    }
+    return 1;
+}
+
+try {
+    manager->finalize(1, "Error.");
+} catch (...){
+    Console::WriteLine("Error con la base de datos al finalizar.");
+    return 1;
+}
+
+// 3. Ejecución.
+while(true){
+    GlobalMemoryStatusEx (&statex);
+    Console::Write("Memory in use: {0:G}% ({1:D} / {2:D} Kbytes)", 
+                statex.dwMemoryLoad, statex.ullAvailPhys/DIV,
+                statex.ullTotalPhys/DIV);
+    Thread::Sleep(1000 * time);
+}
+\end{verbatim}
+
+
+\subsection*{Buenas prácticas}
+Debido a que las aplicaciones que se programen deben seguir unos 
+estándares, es recomendable seguir estos pasos:
+
+\begin{itemize}
+\item Las librerías que se utilicen para ejecutar las acciones, 
+incluso la librería \emph{libtool} deben estar en la carpeta 
+\emph{lib} dentro del directorio \emph{root} de la propia herramienta.
+\item Los usuarios sólo verán los valores de los parámetros de 
+salida cuando se termine de ejecutar la acción, por lo que escribir 
+varias veces un valor no tiene sentido.
+\item Los \emph{buffers} de salida son tratados como en los ficheros, 
+por lo que si se quiere mostrar en tiempo real al usuario, será 
+necesario vaciarlos o reducir su tamaño a cero. (Esto se puede 
+conseguir mediante la función \emph{flush} contenida en muchos 
+lenguajes de programación.)
+\item Si se usa en una misma herramienta distinto \hardware 
+dependiendo de la acción a tomar, es mejor separarlas y dividirlas en 
+varias herramientas, para que los usuarios puedan disponerlas de 
+manera más efectiva.
+\end{itemize}
+
+\section*{Crear una nueva \emph{libtool}}
+Puede ser necesario crear nuevas librerías para otros lenguajes, como 
+Java, Python e incluso el \emph{script} Bat de Windows. Para ello es 
+necesario tener instalado la librería de acceso a la base de datos 
+SQLite ya que la comunicación se realiza mediante ese formato (se 
+puede obtener más información sobre las APIs de SQLite en la 
+siguiente dirección \texttt{http://www.sqlite.org/}).
+
+En el desarrollo de la librería hay que tener en cuenta las consultas 
+a la base de datos, y la protección de escritura y lectura. Como 
+explicar esto puede conllevar un aumento de la documentación bastante 
+grande, se puede consultar las librerías ya hechas que están 
+profusamente comentadas para ver cómo desarrollar una nueva, ya que la 
+estructura es esencialmente la misma y su aplicación es sencilla.
+
+La figura \ref{fig:erlibtool} muestra el modelo que sigue la base de 
+datos asociada a cada herramienta.
+
+\cleardoublepage

@@ -1,0 +1,35 @@
+﻿Build started 04-Sep-11 13:44:14.
+     1>Project "C:\Users\rodriguezmecha\Documents\My Dropbox\Universidad\Proyecto\rlf\projects\visual studio\RLF_Board\AD_INT\ADINT.vcxproj" on node 2 (rebuild target(s)).
+     1>_PrepareForClean:
+         Deleting file ".\Debug\ADINT.lastbuildstate".
+     1>C:\Windows\Microsoft.NET\Framework\v4.0.30319\Microsoft.Common.Targets(1200,9): warning : The referenced project '..\..\..\LibTool\VC++\libboxvcpp\libboxvcpp.vcxproj' does not exist.
+       InitializeBuildStatus:
+         Creating ".\Debug\ADINT.unsuccessfulbuild" because "AlwaysCreate" was specified.
+       GenerateTargetFrameworkMonikerAttribute:
+       Skipping target "GenerateTargetFrameworkMonikerAttribute" because all output files are up-to-date with respect to the input files.
+       ClCompile:
+         c:\Program Files\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /AI"C:\Program Files\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0" /Z7 /clr /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _VC80_UPGRADE=0x0600 /D _MBCS /Gm- /EHa /MD /GS /Gy- /fp:precise /Zc:wchar_t /Zc:forScope /Fo".\Debug\\" /Fd".\Debug\vc100.pdb" /TP /FU"C:\Users\rodriguezmecha\Documents\My Dropbox\Universidad\Proyecto\rlf\tools\lib\NET\LibTool.dll" /FU"C:\Program Files\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Core.dll" /analyze- /errorReport:prompt ADINT.cpp /clr:nostdlib 
+         ADINT.cpp
+     1>ADINT.cpp(86): warning C4244: '=' : conversion from 'unsigned __int64' to 'ULONG', possible loss of data
+         c:\Program Files\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /Z7 /clr /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _VC80_UPGRADE=0x0600 /D _MBCS /Gm- /EHa /MD /GS /Gy- /fp:precise /Zc:wchar_t /Zc:forScope /Fo".\Debug\\" /Fd".\Debug\\" /TP /analyze- /errorReport:prompt "C:\Users\rodriguezmecha\AppData\Local\Temp\.NETFramework,Version=v4.0.AssemblyAttributes.cpp"
+         .NETFramework,Version=v4.0.AssemblyAttributes.cpp
+       ResourceCompile:
+         c:\Program Files\Microsoft SDKs\Windows\v7.0A\bin\rc.exe /D _DEBUG /D _VC80_UPGRADE=0x0600 /l"0x0804" /nologo /fo".\Debug\ADINT.res" ADINT.RC 
+       Link:
+         c:\Program Files\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:".\Debug\ADINT.exe" /INCREMENTAL /NOLOGO odbc32.lib odbccp32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /ManifestFile:".\Debug\ADINT.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"C:\Users\rodriguezmecha\Documents\My Dropbox\Universidad\Proyecto\rlf\projects\visual studio\RLF_Board\AD_INT\Debug\ADINT.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /FIXED:NO /NXCOMPAT /MACHINE:X86 .\Debug\ADINT.res
+         .\Debug\ADINT.obj
+         ".\Debug\.NETFramework,Version=v4.0.AssemblyAttributes.obj"
+         "..\..\..\..\..\..\..\..\..\..\..\Program Files\Advantech\Adsapi\Lib\Adsapi32.lib"
+         ADINT.vcxproj -> C:\Users\rodriguezmecha\Documents\My Dropbox\Universidad\Proyecto\rlf\projects\visual studio\RLF_Board\AD_INT\.\Debug\ADINT.exe
+       Manifest:
+         c:\Program Files\Microsoft SDKs\Windows\v7.0A\bin\mt.exe /nologo /verbose /outputresource:".\Debug\ADINT.exe;#1" /manifest .\Debug\ADINT.exe.intermediate.manifest
+       _CopyFilesMarkedCopyLocal:
+         Copying file from "C:\Users\rodriguezmecha\Documents\My Dropbox\Universidad\Proyecto\rlf\tools\lib\NET\LibTool.dll" to ".\Debug\LibTool.dll".
+       FinalizeBuildStatus:
+         Deleting file ".\Debug\ADINT.unsuccessfulbuild".
+         Touching ".\Debug\ADINT.lastbuildstate".
+     1>Done Building Project "C:\Users\rodriguezmecha\Documents\My Dropbox\Universidad\Proyecto\rlf\projects\visual studio\RLF_Board\AD_INT\ADINT.vcxproj" (rebuild target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:09.16

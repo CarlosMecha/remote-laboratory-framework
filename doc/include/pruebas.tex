@@ -1,0 +1,848 @@
+% Pruebas realizadas
+
+\newcounter{prueba}
+\newcounter{pfuncion}
+\newcounter{perror}
+\newcounter{pestres}
+
+\capitulo{Pruebas}{pruebas}{
+Las pruebas de verificación del sistema implementado es una parte 
+importante del desarrollo \emph{software}. En este capítulo se 
+incluyen las más destacadas que validan el conjunto de la plataforma 
+RLF.
+}
+
+Las pruebas que se muestran a continuación han sido seleccionadas del 
+conjunto global que se realizaron en la implementación del proyecto. 
+Debido al gran número de estas no se ha podido incluir todas.
+
+\section{Configuraciones}
+Se han establecido un conjunto de configuraciones de la arquitectura 
+para las distintas pruebas, con lo que se consigue verificar que 
+independientemente de la estructura del sistema, los resultados sean 
+los mismos. Estas configuraciones tienen un nombre asociado que se 
+especificará en cada una de las pruebas. A continuación se muestra 
+cada configuración, con el número de componentes que intervienen:
+
+\begin{table}[H]
+\begin{center}
+\begin{tabular}{|| l | c | c | c | p{10cm} ||}
+	\hline
+	\hline
+	Nombre & L & CE & CW & Disposición\\
+	\hline
+	\hline
+	Básica & 1 & 2 & 1 & Todos los componentes en la misma máquina, 
+	excepto un CE y el CW que está en otra máquina en red.\\
+	\hline
+	Común & 2 & 1 & 1 & El P y un L se disponen en 
+	una máquina, el otro L en un sistema Windows en red 
+	local con el CE. El CW en un \emph{smartphone} con 3G.\\
+	\hline
+	Remota & 2 & 2 & 2 & Cada componente está en una máquina distinta, 
+	pero el P y los L están conectados en red local, mientras que los 
+	CE y CW se conectan mediante Internet.\\
+	\hline
+	Educativa & 5 & 2 & 1 & P se encuentra en una red externa, los L 
+	están conectados en red local, y los CE y CW en otra red externa. Algunas 
+	herramientas han sido duplicadas.\\
+	\hline
+	Industrial & 5 & 5 & 2 & Cada componente se encuentra en un nodo 
+	distinto, distribuidos entre redes locales e Internet. Algunas 
+	herramientas han sido duplicadas.\\
+	\hline
+	\hline
+\end{tabular}
+\end{center}
+	\caption{Configuraciones de las pruebas.}
+	\label{tab:configuraciones}
+\end{table}
+
+\textbf{NOTA 1:} Los \emph{laboratorios} (L) son numerados secuencialmente 
+de forma \emph{1}, \emph{2}, \emph{3}\ldots Los \emph{clientes de 
+escritorio} (CE) se corresponden con el alfabeto en mayúsculas: \emph{A}, 
+\emph{B}, \emph{C}\ldots Y por último, los \emph{clientes web} (CW) 
+corresponden con el alfabeto en minúsculas: \emph{a}, \emph{b}, 
+\emph{c}\ldots
+
+\textbf{NOTA 2:} Todas las configuraciones se componen de un solo 
+proveedor y monitor (P), y de las cinco herramientas entregadas con el 
+proyecto, además de un número concreto de laboratorio, clientes de 
+escritorio y clientes web.
+
+\section{Pruebas de verificación de funcionalidad}
+
+Estas pruebas han sido concebidas para verificar todas las funciones y 
+opciones que aporta la plataforma RLF. Han sido realizadas en un 
+entorno controlado y comprobando que la respuesta del sistema a 
+determinadas acciones era la esperada.
+
+Durante el desarrollo del proyecto, estas pruebas se repitieron 
+obteniendo diferentes errores que fueron corregidos hasta obtener los 
+resultados esperados.
+
+\begin{table}[H]
+\begin{center}
+	\stepcounter{prueba}
+	\stepcounter{pfuncion}
+\begin{tabular}{|| m{1cm} m{2cm} | m{2.5cm} m{2.5cm} | l @{\extracolsep{\fill}} c ||}
+	\hline
+	\hline
+	\multicolumn{6}{|| c ||}{\textsc{Prueba \arabic{prueba}}}\\
+	\hline
+	\textbf{ID} & PF-\Alph{pfuncion} &
+	\textbf{Configuración} & Básica & 
+	\textbf{Resultado} & Válido\\
+	\hline
+	\hline
+	\multicolumn{6}{|| c ||}{\textbf{Descripción}}\\
+	\hline
+	\multicolumn{6}{|| p{14cm} ||}{
+	Se accede desde la red externa mediante el CE para reservar todos 
+	las herramientas disponibles, ejecutando a la vez dos de ellas. 
+	Después se comprueban el estado de las herramientas mediante el 
+	CW, donde todas están ocupadas.
+	}\\
+	\hline
+	\multicolumn{6}{|| c ||}{\textbf{Acciones}}\\
+	\hline
+	\multicolumn{6}{|| p{14cm} ||}{
+		\begin{enumerate}
+		\item Reserva de todas las herramientas.
+		\item Ejecución de dos de ellas.
+		\item Comprobación por la web.
+		\item Obtención de las herramientas ocupadas.
+		\end{enumerate}
+	}\\
+	\hline
+	\hline
+\end{tabular}
+\end{center}
+\end{table}
+
+\begin{table}[H]
+\begin{center}
+	\stepcounter{prueba}
+	\stepcounter{pfuncion}
+\begin{tabular}{|| m{1cm} m{2cm} | m{2.5cm} m{2.5cm} | l @{\extracolsep{\fill}} c ||}
+	\hline
+	\hline
+	\multicolumn{6}{|| c ||}{\textsc{Prueba \arabic{prueba}}}\\
+	\hline
+	\textbf{ID} & PF-\Alph{pfuncion} &
+	\textbf{Configuración} & Común & 
+	\textbf{Resultado} & Válido\\
+	\hline
+	\hline
+	\multicolumn{6}{|| c ||}{\textbf{Descripción}}\\
+	\hline
+	\multicolumn{6}{|| p{14cm} ||}{
+	Se comprueba ejecución de herramientas en diferentes L desde el 
+	mismo CE.
+	}\\
+	\hline
+	\multicolumn{6}{|| c ||}{\textbf{Acciones}}\\
+	\hline
+	\multicolumn{6}{|| p{14cm} ||}{
+		\begin{enumerate}
+		\item Reserva de una herramienta de cada laboratorio.
+		\item Ejecución de las acciones de las herramientas.
+		\item Desconexión.
+		\end{enumerate}
+	}\\
+	\hline
+	\hline
+\end{tabular}
+\end{center}
+\end{table}
+
+\begin{table}[H]
+\begin{center}
+	\stepcounter{prueba}
+	\stepcounter{pfuncion}
+\begin{tabular}{|| m{1cm} m{2cm} | m{2.5cm} m{2.5cm} | l @{\extracolsep{\fill}} c ||}
+	\hline
+	\hline
+	\multicolumn{6}{|| c ||}{\textsc{Prueba \arabic{prueba}}}\\
+	\hline
+	\textbf{ID} & PF-\Alph{pfuncion} &
+	\textbf{Configuración} & Básica & 
+	\textbf{Resultado} & Válido\\
+	\hline
+	\hline
+	\multicolumn{6}{|| c ||}{\textbf{Descripción}}\\
+	\hline
+	\multicolumn{6}{|| p{14cm} ||}{
+	El objetivo es la comprobación de los limpiadores de cada 
+	herramienta. Para ello es requerido un cierre forzado de una 
+	acción.
+	}\\
+	\hline
+	\multicolumn{6}{|| c ||}{\textbf{Acciones}}\\
+	\hline
+	\multicolumn{6}{|| p{14cm} ||}{
+		\begin{enumerate}
+		\item Reserva de una herramienta.
+		\item Ejecución de una acción.
+		\item Forzado de cierre desde el CE.
+		\item Comprobación del \emph{log} del laboratorio responsable.
+		\item El limpiador se ejecuta a los pocos segundos de cerrar 
+		la acción.
+		\end{enumerate}
+	}\\
+	\hline
+	\hline
+\end{tabular}
+\end{center}
+\end{table}
+
+\begin{table}[H]
+\begin{center}
+	\stepcounter{prueba}
+	\stepcounter{pfuncion}
+\begin{tabular}{|| m{1cm} m{2cm} | m{2.5cm} m{2.5cm} | l @{\extracolsep{\fill}} c ||}
+	\hline
+	\hline
+	\multicolumn{6}{|| c ||}{\textsc{Prueba \arabic{prueba}}}\\
+	\hline
+	\textbf{ID} & PF-\Alph{pfuncion} &
+	\textbf{Configuración} & Básica & 
+	\textbf{Resultado} & Válido\\
+	\hline
+	\hline
+	\multicolumn{6}{|| c ||}{\textbf{Descripción}}\\
+	\hline
+	\multicolumn{6}{|| p{14cm} ||}{
+	Se verifica que las herramientas de datos se ejecuten por varios 
+	usuarios y que sólo se cierren cuando todos se han desconectado.
+	}\\
+	\hline
+	\multicolumn{6}{|| c ||}{\textbf{Acciones}}\\
+	\hline
+	\multicolumn{6}{|| p{14cm} ||}{
+		\begin{enumerate}
+		\item Reserva de una herramienta con el CE \emph{A}.
+		\item Reserva de la misma herramienta con el CE \emph{B}.
+		\item El CE \emph{B} ejecuta la acción de la herramienta.
+		\item Al cabo de un tiempo, el CE a también.
+		\item El CE \emph{B} cierra la ejecución y se desconecta.
+		\item Por último, CE a para la acción.
+		\item Se comprueba el \emph{log} de L y se verifica que la 
+		acción se ha detenido correctamente cuando el CE \emph{A} se 
+		desconectó.
+		\end{enumerate}
+	}\\
+	\hline
+	\hline
+\end{tabular}
+\end{center}
+\end{table}
+
+\begin{table}[H]
+\begin{center}
+	\stepcounter{prueba}
+	\stepcounter{pfuncion}
+\begin{tabular}{|| m{1cm} m{2cm} | m{2.5cm} m{2.5cm} | l @{\extracolsep{\fill}} c ||}
+	\hline
+	\hline
+	\multicolumn{6}{|| c ||}{\textsc{Prueba \arabic{prueba}}}\\
+	\hline
+	\textbf{ID} & PF-\Alph{pfuncion} &
+	\textbf{Configuración} & Básica & 
+	\textbf{Resultado} & Válido\\
+	\hline
+	\hline
+	\multicolumn{6}{|| c ||}{\textbf{Descripción}}\\
+	\hline
+	\multicolumn{6}{|| p{14cm} ||}{
+	Comprobación de la liberación de herramientas una vez que un 
+	usuario se ha desconectado, y su posterior uso por parte de otro 
+	usuario.
+	}\\
+	\hline
+	\multicolumn{6}{|| c ||}{\textbf{Acciones}}\\
+	\hline
+	\multicolumn{6}{|| p{14cm} ||}{
+		\begin{enumerate}
+		\item Reserva de un conjunto de herramientas con el CE \emph{A}.
+		\item Conexión del CE \emph{B}.
+		\item El CE \emph{B} comprueba el estado de las herramientas en uso 
+		por CE \emph{A}.
+		\item CE \emph{A} cierra algunas acciones forzándolas y otras con la 
+		finalización normal, después se desconecta.
+		\item El CE \emph{B} reserva las herramientas que CE a ha liberado.
+		\item Ejecuta las acciones de esas herramientas.
+		\item Debe esperar para el inicio de algunas acciones, 
+		correspondientes con las que se ha forzado su cierre por CE 
+		\emph{A}, ya que se están ejecutando sus limpiadores.
+		\item Se comprueba el estado de las herramientas en el CW.
+		\item CE \emph{B} libera sus herramientas después de utilizarlas.
+		\item Se vuelve a comprobar el estado de las herramientas 
+		mediante el CW y se verifica que todas están libres.
+		\end{enumerate}
+	}\\
+	\hline
+	\hline
+\end{tabular}
+\end{center}
+\end{table}
+
+\begin{table}[H]
+\begin{center}
+	\stepcounter{prueba}
+	\stepcounter{pfuncion}
+\begin{tabular}{|| m{1cm} m{2cm} | m{2.5cm} m{2.5cm} | l @{\extracolsep{\fill}} c ||}
+	\hline
+	\hline
+	\multicolumn{6}{|| c ||}{\textsc{Prueba \arabic{prueba}}}\\
+	\hline
+	\textbf{ID} & PF-\Alph{pfuncion} &
+	\textbf{Configuración} & Básica & 
+	\textbf{Resultado} & Válido\\
+	\hline
+	\hline
+	\multicolumn{6}{|| c ||}{\textbf{Descripción}}\\
+	\hline
+	\multicolumn{6}{|| p{14cm} ||}{
+	Verificación de los roles establecidos para los distintos usuarios 
+	y las herramientas que pueden utilizar.
+	}\\
+	\hline
+	\multicolumn{6}{|| c ||}{\textbf{Acciones}}\\
+	\hline
+	\multicolumn{6}{|| p{14cm} ||}{
+		\begin{enumerate}
+		\item Se registran las herramientas con distintos roles.
+		\item Se crea un usuario con un rol específico.
+		\item El usuario, mediante el CE y el CW comprueba que sólo 
+		tiene acceso a las herramientas con su rol o inferior.
+		\end{enumerate}
+	}\\
+	\hline
+	\hline
+\end{tabular}
+\end{center}
+\end{table}
+
+\begin{table}[H]
+\begin{center}
+	\stepcounter{prueba}
+	\stepcounter{pfuncion}
+\begin{tabular}{|| m{1cm} m{2cm} | m{2.5cm} m{2.5cm} | l @{\extracolsep{\fill}} c ||}
+	\hline
+	\hline
+	\multicolumn{6}{|| c ||}{\textsc{Prueba \arabic{prueba}}}\\
+	\hline
+	\textbf{ID} & PF-\Alph{pfuncion} &
+	\textbf{Configuración} & Básica & 
+	\textbf{Resultado} & Válido\\
+	\hline
+	\hline
+	\multicolumn{6}{|| c ||}{\textbf{Descripción}}\\
+	\hline
+	\multicolumn{6}{|| p{14cm} ||}{
+	Se pretende comprobar la correcta liberación de herramientas 
+	después de que el usuario haya sido expulsado del sistema por 
+	exceso de tiempo.
+	}\\
+	\hline
+	\multicolumn{6}{|| c ||}{\textbf{Acciones}}\\
+	\hline
+	\multicolumn{6}{|| p{14cm} ||}{
+		\begin{enumerate}
+		\item El CE reserva varias herramientas.
+		\item Ejecuta una acción hasta que se le acaba el tiempo.
+		\item El sistema expulsa al usuario, cerrando las acciones en 
+		ejecución y liberando las herramientas.
+		\item Por último, se ejecutan las acciones.
+		\end{enumerate}
+	}\\
+	\hline
+	\hline
+\end{tabular}
+\end{center}
+\end{table}
+
+\begin{table}[H]
+\begin{center}
+	\stepcounter{prueba}
+	\stepcounter{pfuncion}
+\begin{tabular}{|| m{1cm} m{2cm} | m{2.5cm} m{2.5cm} | l @{\extracolsep{\fill}} c ||}
+	\hline
+	\hline
+	\multicolumn{6}{|| c ||}{\textsc{Prueba \arabic{prueba}}}\\
+	\hline
+	\textbf{ID} & PF-\Alph{pfuncion} &
+	\textbf{Configuración} & Común & 
+	\textbf{Resultado} & Válido\\
+	\hline
+	\hline
+	\multicolumn{6}{|| c ||}{\textbf{Descripción}}\\
+	\hline
+	\multicolumn{6}{|| p{14cm} ||}{
+	Esta prueba fue diseñada para utilizar los servicios externos de 
+	cada una de las herramientas.
+	}\\
+	\hline
+	\multicolumn{6}{|| c ||}{\textbf{Acciones}}\\
+	\hline
+	\multicolumn{6}{|| p{14cm} ||}{
+		\begin{enumerate}
+		\item Los CE \emph{A} y \emph{B} reservan varias herramientas, 
+		una de ellas de datos para acceder a su servicio externo.
+		\item Ambos ejecutan las herramientas utilizando a la vez 
+		programas externos para el manejo de los servicios.
+		\item Todos los servicios y las acciones en ejecución 
+		responden correctamente, tanto en el envío de datos como en la 
+		recepción.
+		\end{enumerate}
+	}\\
+	\hline
+	\hline
+\end{tabular}
+\end{center}
+\end{table}
+
+\begin{table}[H]
+\begin{center}
+	\stepcounter{prueba}
+	\stepcounter{pfuncion}
+\begin{tabular}{|| m{1cm} m{2cm} | m{2.5cm} m{2.5cm} | l @{\extracolsep{\fill}} c ||}
+	\hline
+	\hline
+	\multicolumn{6}{|| c ||}{\textsc{Prueba \arabic{prueba}}}\\
+	\hline
+	\textbf{ID} & PF-\Alph{pfuncion} &
+	\textbf{Configuración} & Común & 
+	\textbf{Resultado} & Válido\\
+	\hline
+	\hline
+	\multicolumn{6}{|| c ||}{\textbf{Descripción}}\\
+	\hline
+	\multicolumn{6}{|| p{14cm} ||}{
+	Prueba la capacidad de insertar herramientas \emph{en 
+	caliente}, es decir, mientras el sistema está en pleno 
+	funcionamiento, atendidendo peticiones de los usuarios.
+	}\\
+	\hline
+	\multicolumn{6}{|| c ||}{\textbf{Acciones}}\\
+	\hline
+	\multicolumn{6}{|| p{14cm} ||}{
+		\begin{enumerate}
+		\item El CE \emph{A} reserva algunas herramientas.
+		\item El CE \emph{B} se conecta al sistema pero aún no reserva nada.
+		\item Se inserta en el L \emph{1} una herramienta y se arma.
+		\item El CE \emph{B} puede reservar desde ese momento la herramienta.
+		\end{enumerate}
+	}\\
+	\hline
+	\hline
+\end{tabular}
+\end{center}
+\end{table}
+
+\begin{table}[H]
+\begin{center}
+	\stepcounter{prueba}
+	\stepcounter{pfuncion}
+\begin{tabular}{|| m{1cm} m{2cm} | m{2.5cm} m{2.5cm} | l @{\extracolsep{\fill}} c ||}
+	\hline
+	\hline
+	\multicolumn{6}{|| c ||}{\textsc{Prueba \arabic{prueba}}}\\
+	\hline
+	\textbf{ID} & PF-\Alph{pfuncion} &
+	\textbf{Configuración} & Remoto & 
+	\textbf{Resultado} & Válido\\
+	\hline
+	\hline
+	\multicolumn{6}{|| c ||}{\textbf{Descripción}}\\
+	\hline
+	\multicolumn{6}{|| p{14cm} ||}{
+	La última prueba de funciones corresponde a la respuesta de un L 
+	cuando está sobrecargado de acciones en ejecución.
+	}\\
+	\hline
+	\multicolumn{6}{|| c ||}{\textbf{Acciones}}\\
+	\hline
+	\multicolumn{6}{|| p{14cm} ||}{
+		\begin{enumerate}
+		\item El L \emph{1} se configura para que sólo acepte 4 
+		procesos en ejecución.
+		\item Los CE \emph{A} y \emph{B} reservan varias herramientas 
+		que pertenecen a L \emph{1} y ejecutan todas las acciones 
+		correspondientes.
+		\item Las ejecuciones se ven bloqueadas con el estado de 
+		espera hasta que alguna con estado de ejecución termine.
+		\item Las peticiones de ejecución se ejecutan con el orden de 
+		llegada.
+		\end{enumerate}
+	}\\
+	\hline
+	\hline
+\end{tabular}
+\end{center}
+\end{table}
+
+\section{Pruebas de recuperación de errores}
+Las siguientes pruebas comprobaron que bajo ciertas situaciones de 
+error o incontroladas, el sistema respondía tal y como corresponde a 
+la recuperación de errores implementada.
+
+Muchos de los errores que pueden surgir en una plataforma RLF son 
+externos a la misma, por lo que su control se resume en una parada 
+controlada del componente o componentes afectados.
+
+\begin{table}[H]
+\begin{center}
+	\stepcounter{prueba}
+	\stepcounter{perror}
+\begin{tabular}{|| m{1cm} m{2cm} | m{2.5cm} m{2.5cm} | l @{\extracolsep{\fill}} c ||}
+	\hline
+	\hline
+	\multicolumn{6}{|| c ||}{\textsc{Prueba \arabic{prueba}}}\\
+	\hline
+	\textbf{ID} & PE-\Alph{perror} &
+	\textbf{Configuración} & Remoto & 
+	\textbf{Resultado} & Válido\\
+	\hline
+	\hline
+	\multicolumn{6}{|| c ||}{\textbf{Descripción del error}}\\
+	\hline
+	\multicolumn{6}{|| p{14cm} ||}{
+	La herramienta en ejecución sufre un fallo bloqueante.
+	}\\
+	\hline
+	\multicolumn{6}{|| c ||}{\textbf{Respuesta}}\\
+	\hline
+	\multicolumn{6}{|| p{14cm} ||}{
+		\begin{enumerate}
+		\item El L encargado de la herramienta espera hasta que se 
+		agote el tiempo de la acción. Dado ese caso, se considera un 
+		error bloqueante.
+		\item L establece el estado de error para esa acción, para por 
+		completo la ejecución de la acción y añade una petición para 
+		ejecutar el limpiador.
+		\item El CE recibe la notificación de que la acción actual ha 
+		sido parada por un error surgido.
+		\item Se muestra las excepciones enviadas por la herramienta y 
+		el estado final de la misma.
+		\end{enumerate}
+	}\\
+	\hline
+	\hline
+\end{tabular}
+\end{center}
+\end{table}
+
+\begin{table}[H]
+\begin{center}
+	\stepcounter{prueba}
+	\stepcounter{perror}
+\begin{tabular}{|| m{1cm} m{2cm} | m{2.5cm} m{2.5cm} | l @{\extracolsep{\fill}} c ||}
+	\hline
+	\hline
+	\multicolumn{6}{|| c ||}{\textsc{Prueba \arabic{prueba}}}\\
+	\hline
+	\textbf{ID} & PE-\Alph{perror} &
+	\textbf{Configuración} & Remoto & 
+	\textbf{Resultado} & Válido\\
+	\hline
+	\hline
+	\multicolumn{6}{|| c ||}{\textbf{Descripción del error}}\\
+	\hline
+	\multicolumn{6}{|| p{14cm} ||}{
+	Uno de los laboratorios es desarmado por el administrador o sufre 
+	una parada por un error.
+	}\\
+	\hline
+	\multicolumn{6}{|| c ||}{\textbf{Respuesta}}\\
+	\hline
+	\multicolumn{6}{|| p{14cm} ||}{
+		\begin{enumerate}
+		\item El CE recibe el mensaje de error y comprueba las 
+		herramientas reservadas de ese laboratorio.
+		\item Se muestra el diálogo de aviso por cierre inesperado de 
+		L.
+		\end{enumerate}
+	}\\
+	\hline
+	\hline
+\end{tabular}
+\end{center}
+\end{table}
+
+\begin{table}[H]
+\begin{center}
+	\stepcounter{prueba}
+	\stepcounter{perror}
+\begin{tabular}{|| m{1cm} m{2cm} | m{2.5cm} m{2.5cm} | l @{\extracolsep{\fill}} c ||}
+	\hline
+	\hline
+	\multicolumn{6}{|| c ||}{\textsc{Prueba \arabic{prueba}}}\\
+	\hline
+	\textbf{ID} & PE-\Alph{perror} &
+	\textbf{Configuración} & Remoto & 
+	\textbf{Resultado} & Válido\\
+	\hline
+	\hline
+	\multicolumn{6}{|| c ||}{\textbf{Descripción del error}}\\
+	\hline
+	\multicolumn{6}{|| p{14cm} ||}{
+	El P sufre un error o su nodo es desconectado de la red.
+	}\\
+	\hline
+	\multicolumn{6}{|| c ||}{\textbf{Respuesta}}\\
+	\hline
+	\multicolumn{6}{|| p{14cm} ||}{
+		\begin{enumerate}
+		\item Cuando los CE o CW se intentan conectar al P, o 
+		realizar una acción si ya lo estaban, se muestra el diálogo de 
+		problema con el servidor central.
+		\end{enumerate}
+	}\\
+	\hline
+	\hline
+\end{tabular}
+\end{center}
+\end{table}
+
+\begin{table}[H]
+\begin{center}
+	\stepcounter{prueba}
+	\stepcounter{perror}
+\begin{tabular}{|| m{1cm} m{2cm} | m{2.5cm} m{2.5cm} | l @{\extracolsep{\fill}} c ||}
+	\hline
+	\hline
+	\multicolumn{6}{|| c ||}{\textsc{Prueba \arabic{prueba}}}\\
+	\hline
+	\textbf{ID} & PE-\Alph{perror} &
+	\textbf{Configuración} & Remoto & 
+	\textbf{Resultado} & Válido\\
+	\hline
+	\hline
+	\multicolumn{6}{|| c ||}{\textbf{Descripción del error}}\\
+	\hline
+	\multicolumn{6}{|| p{14cm} ||}{
+	El CE sufre un error o una desconexión del sistema.
+	}\\
+	\hline
+	\multicolumn{6}{|| c ||}{\textbf{Respuesta}}\\
+	\hline
+	\multicolumn{6}{|| p{14cm} ||}{
+		\begin{enumerate}
+		\item El CE no consigue desconectarse del sistema de manera 
+		normal.
+		\item El P bloquea la cuenta de usuario hasta que se ponga en 
+		contacto con el administrador para que la desbloquee.
+		\end{enumerate}
+	}\\
+	\hline
+	\hline
+\end{tabular}
+\end{center}
+\end{table}
+
+\begin{table}[H]
+\begin{center}
+	\stepcounter{prueba}
+	\stepcounter{perror}
+\begin{tabular}{|| m{1cm} m{2cm} | m{2.5cm} m{2.5cm} | l @{\extracolsep{\fill}} c ||}
+	\hline
+	\hline
+	\multicolumn{6}{|| c ||}{\textsc{Prueba \arabic{prueba}}}\\
+	\hline
+	\textbf{ID} & PE-\Alph{perror} &
+	\textbf{Configuración} & Remoto & 
+	\textbf{Resultado} & Válido\\
+	\hline
+	\hline
+	\multicolumn{6}{|| c ||}{\textbf{Descripción del error}}\\
+	\hline
+	\multicolumn{6}{|| p{14cm} ||}{
+	El CW sufre un error o una desconexión del sistema.
+	}\\
+	\hline
+	\multicolumn{6}{|| c ||}{\textbf{Respuesta}}\\
+	\hline
+	\multicolumn{6}{|| p{14cm} ||}{
+		\begin{enumerate}
+		\item El CW no consigue desconectarse del monitor de manera 
+		normal.
+		\item P no bloquea la cuenta de usuario, por lo que se puede 
+		volver a conectar desde un CW o un CE.
+		\end{enumerate}
+	}\\
+	\hline
+	\hline
+\end{tabular}
+\end{center}
+\end{table}
+
+
+\begin{figure}
+	\centering
+	\includegraphics[scale=0.3]{images/mac.png}
+	\caption[RLF en Mac]{En estas pruebas también se han incluido 
+	nodos con el sistema Macintosh.}
+	\label{fig:mac}
+\end{figure}
+
+\section{Pruebas de estrés}
+\label{sec:pruebasestres}
+Por último, estas pruebas están recogidas para verificar el correcto 
+funcionamiento en ambientes con gran carga o baja potencia. El número 
+de componentes y clientes es aumentado.
+
+\begin{table}[H]
+\begin{center}
+	\stepcounter{prueba}
+	\stepcounter{pestres}
+\begin{tabular}{|| m{1cm} m{2cm} | m{2.5cm} m{2.5cm} | l @{\extracolsep{\fill}} c ||}
+	\hline
+	\hline
+	\multicolumn{6}{|| c ||}{\textsc{Prueba \arabic{prueba}}}\\
+	\hline
+	\textbf{ID} & PX-\Alph{pestres} &
+	\textbf{Configuración} & Básico & 
+	\textbf{Resultado} & Válido\\
+	\hline
+	\hline
+	\multicolumn{6}{|| c ||}{\textbf{Descripción del conjunto}}\\
+	\hline
+	\multicolumn{6}{|| p{14cm} ||}{
+	Todos los componentes se encuentran en un \emph{netbook}, con un 
+	procesador Atom 450 y 1 GB de memoria RAM. Acceden dos CE a 
+	él, uno de ellos ejecuta la herramienta de vídeo por 
+	\emph{streaming}. Acceden otros dos CW mediante dispositivos 
+	\emph{Android}.
+	}\\
+	\hline
+	\multicolumn{6}{|| c ||}{\textbf{Respuesta}}\\
+	\hline
+	\multicolumn{6}{|| p{14cm} ||}{
+	El sistema responde correctamente ocupando el 95\% del procesador 
+	y 150 MBs de RAM. El vídeo se recibe de manera fluida y la 
+	interfaz del CE \emph{A} funciona correctamente.
+	}\\
+	\hline
+	\hline
+\end{tabular}
+\end{center}
+\end{table}
+
+\begin{table}[H]
+\begin{center}
+	\stepcounter{prueba}
+	\stepcounter{pestres}
+\begin{tabular}{|| m{1cm} m{2cm} | m{2.5cm} m{2.5cm} | l @{\extracolsep{\fill}} c ||}
+	\hline
+	\hline
+	\multicolumn{6}{|| c ||}{\textsc{Prueba \arabic{prueba}}}\\
+	\hline
+	\textbf{ID} & PX-\Alph{pestres} &
+	\textbf{Configuración} & Remoto & 
+	\textbf{Resultado} & No válido\\
+	\hline
+	\hline
+	\multicolumn{6}{|| c ||}{\textbf{Descripción del conjunto}}\\
+	\hline
+	\multicolumn{6}{|| p{14cm} ||}{
+	En un entorno donde las conexiones entre las redes son de muy baja 
+	velocidad, se prueba el acceso a las diferentes herramientas. El P 
+	y L \emph{1} están conectados a la red mediante \emph{tethering} con 
+	un teléfono móvil con acceso 3G (alrededor de 200 kB/s de bajada y 
+	64 kB/s de subida en Madrid \cite{tresg}), así como los dos CE y 
+	otro CW conectados a redes normales.
+	}\\
+	\hline
+	\multicolumn{6}{|| c ||}{\textbf{Respuesta}}\\
+	\hline
+	\multicolumn{6}{|| p{14cm} ||}{
+	Los accesos al proveedor se ven ralentizados. Cuando se ejecuta 
+	una acción, a pesar de que la interfaz no se bloquea, el flujo de 
+	datos es demasiado lento como para poder tener la continuidad 
+	necesaria para un correcto funcionamiento. 
+	}\\
+	\hline
+	\hline
+\end{tabular}
+\end{center}
+\end{table}
+
+\begin{table}[H]
+\begin{center}
+	\stepcounter{prueba}
+	\stepcounter{pestres}
+\begin{tabular}{|| m{1cm} m{2cm} | m{2.5cm} m{2.5cm} | l @{\extracolsep{\fill}} c ||}
+	\hline
+	\hline
+	\multicolumn{6}{|| c ||}{\textsc{Prueba \arabic{prueba}}}\\
+	\hline
+	\textbf{ID} & PX-\Alph{pestres} &
+	\textbf{Configuración} & Educativa & 
+	\textbf{Resultado} & Válido\\
+	\hline
+	\hline
+	\multicolumn{6}{|| c ||}{\textbf{Descripción del conjunto}}\\
+	\hline
+	\multicolumn{6}{|| p{14cm} ||}{
+	Se accede desde 15 terminales en los laboratorios 
+	informáticos de la universidad hacia el sistema que se encuentra 
+	en el taller de Automática. Las redes de conexión son las propias 
+	de la universidad.
+	}\\
+	\hline
+	\multicolumn{6}{|| c ||}{\textbf{Respuesta}}\\
+	\hline
+	\multicolumn{6}{|| p{14cm} ||}{
+	La plataforma RLF funciona sin ningún retardo.
+	}\\
+	\hline
+	\hline
+\end{tabular}
+\end{center}
+\end{table}
+
+\begin{table}[H]
+\begin{center}
+	\stepcounter{prueba}
+	\stepcounter{pestres}
+\begin{tabular}{|| m{1cm} m{2cm} | m{2.5cm} m{2.5cm} | l @{\extracolsep{\fill}} c ||}
+	\hline
+	\hline
+	\multicolumn{6}{|| c ||}{\textsc{Prueba \arabic{prueba}}}\\
+	\hline
+	\textbf{ID} & PX-\Alph{pestres} &
+	\textbf{Configuración} & Industrial & 
+	\textbf{Resultado} & Válido\\
+	\hline
+	\hline
+	\multicolumn{6}{|| c ||}{\textbf{Descripción del conjunto}}\\
+	\hline
+	\multicolumn{6}{|| p{14cm} ||}{
+	Los componentes se encuentran distribuidos en distintas 
+	localidades separadas por varios kilómetros de distancia. Además,
+	uno de los laboratorios y un CE se situaron en Osaka, Japón.
+	}\\
+	\hline
+	\multicolumn{6}{|| c ||}{\textbf{Respuesta}}\\
+	\hline
+	\multicolumn{6}{|| p{14cm} ||}{
+	La plataforma RLF funciona sin ningún retardo.
+	}\\
+	\hline
+	\hline
+\end{tabular}
+\end{center}
+\end{table}
+
+Como se ha comprobado en las numerosas pruebas, la plataforma RLF 
+\emph{Prototype 1} ha superado los objetivos de estabilidad y 
+seguridad. Por supuesto, para obtener una versión completa para el 
+mercado, ha de someterse a pruebas de estrés mucho más severas. Al 
+estar tratando con un sistema crítico donde los errores pueden suponer 
+un gasto en reparaciones bastante importante, es necesario un control 
+de calidad exhaustivo y de gran precisión.
+
+\cleardoublepage
+

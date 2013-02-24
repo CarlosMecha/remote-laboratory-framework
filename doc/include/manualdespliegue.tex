@@ -1,0 +1,306 @@
+% Apéndice: Manual de despliegue
+
+\capitulo{Guía de despliegue}{despliegue}{
+RLF está compuesto de varios módulos que trabajan conjuntamente como 
+una única entidad, pero para eso, se requieren un conjunto de pasos 
+que los \emph{orquestan} al inicio.
+}
+
+\section*{Plataforma Java}
+Debido \index{Java} a que es un requisito en \textbf{cualquier} máquina de la 
+plataforma RLF, es necesario instalarla antes que cualquier otro 
+componente que se describe a continuación. Se pueden obtener de los 
+siguientes enlaces:
+
+\textit{Windows, Java 6 JRE}
+\begin{itemize}
+\item Descarga: \texttt{http://java.com/es/download/}
+\item Manual: \texttt{http://java.com/es/download/help/index\_installing.xml}
+\end{itemize}
+
+\textit{Linux, Java 6 JDK}
+\begin{itemize}
+\item Descarga: \texttt{http://www.oracle.com/technetwork/java/javase/downloads/index.html}
+\item Manual: \texttt{http://www.guia-ubuntu.org/index.php?title=Java}
+\end{itemize}
+
+\section*{Proveedor y monitor}
+Estos dos módulos están originalmente creados para entornos Linux, 
+aunque debido a las tecnologías usadas, pueden ser instalados en 
+Windows. Sólo se explicará cómo ponerlos en funcionamiento en una 
+distribución Linux.
+
+Se componen de una base de datos principal en MySQL y de dos servicios 
+web contenidos en el mismo paquete para su acceso externo. A 
+continuación se muestran los pasos necesarios para incluirlos en el 
+sistema.
+
+\subsection*{Base de datos}
+Se requerirá instalar los paquetes que proveen la plataforma MySQL 
+completa. Para ello se echará mano del gestor de aplicaciones 
+incluidos en las distintas distribuciones Linux. Los paquetes a 
+instalar son los siguientes:
+
+\textit{MySQL 5.1}
+
+\begin{itemize}
+\item \texttt{mysql-common} Paquete general de la plataforma MySQL.
+\item \texttt{mysql-server} Contiene todo lo necesario para contener 
+un servidor de base de datos.
+\item \texttt{mysql-admin} Aplicación para la cómoda creación de 
+usuarios y realización de \emph{backups} entre otros.
+\item \texttt{mysql-client} Herramientas necesarias para el acceso a 
+bases de datos MySQL.
+\item \texttt{mysql-query-browser} La solución más cómoda que aporta 
+MySQL para el manejo de los datos y creación de tablas en la base de 
+datos.
+\end{itemize}
+
+\textbf{NOTA:} Es recomendable que la base de datos esté en la misma 
+máquina que el servidor web ya que están configurados por defecto 
+para acceder a una base de datos local, aunque se incluye en la 
+sección de este mismo manual cómo configurar los servicios web para 
+poder acceder a la base de datos de forma desacoplada.
+
+Una vez instalados estos paquetes, será necesario configurar el 
+servidor para atender las peticiones, en ello se asignará su IP de 
+escucha y un puerto que será necesario para que cualquier parte de RLF 
+acceda al proveedor. Véase para realizar esta configuración inicial:
+
+\begin{verbatim}
+http://dev.mysql.com/doc/refman/5.0/es/unix-post-installation.html
+\end{verbatim}
+
+Una vez el servidor esté completo con la base de datos activa, tocará 
+el turno de aportarle información. Mediante \emph{MySQL Query Browser} 
+se creará un esquema nuevo llamado ``rlf''. Después se desplegarán 
+los \emph{scripts} que crean todas las tablas necesarias, se 
+encuentran en la carpeta \emph{rlf/src/sql} y son el conjunto de 
+archivos indicados en el fichero \emph{makedb.sql}.
+
+\subsubsection*{Creación de usuarios.}
+Cuando se pueda disponer de la base de datos, se recomienda crear los 
+usuarios de acceso a la misma. Mínimo se requiere un administrador 
+general, uno para el servicio web y uno por cada laboratorio que se 
+vaya a disponer. Se podrá realizar mediante el programa instalado 
+anteriormente \emph{MySQL Administrator}. Los permisos necesarios para 
+el usuario del proveedor y de los laboratorios son los siguientes:
+
+En el esquema ``mysql'':
+\begin{itemize}
+\item \emph{SELECT}
+\end{itemize}
+
+En el esquema ``rlf'':
+\begin{itemize}
+\item \emph{SELECT}
+\item \emph{INSERT}
+\item \emph{UPDATE}
+\item \emph{DELETE}
+\item \emph{REFERENCES}
+\item \emph{LOCK\_TABLES}
+\item \emph{EXECUTE}
+\end{itemize}
+
+Mientras que el usuario administrador tendrá todos los permisos en 
+todos los esquemas disponibles.
+
+\subsection*{Los servicios web}
+Una vez que la base de datos está creada, es necesario instalar el 
+servidor que permite ejecutar aplicaciones web. Se ha seleccionado la 
+plataforma Tomcat que viene disponible con el IDE NetBeans de 
+desarrollo en J2EE.
+
+Antes de poder desplegar la aplicación, se requiere modificar el 
+código de acceso a la base de datos del servicio web. Para ello, se 
+utilizará el IDE NetBeans que se puede descargar de 
+\texttt{http://netbeans.org/}, y se importará el proyecto contenido en 
+\emph{rlf/projects/netbeans/RLF\_Provider}. A continuación se modifica la 
+clase ``Database.java'':
+
+\begin{verbatim}
+/** Localización de la base de datos del proveedor. */
+public final static String DATABASE = "jdbc:mysql://<IP>:<PUERTO>/rlf";
+/** Usuario de acceso a la base de datos. */
+private static String USER = <USUARIO PROVEEDOR>;
+/** Contraseña del usuario. */
+private static String PASS = <CONTRASEÑA>;
+\end{verbatim}
+
+Una vez modificado esto, se compilará el proyecto obteniendo como 
+resultado un archivo ``Provider.war''. Después se instalará el 
+programa Tomcat mediante los siguientes paquetes:
+
+\emph{Tomcat 6.0} \index{Tomcat}
+
+\begin{itemize}
+\item \texttt{tomcat6} Paquete general de la plataforma Tomcat.
+\item \texttt{tomcat6-admin} Aplicación para navegador que permite la 
+configuración del sistema de manera muy sencilla.
+\end{itemize}
+
+Es necesario asignarle una IP y un puerto de escucha. Serán estos 
+parámetros los que luego se configurarán en los clientes. Se puede 
+obtener información de como configurar Tomcat en el siguiente enlace 
+oficial:
+
+\begin{verbatim}
+http://tomcat.apache.org/tomcat-6.0-doc/setup.html
+\end{verbatim}
+
+Por último se copiará el archivo generado anteriormente en la carpeta 
+\emph{webapps} donde se haya instalado Tomcat. A partir de ese momento 
+se puede acceder al monitor y al proveedor por medio de web o de los 
+clientes, aunque no habrá aún usuarios RLF introducidos. Las rutas 
+típicas de acceso a estos dos servicios pueden ser:
+
+\begin{verbatim}
+http://<IP>:<PUERTO>/RLF/Provider
+http://<IP>:<PUERTO>/RLF/Monitor
+\end{verbatim}
+
+\section*{Laboratorios}
+Una vez instalada la máquina virtual de Java, no es necesario instalar 
+ningún componente más. Conviene copiar todos los archivos contenidos en 
+\emph{rlf/bin/lab} (\emph{rlf\textbackslash bin\textbackslash lab} en 
+Windows) a otra carpeta y configurar el laboratorio modificando el 
+fichero \emph{res/lab.conf} (o \emph{res\textbackslash lab.conf} en 
+Windows) de la siguiente forma:
+
+\begin{verbatim}
+lab_name=<NOMBRE ÚNICO DEL LABORATORIO>
+user=<USUARIO DE LA BASE DE DATOS>
+pass=<CONTRASEÑA>
+provider_host=<IP DE LA BASE DE DATOS DEL PROVEEDOR>
+provider_port=<PUERTO DE LA BASE DE DATOS DEL PROVEEDOR>
+labmanager_request_port=<PUERTO GENERAL DEL LABORATORIO. DLF=6400>
+client_request_port=<PUERTO DE COMUNICACIONES 1. DFL=6401>
+client_notification_port=<PUERTO DE COMUNICACIONES 2. DFL=6402>
+provider_request_port=<PUERTO DE COMUNICACIONES 3. DFL=6403>
+max_process=<NÚMERO MÁXIMO DE PROCESOS EN EJECUCIÓN. DFL=4>
+\end{verbatim}
+
+Es importante apuntar el puerto general del laboratorio ya que es 
+necesario para su configuración mediante LabConsole (véase Manual de 
+mantenimiento).
+
+\subsection*{Insertar el laboratorio en el proveedor}
+Para que los laboratorios puedan utilizar correctamente el proveedor, 
+deben ser introducidos en la base de datos de este. Para ello es 
+necesario obtener la IP de la máquina donde se ejecuta. Por cada 
+laboratorio, se insertará en la base de datos central la siguiente 
+sentencia SQL:
+
+\begin{verbatim}
+INSERT INTO lab (name, host, description) VALUES ('nombre', 'ip', 'descripción');
+\end{verbatim}
+
+\subsection*{Ejecutar el laboratorio}
+Para iniciar el laboratorio sólo es necesario acceder a la carpeta 
+contenedora y ejecutar el fichero ``lab.jar'' aunque es recomendable 
+utilizar la terminal que disponga el sistema operativo para obtener 
+posibles errores (aparte de los que aparezcan en el \emph{log}). Se 
+podrá realizar esto mediante el siguiente comando, válido tanto en la 
+terminal de Linux como en el CMD de Windows:
+
+\begin{verbatim}
+java -jar <ruta>/lab.jar
+\end{verbatim}
+
+\section*{Herramientas}
+El despliegue de las herramientas sólo es referido a las que han sido 
+entregadas con este proyecto. Para crear nuevas consultar el Manual de 
+desarrollo y el Manual de mantenimiento.
+
+\subsection*{Configuración inicial}
+Para que las herramientas funcionen se ha de modificar las rutas 
+contenidas en sus ficheros de configuración XML. También puede ser 
+necesario cambiar algún parámetro de estas que dependa del sistema 
+(como por ejemplo, en el caso de RLF\_Video la IP de acceso). Después, 
+se podrán registrar (ver Manual de administrador) y obtener la clave 
+única, que se incluirá en el código y posteriormente se compilarán. 
+Se ha añadido los proyectos para los distintos IDEs de las 
+herramientas para poder ser compilados (y arregladas las dependencias) 
+sin dificultad.
+
+\subsection*{Componentes necesarios}
+Algunas herramientas necesitan de componentes instalados externos que 
+se citan a continuación.
+
+\begin{itemize}
+\item \textbf{RLF\_DummyTool:} Ninguno.
+\item \textbf{RLF\_Music:}
+	\begin{itemize}
+	\item Es necesario el programa para linux MPG123 que se puede 
+	obtener del paquete con el mismo nombre.
+	\item El paquete de desarrollo \emph{libsqlite-dev}.
+	\end{itemize}
+\item \textbf{RLF\_Video:}
+	\begin{itemize}
+	\item Utiliza el programa VLC que se obtiene de los repositorios 
+	oficiales de la distribución bajo el paquete con el mismo nombre.
+	\item El driver necesario para utilizar la cámara web en Linux.
+	\end{itemize}
+\item \textbf{RLF\_FreeMem:}
+	\begin{itemize}
+	\item Requiere la librería System.Data.SQLite instalada en el 
+	sistema, que se puede obtener de 
+	\texttt{http://sqlite.phxsoftware.com/}.
+	\end{itemize}
+\item \textbf{RLF\_Board:}
+	\begin{itemize}
+	\item También requiere la librería System.Data.SQLite.
+	\item Necesita los drivers para la tarjeta asociada 
+	(\texttt{http://www.advantech.com/}). Es recomendable 
+	que se recompile resolviendo las dependencias de estas librerías 
+	ya que no pueden incluirse en el propio ejecutable.
+	\end{itemize}
+\end{itemize}
+
+\section*{Usuarios de RLF}
+Para que se pueda usar y administrar la plataforma, es necesario dar 
+de alta a los usuarios de la misma.
+
+\subsection*{Administradores}
+Serán los encargados de mantener las herramientas, así como 
+eliminarlas y registrarlas. Además utilizan el programa LabConsole 
+para manejar los distintos laboratorios. Para dar de alta a un 
+administrador en el sistema es requerido insertar esta sentencia SQL 
+en la base de datos de proveedor:
+
+\begin{verbatim}
+INSERT INTO user (user, hash_pass, email) 
+         VALUES ('nombre', SHA1('contraseña'), 'email');
+INSERT INTO admin (name, tlf)
+         VALUES ('nombre', 'teléfono');
+\end{verbatim}
+
+A partir de aquí ya podrá realizar dichas tareas.
+
+\subsection*{Clientes}
+Podrán usar el monitor web y el cliente de escritorio. Son los 
+usuarios finales de RLF. Tienen asociado un tiempo máximo de 
+reserva de herramientas (a discreción de los administradores, 
+generalmente una hora) y un rol que les permite acceder a herramientas 
+de mayor nivel o menos (el rol \index{rol} 0 es el más básico y según aumenta es 
+más restrictivo). Se deberá añadir estas sentencias SQL al proveedor:
+
+\begin{verbatim}
+INSERT INTO user (user, hash_pass, email)
+         VALUES ('nombre', SHA1('contraseña'), 'email');
+INSERT INTO client (name, timeout, role)
+         VALUES ('nombre', tiempo, rol);
+\end{verbatim}
+
+\textbf{NOTA:} Un administrador no incluye el rol de cliente, por lo 
+que si se requiere un usuario con ambos perfiles, habrá que darlo de 
+alta en cada perfil por separado de esta forma:
+
+\begin{verbatim}
+INSERT INTO user (user, hash_pass, email)
+         VALUES ('nombre', SHA1('contraseña'), 'email');
+INSERT INTO admin (name, tlf)
+         VALUES ('nombre', 'teléfono');
+INSERT INTO client (name, timeout, role)
+         VALUES ('nombre', tiempo, rol);
+\end{verbatim}

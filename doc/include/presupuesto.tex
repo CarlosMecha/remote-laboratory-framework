@@ -1,0 +1,268 @@
+% Apéndice: Presupuesto
+
+\capitulo{Presupuesto}{presupuesto}{
+La versatilidad aportada a este proyecto reduce en gran medida 
+los gastos necesarios para el despliegue del mismo. Se adjunta a 
+continuación un presupuesto aproximado dependiendo de las necesidades 
+actuales del lugar de trabajo o enseñanza. Todos los precios aquí 
+recogidos datan de Septiembre de 2011.
+}
+
+\section*{Costes de desarrollo}
+No son necesarios para el despliegue pero cuantifican la cantidad de 
+trabajo empleada para la creación de la plataforma, así con su 
+diseño y documentación. 
+
+\subsection*{Coste de personal}
+Este cálculo se realiza atendiendo a la planificación que se incluyó 
+en la tabla \ref{tab:planificacion} del capítulo introductorio. El 
+precio por hora está estimado según los sueldos en Septiembre de 2011 
+en Madrid:
+
+\begin{table}[H]
+\begin{center}
+\begin{tabular*}{12cm}{|| p{8.5cm} @{\extracolsep{\fill}} | r ||}
+	\hline
+	\hline
+	Concepto & Coste en \euro\\
+	\hline
+	\hline
+	Ing. Informático por hora & 30,00\\
+	Corrector de documentación por hora & 17,00\\
+	\hline
+	\textbf{TOTAL} & 44.210,00\\
+	\hline
+	\hline
+\end{tabular*}
+\end{center}
+	\caption{Coste de personal}
+	\label{coste:personal}
+\end{table}
+
+
+\subsection*{Costes de material para el desarrollo}
+Algunos de estos precios no son por la compra del producto (señalados 
+con \# ), si no por el gasto aproximado en el uso del material.
+
+\begin{table}[H]
+\begin{center}
+\begin{tabular*}{12cm}{|| p{8.5cm} @{\extracolsep{\fill}} | r ||}
+	\hline
+	\hline
+	Concepto & Coste en \euro\\
+	\hline
+	\hline
+	Servidor primario \# & 180,00\\
+	Servidor secundario \# & 120,00\\
+	Ordenador portátil \# & 120,00\\
+	Dispositivo móvil & 169,00\\
+	Sistema operativo Windows 7 Professional & 0,00\\
+	Sistema operativo Windows XP Professional & 0,00\\
+	Sistema operativo Unix & 0,00\\
+	Base de datos MySQL & 0,00\\
+	Base de datos SQLite & 0,00\\
+	Servidor de aplicaciones Tomcat o JBoss & 0,00\\
+	Cámara web & 13,50\\
+	Micrófono & 6,99\\
+	Advantech PCI-1711-BE \# & 60,00\\
+	Altavoces doble canal & 29,50\\
+	\hline
+	\textbf{TOTAL} & 698,99\\
+	\hline
+	\hline
+\end{tabular*}
+\end{center}
+	\caption{Coste material para el desarrollo}
+	\label{coste:matdesarrollo}
+\end{table}
+
+Deduciéndose como coste total del desarrollo:
+
+\begin{table}[H]
+\begin{center}
+\begin{tabular*}{12cm}{|| p{8.5cm} @{\extracolsep{\fill}} | r ||}
+	\hline
+	\hline
+	Concepto & Coste en \euro\\
+	\hline
+	\hline
+	Coste personal & 44.210,00\\
+	Coste material & 698,99\\
+	\hline
+	\textbf{TOTAL} & 44.908,99\\
+	\hline
+	\hline
+\end{tabular*}
+\end{center}
+	\caption{Coste total de desarrollo}
+	\label{coste:totaldesarrollo}
+\end{table}
+
+\section*{Costes generales de mantenimiento}
+Estos costes están asumidos para el despliegue de la plataforma, 
+contando que su distribución se encuentre en la misma red local, 
+aunque el número de nodos es indiferente.
+
+\begin{table}[H]
+\begin{center}
+\begin{tabular*}{12cm}{|| p{8.5cm} @{\extracolsep{\fill}} | r ||}
+	\hline
+	\hline
+	Concepto & Coste anual en \euro\\
+	\hline
+	\hline
+	Línea de alta velocidad empresarial, \emph{Movistar} & 840,00\\
+	Suministro eléctrico, \emph{Endesa} & 1.200,00\\
+	Seguridad física y de datos, \emph{Movistar} & 600,00\\
+	Coste estimado en reparaciones & 400,00\\
+	\hline
+	\textbf{TOTAL} & 3.040,00\\
+	\hline
+	\hline
+\end{tabular*}
+\end{center}
+	\caption[Costes generales]{Costes aproximados de servicios 
+	requeridos.}
+	\label{coste:general}
+\end{table}
+
+Debido a que los componentes \hardware tienen más uso que aquellos con 
+un limitado tiempo de acceso diario que se pueden encontrar en las 
+universidades o puestos de trabajo, se asume un incremento en el coste 
+de reparación anual.
+
+\section*{Coste material por componentes}
+A pesar de que todos los componentes de RLF pueden estar contenidos en 
+la misma máquina, se especifican los costes de cada uno por separado, 
+después se incluyen configuraciones estándar con su inversión 
+correspondiente.
+
+\subsection*{Proveedor y monitor}
+Servidor \index{servidor} central de toda la plataforma, es la máquina con más 
+prestaciones de todo el conjunto. Sus sistema es Unix y no requiere de 
+ningún programa de pago debeido a su configuración estándar. Puede 
+desdoblarse si se requiere para obtener una mayor velocidad y 
+potencia, quedando un servidor con mayor capacidad para el proveedor y 
+uno con menos para el monitor.
+
+\begin{table}[H]
+\begin{center}
+\begin{tabular*}{12cm}{|| p{8.5cm} @{\extracolsep{\fill}} | r ||}
+	\hline
+	\hline
+	Concepto & Coste en \euro\\
+	\hline
+	\hline
+	PowerEdge T410 Tower Server, \emph{Dell} & 1.217,00\\
+	\{Latitude 13 (Terminal portatil de acceso), \emph{Dell}\} & \{619,00\}\\
+	Router (Incluido en el contrato de la línea) & 0,00\\
+	Sistema de alimentación ininterrumpida (SAI) & 79,90\\
+	Sistema operativo Unix & 0,00\\
+	Base de datos MySQL & 0,00\\
+	Servidor de aplicaciones Tomcat o JBoss & 0,00\\
+	\hline
+	\textbf{TOTAL} & 1.296,90\\
+	\textbf{TOTAL \{con terminal de acceso\}} & 1.915,90\\
+	\hline
+	\hline
+\end{tabular*}
+\end{center}
+	\caption[Coste del proveedor y monitor]{Costes aproximados de un 
+	proveedor con monitor estándar.}
+	\label{coste:proveedor}
+\end{table}
+
+Si se desea cobrar por los servicios de esta plataforma, se deberá 
+pagar la licencia de MySQL y J2EE a Oracle. La terminal de acceso es 
+un ordenador portatil de prestaciones medias con sistema operativo 
+Unix. Es opcional y sólo se requiere uno por sistema RLF.
+
+\subsection*{Laboratorio}
+Por cada laboratorio en la plataforma se tiene que aplicar este coste. 
+Dependiendo del sistema se deberá pagar la licencia de Windows.
+
+\begin{table}[H]
+\begin{center}
+\begin{tabular*}{12cm}{|| p{8.5cm} @{\extracolsep{\fill}} | r ||}
+	\hline
+	\hline
+	Concepto & Coste en \euro\\
+	\hline
+	\hline
+	PowerEdge T110, \emph{Dell} & 378,00\\
+	Sistema operativo Unix & 0,00\\
+	\{Sistema operativo Windows 7 Professional\} & \{149,99\}\\
+	Base de datos SQLite & 0,00\\
+	\hline
+	\textbf{TOTAL} & 378,00\\
+	\textbf{TOTAL \{con Windows\}} & 527,99\\
+	\hline
+	\hline
+\end{tabular*}
+\end{center}
+	\caption[Coste por laboratorio]{Costes aproximados por cada 
+	laboratorio.}
+	\label{coste:laboratorio}
+\end{table}
+
+\clearpage
+
+\subsection*{Herramientas}
+
+\begin{table}[H]
+\begin{center}
+\begin{tabular*}{12cm}{|| p{8.5cm} @{\extracolsep{\fill}} | r ||}
+	\hline
+	\hline
+	Concepto & Coste en \euro\\
+	\hline
+	\hline
+	eLight HD 720p Webcam, \emph{Trust} & 79,00\\
+	Advantech PCI-1711-BE & 499,00\\
+	Altavoces doble canal & 29,50\\
+	\hline
+	\textbf{TOTAL} & 607,50\\
+	\hline
+	\hline
+\end{tabular*}
+\end{center}
+	\caption[Costes de herramientas]{Costes aproximados de las 
+	herramientas entregadas.}
+	\label{coste:herramientas}
+\end{table}
+
+\textbf{NOTA:} Aquí sólo se recogen los gastos de las herramientas 
+entregadas junto con este proyecto.
+
+\section*{Ejemplo de un sistema estándar}
+
+Se compone de un proveedor central, un laboratorio de Unix y otro de 
+Windows. Todos en diferentes máquinas y con todas las herramientas 
+entregadas en uso. No es necesario una terminal de acceso, ya que el 
+proveedor cuenta con ella.
+
+\begin{table}[H]
+\begin{center}
+\begin{tabular*}{12cm}{|| p{8.5cm} @{\extracolsep{\fill}} | r ||}
+	\hline
+	\hline
+	Concepto & Coste en \euro\\
+	\hline
+	\hline
+	Gastos generales (al año) & 3.040,00\\
+	Proveedor & 1.296,90\\
+	Laboratorio Windows & 527,99\\
+	Laboratorio Linux & 378,00\\
+	Herramientas & 607,50\\
+	\hline
+	\textbf{TOTAL} & 5850,39\\
+	\hline
+	\hline
+\end{tabular*}
+\end{center}
+	\caption[Presupuesto de un sistema estándar]{Presupuesto 
+	aproximado de un sistema estándar.}
+	\label{coste:sistema}
+\end{table}
+
+\cleardoublepage

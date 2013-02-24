@@ -1,0 +1,284 @@
+% Introducción
+
+\capitulo{Introducción}{introduccion}{
+La finalidad de este capítulo es dar a conocer el contenido de este 
+libro, así como un primer encuentro con el proyecto. Tratado como una 
+pequeña introducción, los conceptos novedosos serán explicados en 
+capítulos posteriores.
+}
+
+\section{Introducción}
+
+Este proyecto se inicia como parte de una solución a problemas 
+concretos en la evolución tecnológica. Desde hace años, el mundo 
+está inmerso en un constante cambio impulsado por el desarrollo de una 
+parte de la ciencia, la cual sirve como base a innumerables 
+campos. Tan amplio es el efecto, que no se concibe, en la actualidad, 
+la vida sin ella. Ésta es la ciencia de la información.
+
+Todo lo que implica una revolución como ésta se ve reflejado en el 
+pensamiento de los nuevos científicos, ingenieros, estudiosos y 
+empresarios, los cuales han tenido que adaptar sus ideas a esta nueva 
+situación. Éstas son las que ahora, y en el futuro, resolverán 
+los problemas que surgen como consecuencia directa del cambio sometido.
+
+La idea (o proyecto), que en las posteriores páginas de este documento es 
+explicada, no es más que una de las miles que intentan ayudar a esa 
+evolución sin retorno, asegurando que será la base para otras 
+soluciones. Se dará como nombre \emph{Remote Laboratory Framework} 
+(versión \emph{Prototype}) a este proyecto.
+
+Se empieza, entonces, con los motivos y características que han 
+gestado esta idea, así como su análisis y diseño, y, por último, su 
+implementación en la vida real.
+
+\section{Motivación del proyecto}
+
+La ciencia de la información ha contribuido al desarrollo de otros 
+campos (no sólo en el ambiente tecnológico) y al aumento de 
+necesidades concretas. Yendo a las partes más básicas de la vida 
+cotidiana, la educación y el trabajo se han visto afectados 
+directamente, siendo parte del problema y de la solución.
+
+De tal modo es así que como al cabo de los años de estudio, un alumno se enfrenta a 
+numerosos problemas relacionados con ambos campos, independientemente 
+del tipo de estudios cursados. Las innumerables horas dedicadas al 
+desarrollo y aplicación de los conocimientos adquiridos hacen que las 
+ideas surjan como una respuesta lógica a estos mismos problemas.
+
+Pero este proyecto se centrará en dos problemas concretos que hasta hace 
+unos años, no tenían aparente solución:
+
+El primero es la \textbf{dependencia} que se tiene en los modelos de educación 
+y de trabajo actuales respecto a los lugares donde se desarrollan 
+estas actividades. Los traslados pueden llegar a copar gran parte del 
+tiempo en un estudiante o trabajador, el cual, la mayor parte es 
+improductivo. Cabe decir que se realizan esfuerzos por parte de las 
+organizaciones involucradas para intentar eliminar esta gran 
+dependencia creando herramientas de comunicación y sistemas 
+automatizados remotos. Siendo soluciones válidas, aún quedan muchos 
+campos por tratar, como es el caso de las herramientas de trabajo 
+electrónicas, desde ordenadores, máquinas y componentes mećanicos 
+entre otros, dispuestos en un lugar concreto, donde el personal debe 
+desplazarse obligatoriamente para poder usarlos. \emph{El problema de 
+la dependencia física de las herramientas de trabajo.}
+
+El segundo problema se centra más en la \textbf{variedad} de estas 
+herramientas. Cada empresa vende sus productos a estos centros y 
+organizaciones cerrando el paso a la competencia, lo que conlleva a 
+que cada uno de estos sea incompatible (en mayor o menor medida) con 
+los desarrollados por otras empresas. Esto obliga a los estudiantes y 
+trabajadores a aprender como se usa cada producto, incluso cuando su 
+funcionalidad es la misma, con el gasto de tiempo y esfuerzo que esto 
+requiere. Se acentúa aún más en las herramientas \emph{software}, 
+donde, sin seguir ningún estándar, fuerzan al usuario a cambiar su 
+forma de trabajo. \emph{El problema de la heterogeneidad de los 
+componentes tecnológicos.}
+
+Cualquier intento de solventar el primer problema se enfrenta con el 
+segundo de manera irremediable, obligando a que cada solución sea 
+específica para un producto en concreto.
+
+Paralelamente, el avance tecnológico desarrolla el concepto de 
+``la gran red'', Internet, que se muestra como aliciente para 
+solventar dichos problemas. Esta gran tecnología permite lidiar con el 
+problema de la dependencia, y las herramientas surgidas de ella, como 
+las grandes plataformas de trabajo apuntan al problema de la variedad.
+
+A partir de aquí, se puede extender el concepto de este proyecto a 
+otros campos sin aparente relación. En la ingeniería, con sistemas 
+complejos compuestos por multitud de componentes electrónicos y 
+tecnologías, es donde se invierten grandes fortunas en solventar estos 
+dos mismos problemas. Incluso, al aportar los avances tecnologicos a 
+campos donde anteriormente no se encontraban, como es el caso de la 
+arquitectura y construcción, aparecen dichos problemas.
+
+\section{Objetivos}
+
+Apuntando a unos objetivos concretos y bien definidos, el proyecto 
+tiene como finalidad solventar los dos problemas anteriormente 
+descritos. Como se verá a lo largo de este documento, se considerará 
+crear un sistema que permita principalmente:
+
+\begin{itemize}
+\item Acceder a un conjunto de recursos heterogéneos de manera remota, 
+es decir, sin necesidad de estar físicamente donde se encuentran. 
+\item Conseguir un sistema distribuido que sea visto como un único 
+componente por parte del usuario.
+\item Incluir la posibilidad de ampliar el sistema de forma escalable 
+sin que suponga el desarrollo desde cero.
+\end{itemize}
+
+Si se ponen en práctica estos objetivos, se obtendrá una 
+\emph{plataforma} que permita la eliminación de muchos sistemas 
+dedicados, así como su ahorro, en ambientes de trabajo donde se 
+requiera utilizar recursos físicos electrónicos, aplicándose 
+también a recursos didácticos en universidades o escuelas. 
+De este modo se minimizará el tiempo que se requiere para su uso y el tiempo 
+que estas herramientas permanecen \emph{ociosas}. Para cumplir estos 
+objetivos, es necesario atacar un conjunto metas más desgranadas que 
+atienden a objetivos sencundarios. 
+
+\begin{itemize}
+\item Permitir al usuario manejarlos de igual manera que si lo hiciera 
+de forma local.
+\item Dar cabida a recursos de diferentes tipos, 
+transformando esa heterogeneidad en una aparente homogeneidad.
+\item Eliminar las dependencias de los recursos en cuanto a requisitos 
+propios de la plataforma, es decir, reducir al mínimo las especificaciones 
+de funcionamiento de cada recurso.
+\item Automatizar todo el proceso de la utilización de los recursos, de 
+forma que no requiera de intervención externa para el funcionamiento 
+normal del sistema, lo que hará que se pueda utilizar en cualquier 
+momento, incluso fuera de horarios de trabajo o lectivos.
+\item Ayudar a que las posteriores modificaciones del sistema sean de 
+forma controlada y manteniendo, en la medida de lo posible, la 
+coherencia del proyecto original.
+\end{itemize}
+
+Desde el punto de vista de la creación de nuevos recursos, se 
+establecieron unas normas y requisitos para poder salvar esa 
+heterogeneidad.
+
+Como conclusión, se dirá que se ha creado un sistema distribuido 
+manejado por un \index{\emph{middleware}}\emph{middleware}  
+\footnote{Capa de \emph{software} que se ejecuta sobre el sistema operativo 
+que permite manejar una red de computadoras como un sistema único 
+\cite{Tanenbaum}} que a la vez se comporte como un 
+\emph{framework} \footnote{(Plataforma, entorno, marco de trabajo). 
+Desde el punto de vista del desarrollo de \emph{software}, es una 
+estructura de soporte definida, en la cual otro proyecto de 
+\emph{software} puede ser organizado y desarrollado. \cite{Alegsa}} 
+para la creación, distribución y uso de nuevos recursos tecnológicos.
+
+\section{Planificación}
+
+Debido a la gran cantidad de trabajo que supone el desarrollo de este 
+proyecto, es necesario establecer una planificación \emph{a priori} que 
+defina cómo abordar tales problemas.
+
+Siendo la parte más importante el análisis y diseño, se realizará 
+en primer lugar la recolección de requisitos definidos en primera 
+instancia por el cliente y los usuarios, con su posterior tratamiento y 
+desarrollo.
+
+En segundo lugar el diseño completo del sistema, a partir de dichos 
+requisitos dará lugar a las especificaciones necesarias para empezar 
+el desarrollo del mismo.
+
+\begin{table}[H]
+\begin{center}
+\begin{tabular}{|| l | c | r ||}
+	\hline
+	\hline
+	Tarea & Etapa & Horas estimadas\\
+	\hline
+	\hline
+	Planteamiento inicial & Análisis y diseño & 16\\
+	Aceptación del proyecto & Análisis y diseño & 4\\
+	Primera toma de requisitos & Análisis y diseño & 8\\
+	Revisión de requisitos & Análisis y diseño & 8\\
+	Toma de requisitos & Análisis y diseño & 20\\
+	Aceptación de requisitos & Análisis y diseño & 8\\
+	Investigación y Diseño & Análisis y diseño & 120\\
+	Aceptación del diseño & Análisis y diseño & 4\\
+	Desarrollo & Desarrollo & 1100\\
+	Verificación y pruebas & Pruebas & 40\\
+	Aceptación del sistema & Pruebas & 4\\
+	Documentación & Documentación  & 116\\
+	Presentación del proyecto & Presentación & 20\\
+	\hline
+	& \textbf{Total} & 1468\\
+	\hline
+	\hline
+\end{tabular}
+\end{center}
+	\caption[Planificación del proyecto]{Planificación de las tareas.}
+	\label{tab:planificacion}
+\end{table}
+
+A continuación, se procederá a poner en práctica el diseño 
+obtenido, siendo fieles a lo anteriormente establecido. Esto 
+comprenderá desde el desarrollo del código necesario hasta las 
+posteriores remodelaciones.
+
+Después, con las primeras versiones del sistema, se procederá a 
+realizar los \emph{test} necesarios que verifiquen el buen 
+funcionamiento del mismo, en diversas situaciones y sobre múltiples 
+estados. Debido a que en esta etapa puede surgir la necesidad de 
+modificar el desarrollo del mismo, es posible que se deba retroceder 
+de forma cíclica para poder solventar los problemas y errores que 
+puedan aparecer.
+
+Además, realizarán múltiples revisiones sobre la documentación 
+creada durante todo el proceso para establecer su versión final.
+
+Por último, y con la versión final, tanto del sistema como de la 
+documentación, se expondrá el conjunto de los productos en una 
+presentación donde asistirá el cliente, los tutores que supervisarán 
+el desarrollo de todo el proyecto y un consejo de evaluación.
+
+El recuento de horas se muestra en la tabla \ref{tab:planificacion} y 
+calendario propuesto para estas tareas, representado en un diagrama de 
+Gantt se encuentra en la figura \ref{fig:calendario} al final del capítulo.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[angle=270,scale=0.65]{images/gantt.png}
+	\caption[Calendario de tareas]{Calendario por semanas de las 
+	tareas realizadas.}
+	\label{fig:calendario}
+\end{figure}
+
+\section{Contenido}
+
+La documentación que aquí se presenta viene estructurada de forma que 
+siga los mismos pasos de la planificación anteriormente descrita:
+
+\begin{description}
+\item[Capítulo 1 - Introducción:] Sirve como ayuda para poder 
+comprender la motivación de este proyecto, así como los objetivos que 
+se desean alcanzar.
+\item[Capítulo 2 - Estado arte:] Este capítulo de especial importancia 
+da una visión general de las tecnologías usadas, así como la 
+evolución que ha permitido el desarrollo del sistema. En las 
+diferentes secciones se explicará cada concepto de importancia 
+utilizado en este.
+\item[Capítulo 3 - Análisis:] Mostrará el conjunto de los requisitos y 
+especificaciones concretas que son necesarias para poder llevar a cabo 
+correctamente esta idea.
+\item[Capítulo 4 - Diseño:] Agrupa todas las soluciones propuestas a 
+las anteriores especificaciones, así como la forma de actuar para 
+desarrollar el proyecto.
+\item[Capítulo 5 - Pruebas:] Especifica las diferentes situaciones 
+controladas a las que se someterá el sistema para comprobar el 
+correcto funcionamiento, así como los resultados obtenidos.
+\item[Capítulo 6 - Problemas y conclusión:] Se especificarán los 
+problemas más importantes que se han encontrado en el desarrollo del 
+proyecto y una breve conclusión.
+\end{description}
+
+Además, se incluyen unos anexos para la correcta utilización y 
+comprensión del sistema.
+
+\begin{description}
+\item[Anexo A - Presupuesto:] Lista detallada de los costes que supone 
+implantar y mantener el sistema.
+\item[Anexo B - Guía de despliegue:] Instrucciones que se deberán 
+llevar a cabo para poder desplegar completamente el sistema en un 
+ambiente de trabajo.
+\item[Anexo C - Guía de mantenimiento:] Conjunto de directrices de 
+mantenimiento para administraciones de la plataforma.
+\item[Anexo D - Guía de desarrollo:] Primeras pautas para crear o 
+modificar módulos del propio sistema así como la creación de nuevas 
+herramientas.
+\item[Anexo E - Guía del usuario:] Destinado al usuario final de la 
+aplicación de escritorio y \emph{web}.
+\item[Anexo F - Material entregado:] Lista exhaustiva de todos los 
+componentes, guías y herramientas entregados a la finalización del 
+proyecto en su primer prototipo.
+\end{description}
+
+\cleardoublepage
+
+

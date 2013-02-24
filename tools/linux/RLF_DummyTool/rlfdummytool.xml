@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tool SYSTEM "/home/rodriguezmecha/Universidad/Proyecto/rlf/tools/tool.dtd" >
+<tool path="/home/rodriguezmecha/Universidad/Proyecto/rlf/tools/linux/RLF_DummyTool" data="false">
+	<in-stream/>
+	<out-stream/>
+	<attributes>
+		<name>RLF DummyTool</name>
+		<version>0.1</version>
+		<description>Ejecuciones básicas para realizar pruebas en Linux. Comprende dos acciones que ejecutan operaciones de entrada y salida por teclado y acceso a ficheros locales.</description>
+		<admin>carlos</admin>
+		<role>0</role>
+	</attributes>
+	<constants>
+	</constants>
+	<parameters>
+		<parameter name="exit_word" data-type="string">
+			<description>Palabra con la que salir del programa.</description>
+		</parameter>
+		<parameter name="nechos" data-type="int">
+			<description>Número de echos realizados.</description>
+		</parameter>
+	</parameters>
+	<actions>
+		<action name="echo" timeout="5">
+			<value>rlfdummytool --echo</value>
+			<description>Repite la entrada por teclado.</description>
+			<action_parameter name="exit_word" type="in"/>
+			<action_parameter name="nechos" type="out"/>
+		</action>
+		<action name="cpu-info" timeout="7">
+			<value>rlfdummytool --cpu</value>
+			<description>Obtiene información básica sobre el sistema (nombre de la máquina y memoria libre) bajo petición del usuario.</description>
+		</action>
+		<resetter>rlfdummytool --clean</resetter>
+	</actions>
+	
+</tool>

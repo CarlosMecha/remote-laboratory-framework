@@ -1,0 +1,157 @@
+% Diseño
+
+\capitulo{Diseño}{diseno}{
+En el siguiente capítulo se tratará el diseño de la plataforma RLF, 
+desde los primeros conceptos hasta la implementación. También se describirán 
+cada una de las partes involucradas en el funcionamiento del sistema.
+}
+
+\section{Arquitectura del sistema}
+El primer paso del diseño es, mediante la recopilación de 
+información para la anterior parte de análisis, la definición de la 
+arquitectura del sistema, es decir, sus componentes principales y la 
+forma de interacción entre ellos. Para ello se ha valido de un esquema 
+(figura \ref{fig:arquitectura}) que los identifica. Estos componentes 
+forman una estructura general de cliente/servidor o servidores 
+jerárquicos, aunque cada componente implementa en su interior otro 
+tipo de arquitecturas que se definirán más adelante.
+
+Siguiendo el orden de la parte superior a la inferior de dicha figura, 
+obtenemos los siguientes componentes:
+
+La plataforma se asienta sobre una base de datos central que contiene 
+la información general del sistema. Con ella, los diferentes 
+componentes obtienen la información actualizada de las acciones 
+tomadas y del estado global. Los laboratorios y el servidor web son 
+los componentes directamente relacionados con esta base.
+
+El servidor web actúa como la puerta de acceso a la plataforma RLF. 
+Está compuesto por dos servicios web (servicio proveedor y servicio 
+monitor) y una página web para el acceso a uno de ellos. El servicio 
+proveedor funciona como componente principal, y se encarga de tratar 
+las peticiones por parte de los clientes y darles acceso a los 
+distintos laboratorios.
+
+Los laboratorios conforman el esqueleto de la plataforma y funcionan 
+como gestores de peticiones de ejecución para las herramientas. 
+Contienen una base de datos local propia de cada laboratorio, pero 
+también se sirven de la base de datos central para informar del estado 
+al resto de componentes. Primero, el servidor web indica al 
+laboratorio los clientes válidos permitidos en el sistema, después 
+son los propios clientes los que contactan con él para que atienda sus 
+peticiones y empieza el intercambio de mensajes.
+
+También, laboratorios son gestionados externamente por los administradores 
+mediante un componente remoto (gestor de laboratorios) que no tiene 
+interacción con otros componentes de la plataforma. Con él se puede 
+arrancar los laboratorios, registrar herramientas y otras tareas de 
+mantenimiento.
+
+Al otro lado del sistema se encuentra el cliente de escritorio, que 
+permite acceder al usuario cliente a la plataforma. Provee de la 
+interfaz necesaria para manejar cada herramienta y realizar las 
+peticiones. Está relacionado con la interfaz que implementa el 
+servicio proveedor ya que realiza el acceso a través de ella.
+
+Como casos especiales, se encuentran las aplicaciones externas y los 
+servicios externos. No están directamente relacionados con la 
+plataforma ni implementados en la misma, aunque son parte importante 
+para el desarrollo de herramientas. Contienen su propias 
+comunicaciones y es el usuario cliente el encargado de acceder a los 
+servicios mediantes estas aplicaciones y son las herramientas las 
+encargadas de activarlos.
+
+Por último se tienen las herramientas y sus datos, que funcionan como 
+dos componentes por separados, ya que en realidad, esos datos 
+(contenidos en bases de datos locales) son los intermediarios entre 
+los laboratorios y las herramientas. Mediante funciones del sistema, 
+los laboratorios arrancan las aplicaciones de las herramientas, pero 
+es, mediante dichas bases de datos, donde intercambian información de 
+forma asíncrona.
+
+En el siguiente apartado se explicarán con detalle cada uno de los 
+componentes, indicando sus relaciones y sus funciones.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[angle=90,scale=0.7]{images/arquitectura.png}
+	\caption[Arquitectura de RLF]{Arquitectura de RLF según sus 
+	componentes.}
+	\label{fig:arquitectura}
+\end{figure}
+
+\clearpage
+
+\section{Diseño de componentes}
+
+Para comprender el conjunto de la plataforma, se dispone a explicar 
+cada componente por separado (y sus subcomponentes), incluyendo las 
+relaciones que tiene con otros. Las definiciones que se muestran a 
+continuación responden al estándar \emph{UML 1.1}. Se establece el mismo 
+orden que se siguió en el apartado anterior.
+
+\input{include/componentes}
+
+\section{Despliegue de componentes}
+
+Como última sección se presenta el despliegue de los componentes en 
+los distintos dispositivos o máquinas que son necesarios para el 
+funcionamiento del sistema, también se incluyen los entornos de 
+ejecución necesarios. Se puede ver en la figura \ref{fig:despliegue}, 
+siguiendo el estándar \emph{UML 1.1} el conjunto de componentes.
+
+Este esquema es orientativo ya que debido a la versatilidad de la 
+plataforma, todos los componentes pueden estar en el mismo nodo, o 
+convinaciones de ellos. En cambio, la multiplicidad de 
+cada relación entre los nodos sí que es obligatoria, haciendo 
+imposible tener en una misma plataforma RLF dos servidores centrales, 
+o que un mismo cliente esté conectado a dos plataformas con la misma 
+aplicación cliente. Para más información consultar el Manual de 
+despliegue contenido en esta misma documentación. 
+
+\textbf{NOTA:} Los elementos ``artifact'' representan las aplicaciones 
+finales que contienen a los componentes, referenciados mediante la 
+relación ``manifest''.
+
+En primera instancia se define el servidor central con la base de 
+datos de RLF sobre el entorno MySQL y los servicios en la plataforma 
+web Tomcat que soporta J2EE (ver sección \ref{subsubsec:j2ee}). A él 
+se pueden conectar dispositivos portátiles con navegadores (como 
+entorno de ejecución) para acceder a la página web de monitorización 
+que provee el servidor central.
+
+Después se encuentran los nodos que contienen los laboratorios. 
+Mediante la máquina virtual de java se ejecuta la aplicación 
+\emph{Lab} que contiene el componente principal del laboratorio. Con 
+SQLite se gestionan los datos de las herramientas. Y, dependiendo del 
+tipo de aplicación, se ejecutan las herramientas en el sistema 
+operativo, al igual que los servicios externos. Todos los elementos 
+necesarios para la ejecución de las acciones de las herramientas 
+tienen que estar contenidos en estos mismos nodos.
+
+El nodo cliente contiene todas las aplicaciones necesarias para poder 
+utilizar los servicios externos, además de la máquina virtual Java 
+para poder ejecutar el cliente de escritorio, llamado ``RLF\_Client''. 
+Este nodo debe tener conexión con la red del servidor central así 
+como acceso a los laboratorios.
+
+Por último, el gestor de laboratorios se encuentra en el terminal de 
+acceso a la red de los laboratorios. Al ser una aplicación Java, 
+necesitará la máquina virtual para que funcione.
+
+Los siguientes pasos en el desarrollo de la plataforma incluyen la 
+implementación y las pruebas. No se ha dedicado un capítulo exclusivo 
+para la implementación debido a que en el material entregado se 
+encuentran todas las referencias y definiciones necesarias para 
+comprenderla. Se podrá encontrar en el código, además, los 
+algoritmos y estructuras necesarias para el funcionamiento de la 
+plataforma RLF.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[angle=90,scale=0.7]{images/despliegue.png}
+	\caption[Despliegue de RLF]{Despliegue de RLF por componentes.}
+	\label{fig:despliegue}
+\end{figure}
+
+\cleardoublepage

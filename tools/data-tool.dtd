@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- Remote Laboratory Framework -->
+<!-- Definición de la estructura de una herramienta de datos en XML. -->
+<!-- @author Carlos A. Rodríguez Mecha -->
+<!-- @version 0.1 -->
+<!ELEMENT tool (out-stream?, attributes, constants, action, resetter)>
+	<!ATTLIST tool
+				path CDATA #REQUIRED
+				data CDATA #FIXED "true"
+	>
+	<!-- Streams del servicio. -->
+	<!ELEMENT out-stream EMPTY>
+	<!ELEMENT attributes (name, version, description, admin, role)>
+		<!ELEMENT name (#PCDATA)>
+		<!ELEMENT version (#PCDATA)>
+		<!ELEMENT description (#PCDATA)>
+		<!ELEMENT admin (#PCDATA)>
+		<!ELEMENT role (#PCDATA)>
+	<!-- Constantes, no pueden ser modificadas. -->
+	<!ELEMENT constants (constant*)>
+		<!ELEMENT constant (value, description)>
+			<!ATTLIST constant 
+						name NMTOKEN #REQUIRED
+						data-type (int|string|encode|long|double|boolean) "string"
+			>
+			<!ELEMENT value (#PCDATA)>
+	<!-- Acción principal. -->
+	<!ELEMENT action (value, description, socket*)>
+		<!ATTLIST action
+						name NMTOKEN #REQUIRED
+						timeout CDATA #REQUIRED
+		>
+		<!-- Sockets asociados a esta acción. -->
+		<!ELEMENT socket EMPTY>
+			<!ATTLIST socket
+						port CDATA #REQUIRED
+						protocol CDATA #REQUIRED
+						type (data|media|graph) "data"
+						mode CDATA #FIXED "r"
+			>
+	<!-- Acción especial para reseteo de la herramienta. -->
+	<!ELEMENT resetter (#PCDATA)>
+

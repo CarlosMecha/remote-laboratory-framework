@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- Remote Laboratory Framework -->
+<!-- Definición de la estructura de la herramienta  en XML. -->
+<!-- @author Carlos A. Rodríguez Mecha -->
+<!-- @version 0.1 -->
+<!ELEMENT tool (in-stream?, out-stream?, attributes, constants, parameters, actions)>
+	<!ATTLIST tool 
+				path CDATA #REQUIRED
+				data CDATA #FIXED "false"
+	>
+	<!-- Streams del servicio. -->
+	<!ELEMENT in-stream EMPTY>
+	<!ELEMENT out-stream EMPTY>
+	<!ELEMENT attributes (name, version, description, admin, role)>
+		<!ELEMENT name (#PCDATA)>
+		<!ELEMENT version (#PCDATA)>
+		<!ELEMENT description (#PCDATA)>
+		<!ELEMENT admin (#PCDATA)>
+		<!ELEMENT role (#PCDATA)>
+	<!-- Constantes, no pueden ser modificadas. -->
+	<!ELEMENT constants (constant*)>
+		<!ELEMENT constant (value, description)>
+			<!ATTLIST constant 
+						name NMTOKEN #REQUIRED
+						data-type (int|string|encode|long|double|boolean) "string"
+			>
+			<!ELEMENT value (#PCDATA)>
+	<!-- Parámetros. Son modificados fuera del tiempo de ejecución. -->
+	<!ELEMENT parameters (parameter*)>
+		<!ELEMENT parameter (description, default?, max?, min?)>
+			<!ATTLIST parameter
+						name ID #REQUIRED
+						data-type (int|string|encode|long|double|boolean) "string"
+			>
+			<!ELEMENT default (#PCDATA)>
+			<!ELEMENT max (#PCDATA)>
+			<!ELEMENT min (#PCDATA)>
+	<!-- Acciones de ejecución. -->
+	<!ELEMENT actions (action+, resetter)>
+		<!ELEMENT action (value, description, socket*, action_parameter*)>
+			<!ATTLIST action
+						name NMTOKEN #REQUIRED
+						timeout CDATA #REQUIRED
+			>
+			<!-- Sockets asociados a esta acción. -->
+			<!ELEMENT socket EMPTY>
+				<!ATTLIST socket
+						port CDATA #REQUIRED
+						protocol CDATA #REQUIRED
+						type (data|media|graph) "data"
+						mode (r|w|rw) "r"
+				>
+			<!-- Parámetros asociados a esta acción. -->
+			<!ELEMENT action_parameter EMPTY>
+				<!ATTLIST action_parameter
+						name IDREF #REQUIRED
+						type (in|out|inout) "in"
+				>
+		<!-- Acción especial para reseteo de la herramieta. -->
+		<!ELEMENT resetter (#PCDATA)>
+

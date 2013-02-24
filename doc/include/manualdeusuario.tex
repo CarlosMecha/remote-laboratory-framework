@@ -1,0 +1,355 @@
+% Apéndice: Manual de usuario
+
+\capitulo{Guía de usuario}{usuario}{
+Este manual está destinado al usuario final de la plataforma RLF. 
+Contiene las acciones a realizar con el cliente de escritorio así como 
+la utilización del monitor mediante web.
+}
+
+\section*{RLF\_ Client}
+Este programa da acceso a todas las herramientas incluidas en el 
+sistema RLF al que se va a conectar. Funciona tanto en Windows como en 
+plataformas Linux. Aunque oficialmente no está soportado, también 
+funciona en plataformas Macintosh que sean compatibles con la máquina 
+virtual Java.
+
+\subsection*{Instalación}
+Para poder ejecutar el cliente, es necesario tener con anterioridad 
+unas herramientas instaladas en el ordenador, independientemente del 
+sistema operativo y son gratuitas:
+
+\begin{description}
+\item[JRE 1.6 de Java Sun:] Contiene la máquina virtual y las 
+librerías necesarias para ejecutar programas en el entorno Java. Se 
+puede descargar de \texttt{http://java.com/es/download/} aunque para 
+sistemas Linux se puede encontrar en los repositorios oficiales con el 
+nombre de \texttt{sun-java6-jre}.
+\item[(Opcional) Reproductor media VLC:] Sólo es necesario si se 
+requieren usar herramientas de vídeo. Se puede encontrar en la página 
+oficial (\texttt{http://www.videolan.org/vlc/}) para cualquier 
+plataforma. Al igual que antes, los repositorios de la mayoría de las 
+distribuciones Linux bajo el nombre de \texttt{vlc}.
+\item[(Opcional) Navegador de Internet:] Sólo es necesario para 
+algunas herramientas concretas que utilicen servicios como FTP. Debido 
+a que existen multitud de navegadores, se puede escoger el que 
+quiera, incluso el que venga instalado por defecto en los sistemas 
+operativos.
+\end{description}
+
+La instalación de estos programas se puede encontrar en Internet sin 
+complicación, por lo que no se dedicará tiempo a explicarlo en este 
+manual.
+
+Una vez que esto esté listo, se puede pasar a la instalación del 
+cliente. Para ello, es necesario obtener los archivos de la carpeta 
+\texttt{rlf/bin/client} (\texttt{rlf\textbackslash bin\textbackslash 
+client} en Windows) y copiarlos donde se desee. Es importante que las 
+carpetas \texttt{res} y \texttt{lib} se copien en la misma ubicación 
+donde está el archivo ejecutable \texttt{RLF\_ Client.jar}.
+
+\subsection*{Configuración}
+Para que el cliente se conecte a una dirección específica (que será 
+dada por el administrador) donde se encuentra el proveedor es 
+necesario modificar el archivo de configuración 
+\texttt{res/client.conf} (\texttt{res\textbackslash client.conf} en sistemas 
+Windows). Este fichero contiene la siguiente línea:
+
+\begin{verbatim}
+provider_url=http://[direccion]:[puerto]/[ruta]
+\end{verbatim}
+
+Para configurarlo sólo es necesario modificar los parámetros 
+\emph{dirección}, \emph{puerto} y \emph{ruta} (eliminando los corchetes). 
+Como por ejemplo:
+
+\begin{verbatim}
+provider_url=http://163.117.150.85:8084/RLF/Provider
+\end{verbatim}
+
+\subsection*{Ejecución}
+Para ejecutar el programa sólo es necesario hacer ``doble click'' en el 
+archivo \texttt{RLF\_ Client.jar} en cualquier sistema. Si como 
+consecuencia se obtiene un mensaje de ``No se reconoce el archivo 
+ejecutable'', la instrucción para la línea de comandos es:
+
+\begin{verbatim}
+java -jar RLF_Client.jar
+\end{verbatim}
+
+\textbf{NOTA:} En sistemas Linux puede haber errores con fallos de 
+conexión o de la interfaz gráfica, son externos al programa y vienen 
+dados por la máquina virtual:
+
+\begin{itemize}
+\item Hay que asegurar que no se está utilizando la versión OpenJDK 
+de Java, que es la que viene por defecto en Linux. Esta versión tiene 
+problemas (reconocidos oficialmente) con las interfaces gráficas Swing. 
+Para arreglar este problema, seguir la guía que se puede obtener en 
+esta dirección:
+\begin{verbatim}
+http://www.e-capy.com/reemplazar-openjdk-por-el-jdk-de-java-en-ubuntu/
+\end{verbatim}
+
+\item Siempre es recomendable utilizar el comando anteriormente 
+descrito en vez de ejecutar el programa con ``doble click'' ya que 
+Java establece sus rutas dependiendo de dónde haya sido ejecutado. Es 
+por esto que puede que no encuentre las librerías o el fichero de 
+recursos.
+\end{itemize}
+
+\clearpage
+
+\subsection*{Interfaz}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.45]{images/user/screen.png}
+\end{figure}
+
+Aquí se listan todos los elementos que componen la interfaz del 
+cliente mostrados en la anterior figura. Puede que en determinados 
+momentos algunas de estas opciones no estén activas.
+
+\begin{enumerate}
+\item Es la barra de menús donde poder acceder a todas las acciones, 
+como ruta alternativa a los otros botones. Además se indican los 
+atajos de teclado de estas acciones.
+\item Con este botón se puede conectar o desconectar el usuario al 
+sistema. 
+\item Sirve para obtener el estado de cada herramienta antes de 
+haberlas reservado.
+\item Reconstruye la información de las herramientas por si ha habido 
+cambios estructurales en el servidor.
+\item Reserva las herramientas seleccionadas.
+\item En esta zona se indican las herramientas que se han 
+seleccionado, o el tiempo restante de reserva de las mismas. Si se 
+posiciona el puntero del ratón encima se pueden obtener el nombre e 
+identificador de cada herramienta seleccionada o reservada.
+\item Cada pestaña corresponde a una herramienta distinta controlada 
+por el sistema.
+\item Estado de la herramienta, ver la sección ``Estados de una 
+herramienta'' para más información.
+\item Nombre e identificador único de cada herramienta.
+\item Atributos de cada herramienta, ver la sección ``Atributos de una 
+herramienta'' para más información.
+\item Descripción de la herramienta.
+\item Acción seleccionada de la herramienta. Sólo se pueden ejecutar 
+una vez la herramienta haya sido reservada. Si se despliega la lista 
+se podrán obtener todas las acciones asignadas.
+\item Cuando la herramienta está reservada, con este botón se ejecuta 
+la acción seleccionada.
+\item Descripción de la acción seleccionada.
+\item Sirve para seleccionar la herramienta de la pestaña actual para 
+su posterior reserva.
+\end{enumerate}
+
+\subsubsection*{Estados de una herramienta}
+Cada herramienta tiene asociado un estado con cuatro valores posibles 
+que se corresponden a las cuatro imágenes de la siguiente figura:
+
+\begin{itemize}
+\item \textbf{Disponible:} Esta herramienta no está siendo usada por nadie y 
+puede reservarse. 
+\item \textbf{No disponible:} Esta herramienta está siendo usada por otro 
+usuario o está desconectada del sistema.
+\item \textbf{Reservada:} La herramienta ya está reservada y lista para su 
+ejecución.
+\item \textbf{En ejecución:} Alguna acción de esta herramienta está 
+actualmente en ejecución.
+\end{itemize}
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=1]{images/user/statustools.png}
+\end{figure}
+
+\subsubsection*{Atributos de una herramienta}
+Cada herramienta posee tres atributos característicos que determinan 
+su comportamiento. Se encuentran indicados en la zona 10 explicada en 
+el apartado anterior:
+
+\begin{itemize}
+\item \textbf{In:} Si está activo, la herramienta acepta interacción con el 
+usuario mediante la entrada por teclado. Cuando se ejecute alguna 
+acción, se podrán enviar comandos en el visor de ejecuciones.
+\item \textbf{Out:} Si está activo indica que la herramienta dará información 
+textual al usuario cuando se ejecute una acción.
+\item \textbf{Data:} Indica si la herramienta tiene la categoría de 
+``Herramienta de datos''. Este tipo de herramientas no tienen entrada 
+por teclado, sólo contienen una acción y permiten que varios usuarios 
+la utilicen a la vez, por lo tanto, esta herramienta siempre estará 
+libre para su uso.
+\end{itemize}
+
+\subsection*{Cómo utilizar las herramientas}
+El proceso para obtener unas herramientas y realizar acciones con 
+ellas se describe a continuación.
+
+\subsubsection*{Conexión}
+En primer lugar se ha de conectar con el servidor, para ello se pulsa 
+el boton de \textit{Login} y se introduce el usuario y la contraseña 
+asignada en el diálogo que aparecerá como se ve en la figura 
+a continuación. A partir de ese momento, el resto de las opciones 
+estarán disponibles.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.8]{images/user/login.png}
+\end{figure}
+
+
+
+\subsubsection*{Selección de las herramientas}
+Cuando las herramientas aparezcan, se podrá seleccionar aquellas que 
+dispongan del estado \textbf{Disponible} mediante el \emph{checkbox} 
+propio de cada pestaña. Debido a que puede haber varios usuarios 
+realizando peticiones, es recomendable actualizar (con el botón 
+\textit{Refresh}) los estados de las herramientas antes de 
+seleccionarlas, ya que no se actualizan en tiempo real. Cuando se 
+hayan seleccionado las herramientas, aparecerán en el indicador 
+mostrado en la siguiente figura.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.8]{images/user/select.png}
+\end{figure}
+
+\subsubsection*{Reserva}
+Para poder utilizar unas es necesario reservarlas antes. Cuando todas 
+las herramientas que se deseen estén seleccionadas, se procederá a 
+reservarlas con el botón \textit{Take Tools}. A partir de aquí, el 
+cronómetro se pondrá en marcha, ya que cada usuario tiene un tiempo 
+máximo de uso de las herramientas.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.8]{images/user/timer.png}
+\end{figure}
+
+\textbf{ATENCIÓN:} Cuando el cronómetro está cerca del límite de 
+tiempo lanza un aviso mediante un diálogo, después, cuando se ha 
+terminado cierra todas las acciones en ejecución y libera las 
+herramientas.
+
+\subsubsection*{Ejecutar una acción}
+Cada herramienta puede ejecutar a la vez una sola acción, pero se 
+pueden tener varias acciones de distintas herramientas ejecutándose en 
+el mismo instante. Para ello, selecciona la acción correspondiente y 
+se pulsa el botón \textit{Execute}.
+
+Se mostrará un diálogo con los parámetros de entrada de la acción y 
+con los \emph{sockets} para servicios externos. En los parámetros se indica 
+el tipo y si se pasa el ratón por encima del nombre, se podrá obtener 
+la descripción del mismo.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.4]{images/user/inparams.png}
+\end{figure}
+
+En el caso de esta figura, hay un parámetro de entrada llamado 
+``volts'' de tipo \emph{double} y un servicio externo de FTP de 
+lectura al que se puede acceder mediante la URL 
+\texttt{ftp://163.117.150.95:64001/}. Para ello se utiliza un 
+navegador o un cliente FTP.
+
+\textbf{ATENCIÓN:} Los \emph{sockets} representan servicios que provee 
+la herramienta pero que deben ser atendidos fuera de la interfaz de 
+RLF\_ Client. Esto significa que es necesario utilizar un programa 
+externo, como puede ser un navegador o un reproductor de vídeo. La 
+información que se muestra es la localización o \emph{URL} de ese 
+mismo servicio, así como su protocolo y el tipo de datos que obtiene.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.4]{images/user/video.png}
+\end{figure}
+
+Cuando se tengan configurados los parámetros, se podrá proceder a 
+ejecutar la acción. Si la máquina donde se encuentra la herramienta 
+tiene mucha carga, puede ser necesario esperar hasta que se pueda 
+ejecutar. Se sabe que la ejecución está en marcha cuando el icono 
+muestra el título ``Running...''.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.6]{images/user/running.png}
+\end{figure}
+
+\subsubsection*{Interactuar con una acción}
+Dependiendo del tipo de herramienta, en el diálogo de ejecución se 
+podrá obtener la información de salida de la herramienta e introducir 
+comandos mediante el campo de texto y el botón \textit{Send}. Se 
+podrá terminar la ejecución abortándola (cerrando la ventana) o 
+completando la acción, la cual lanzará otra ventana con los 
+resultados de la aplicación, que conforman el estado final, los 
+parámetros de salida y las excepciones lanzadas, como se ve en la 
+siguiente figura.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.5]{images/user/stopdialog.png}
+\end{figure}
+
+\subsubsection*{Liberar las herramientas}
+Tanto si se ha terminado de utilizar las herramientas como si se ha 
+acabado el tiempo, se ha de desconectar mediante el botón 
+\textit{Logout} o cerrando la aplicación.
+
+\subsubsection*{Errores comunes}
+Por motivos de seguridad, si ocurriera algún error grave en la 
+aplicación RLF\_ Client y el usuario no se pudiera desconectar con 
+normalidad, no podrá volverse a conectar hasta que el administrador 
+haya dado su aprobación, para ello, póngase en contacto con él e 
+indique el motivo de su error.
+
+\clearpage
+
+\section*{RLF\_ Monitor}
+Este servicio está disponible para poder comprobar en tiempo real y 
+desde cualquier dispositivo el estado de las herramientas. Aunque la 
+interfaz esté diseñada especialmente para dispositivos móviles, 
+puede ser consultado desde un navegador de un ordenador personal sin 
+problemas. Con ello se pretende ahorrar tiempo al usuario para 
+informarse si las herramientas que quiere utilizar están en ese 
+momento libres.
+
+Para acceder al servicio, se debe ir al a dirección proporcionada por 
+el administrador mediante cualquier tipo de navegador de Internet. 
+Como por ejemplo:
+
+\begin{verbatim}
+http://163.117.150.85:8080/RLF/Monitor/
+\end{verbatim}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.5]{images/user/loginmonitor.png}
+\end{figure}
+
+Esa página pedirá el nombre y contraseña del usuario que se le ha 
+asignado, una vez esté conectado, podrá obtener información como esta:
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.5]{images/user/monitor.png}
+\end{figure}
+
+\subsection*{Estados de una herramienta en el monitor}
+La lista de estados que se pueden obtener mediante el servicio del 
+monitor es distinta a la que se puede observar con la aplicación 
+cliente RLF\_ Client:
+
+\begin{itemize}
+\item \textbf{Disponible:} Esta herramienta no está siendo usada por nadie y 
+puede reservarse. 
+\item \textbf{No disponible:} Esta herramienta está desconectada del sistema.
+\item \textbf{En uso:} Algún usuario tiene reservada esta herramienta.
+\end{itemize}
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=1]{images/user/statustoolsmonitor.png}
+\end{figure}
+
+\cleardoublepage
